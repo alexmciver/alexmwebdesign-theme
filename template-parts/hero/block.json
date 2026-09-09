@@ -9,7 +9,7 @@
     "acf": {
         "mode": "preview",
         "renderTemplate": "/template-parts/hero/hero.php",
-        "blockVersion": 2
+        "blockVersion": 3
     },
     "supports": {
         "anchor": true,
