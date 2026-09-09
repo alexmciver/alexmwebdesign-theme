@@ -1,0 +1,19 @@
+{
+    "name": "alex-theme/about",
+    "title": "About",
+    "description": "A custom About block.",
+    "category": "alex-blocks",
+    "keywords": [
+        "about"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/about/about.php",
+        "blockVersion": 2
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

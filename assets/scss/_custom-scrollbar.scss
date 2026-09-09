@@ -1,0 +1,13 @@
+/*custom scrollbar*/
+body {
+   &::-webkit-scrollbar {
+    width: 8px;
+   }
+   &::-webkit-scrollbar-thumb {
+    background: #0154fe;
+    border-radius: 5px;
+   }
+   &::-webkit-scrollbar-track {
+    background: white;
+   }
+}

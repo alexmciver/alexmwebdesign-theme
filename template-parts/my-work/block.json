@@ -1,0 +1,19 @@
+{
+    "name": "alex-theme/my-work",
+    "title": "My Work",
+    "description": "A custom My Work block.",
+    "category": "alex-blocks",
+    "keywords": [
+        "my-work"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/my-work/my-work.php",
+        "blockVersion": 2
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

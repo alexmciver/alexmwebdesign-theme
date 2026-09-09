@@ -1,0 +1,12 @@
+Theme Name: Alex Theme
+Theme URI: https://www.alexmwebdesign.co.uk
+Description: A custom Gutenberg block theme
+Version: 1.0
+Author: Alex McIver
+Author URI: https://www.alexmwebdesign.co.uk
+License: GNU General Public License (GPL)
+License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
+
+This theme, like WordPress, is licensed under the GNU General Public License (GPL).
+You should have received a copy of the GNU General Public License (GPL) along with this program.
+If not, see https://www.gnu.org/licenses/gpl-3.0.en.html.

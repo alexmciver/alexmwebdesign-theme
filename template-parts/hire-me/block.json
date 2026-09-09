@@ -1,0 +1,19 @@
+{
+    "name": "alex-theme/hire-me",
+    "title": "Hire Me",
+    "description": "A custom Hire Me block.",
+    "category": "alex-blocks",
+    "keywords": [
+        "hire-me"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/hire-me/hire-me.php",
+        "blockVersion": 2
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

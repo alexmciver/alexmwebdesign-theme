@@ -1,0 +1,19 @@
+{
+    "name": "alex-theme/contact",
+    "title": "Contact",
+    "description": "A custom Contact block.",
+    "category": "alex-blocks",
+    "keywords": [
+        "contact"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/contact/contact.php",
+        "blockVersion": 2
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}
