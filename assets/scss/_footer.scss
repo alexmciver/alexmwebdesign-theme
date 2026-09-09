@@ -1,0 +1,32 @@
+.footer {
+ background-color: red;
+ .footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include mobile {
+   flex-direction: column;
+  }
+ }
+ .col-left {
+  width: 33.33%;
+  max-width: 30rem;
+  @include mobile {
+   width: 100%;
+  }
+ }
+ .col-middle {
+  width: 33.33%;
+  max-width: 30rem;
+  @include mobile {
+   width: 100%;
+  }
+ }
+ .col-right {
+  width: 33.33%;
+  max-width: 30rem;
+  @include mobile {
+   width: 100%;
+  }
+ }
+}
