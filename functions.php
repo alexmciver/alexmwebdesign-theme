@@ -25,6 +25,18 @@ function alex_theme_setup() {
 }
 add_action('after_setup_theme', 'alex_theme_setup');
 
+// ACF Local JSON — save field groups into the theme
+add_filter('acf/settings/save_json', function ($path) {
+    return get_stylesheet_directory() . '/acf-json';
+});
+
+// ACF Local JSON — load field groups from the theme
+add_filter('acf/settings/load_json', function ($paths) {
+    unset($paths[0]);
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+    return $paths;
+});
+
 // Registering ACF blocks
 function alex_register_acf_blocks() {
     $block_templates = array(
