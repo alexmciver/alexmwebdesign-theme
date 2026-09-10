@@ -1,13 +1,15 @@
-/*custom scrollbar*/
+/* Custom scrollbar */
 body {
-   &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 8px;
-   }
-   &::-webkit-scrollbar-thumb {
-    background: #0154fe;
-    border-radius: 5px;
-   }
-   &::-webkit-scrollbar-track {
-    background: white;
-   }
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--orange);
+    border-radius: var(--radius);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--paper-2);
+  }
 }

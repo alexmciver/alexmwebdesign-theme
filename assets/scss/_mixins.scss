@@ -1,11 +1,18 @@
+@mixin bp {
+  @media screen and (max-width: $bp) {
+    @content;
+  }
+}
+
+// Legacy aliases — map to the single design-system breakpoint
 @mixin tablet {
-  @media screen and (max-width: $tablet) {
+  @include bp {
     @content;
   }
 }
 
 @mixin mobile {
-  @media screen and (max-width: $mobile) {
+  @include bp {
     @content;
   }
 }

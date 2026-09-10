@@ -1,32 +1,125 @@
-.footer {
- background-color: red;
- .footer-content {
+.site-footer {
+  background: var(--ink);
+  border-top: 1px solid var(--line-dark-soft);
+  padding: 100px 64px 44px;
+
+  @include bp {
+    padding: 72px 24px 32px;
+  }
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 64px;
+  margin-bottom: 64px;
+
+  @include bp {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 14px;
+
+  span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+  }
+}
+
+.footer-tagline {
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 290px;
+}
+
+.footer-col-title {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
+  margin-bottom: 22px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+
+  a {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.25s var(--ease);
+
+    &:hover {
+      color: var(--orange);
+    }
+  }
+}
+
+.footer-contact {
+  a {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 13px;
+    transition: color 0.25s var(--ease);
+
+    &:hover {
+      color: var(--orange);
+    }
+  }
+}
+
+.footer-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @include mobile {
-   flex-direction: column;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line-dark-soft);
+
+  @include bp {
+    flex-direction: column;
+    text-align: center;
   }
- }
- .col-left {
-  width: 33.33%;
-  max-width: 30rem;
-  @include mobile {
-   width: 100%;
-  }
- }
- .col-middle {
-  width: 33.33%;
-  max-width: 30rem;
-  @include mobile {
-   width: 100%;
-  }
- }
- .col-right {
-  width: 33.33%;
-  max-width: 30rem;
-  @include mobile {
-   width: 100%;
-  }
- }
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.footer-certs {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-cert {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.25);
 }

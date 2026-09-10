@@ -4,28 +4,29 @@ const cssmin = require("gulp-cssmin");
 const concat = require("gulp-concat");
 const uglify = require("gulp-uglify");
 
-// Compile Sass to CSS
+// Compile Sass to CSS from the single entry point
 gulp.task("compile-sass", function () {
   return gulp
-    .src("assets/scss/*.scss")
-    .pipe(sass())
+    .src("assets/scss/main.scss")
+    .pipe(sass().on("error", sass.logError))
     .pipe(concat("styles.css"))
     .pipe(cssmin())
     .pipe(gulp.dest("assets/css"));
 });
 
-// Concatenate and minify JavaScript
-gulp.task('scripts', function () {
-  return gulp.src('assets/js/*.js')
-    .pipe(concat('main.js'))
+// Concatenate and minify JavaScript from src/
+gulp.task("scripts", function () {
+  return gulp
+    .src("assets/js/src/**/*.js")
+    .pipe(concat("main.js"))
     .pipe(uglify())
-    .pipe(gulp.dest('assets/js'));
+    .pipe(gulp.dest("assets/js"));
 });
 
 // Watch for changes and run tasks
 gulp.task("watch", function () {
-  gulp.watch("assets/scss/*.scss", gulp.series("compile-sass"));
-  gulp.watch("assets/js/*.js", gulp.series("scripts"));
+  gulp.watch("assets/scss/**/*.scss", gulp.series("compile-sass"));
+  gulp.watch("assets/js/src/**/*.js", gulp.series("scripts"));
 });
 
 // Default task (runs all specified tasks)

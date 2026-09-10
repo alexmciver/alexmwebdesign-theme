@@ -1,34 +1,63 @@
-/* Lato Black Font */
-@font-face {
-  font-family: $lato-black;
-  src: url("../fonts/Lato-Black.ttf") format("truetype");
-  font-display: swap;
+// Type scale — Cormorant for editorial, DM Sans for UI/body
+
+.page-hero h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(56px, 7.2vw, 116px);
+  line-height: 0.94;
+  letter-spacing: -0.038em;
+  color: #fff;
 }
 
-/* Lato Black  Italic Font */
-@font-face {
-  font-family: $lato-black-italic;
-  src: url("../fonts/Lato-BlackItalic.ttf") format("truetype");
-  font-display: swap;
+.s-h {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(38px, 4.6vw, 68px);
+  line-height: 1.06;
+  letter-spacing: -0.028em;
+  color: var(--ink);
+
+  em {
+    font-style: italic;
+  }
 }
 
-/* Open Sans Regular Font */
-@font-face {
-  font-family: $open-sans-regular;
-  src: url("../fonts/OpenSans-Regular.ttf") format("truetype");
-  font-display: swap;
+.s-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 26px;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 44px;
+    height: 1px;
+    background: var(--orange);
+    flex-shrink: 0;
+  }
 }
 
-/* Open Sans Medium Font */
-@font-face {
-  font-family: $open-sans-medium;
-  src: url("../fonts/OpenSans-Medium.ttf") format("truetype");
-  font-display: swap;
+.s-body {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--ink-mid);
+  max-width: 620px;
 }
 
-/* Open Sans Medium Italic Font */
-@font-face {
-  font-family: $open-sans-medium-italic;
-  src: url("../fonts/OpenSans-MediumItalic.ttf") format("truetype");
-  font-display: swap;
+.page-hero-sub {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 520px;
+  margin-top: 24px;
 }

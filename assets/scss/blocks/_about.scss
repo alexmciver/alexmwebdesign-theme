@@ -1,14 +1,20 @@
 .about {
-    padding: 5.4rem 0;
-    &__content {
-        width: 50%;
+  padding: 150px 64px;
+
+  @include bp {
+    padding: 88px 24px;
+  }
+
+  &__content {
+    width: 50%;
+    max-width: 620px;
+
+    @include bp {
+      width: 100%;
     }
-        h2 {
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #0054ff !important;
-            font-size: 16px;
-            letter-spacing: 3px;
-            line-height: 1.8em;
-        }
+  }
+
+  h2 {
+    @extend .s-eyebrow;
+  }
 }
