@@ -94,6 +94,8 @@
 	position: relative;
 	z-index: 1;
 	align-self: end;
+	display: flex;
+	justify-content: flex-end;
 
 	@include bp {
 		display: none;
@@ -102,8 +104,8 @@
 
 .about-hero__photo {
 	width: 100%;
+	max-width: 600px;
 	aspect-ratio: 4 / 5;
-	background: linear-gradient(145deg, #1a1d36, #0d1020);
 	border-radius: $radius-panel $radius-panel 0 0;
 	display: flex;
 	align-items: center;
