@@ -1,64 +1,50 @@
 <?php
 /**
- * My Work block — work page hero, featured project and archive grid.
+ * My Work block — work page hero, featured project and archive grid from the Work CPT.
  */
-$contact_url = alex_page_url( 'contact' );
-
-$eyebrow          = alex_field( 'eyebrow', 'Work' );
-$heading          = alex_field( 'heading', 'Projects, <em>properly</em> built.' );
-$subheading       = alex_field( 'subheading', 'A selection of WordPress and Shopify builds — chosen for the problems they solved, not how many screenshots they make.' );
+$eyebrow         = alex_field( 'eyebrow', 'Work' );
+$heading         = alex_field( 'heading', 'Projects, <em>properly</em> built.' );
+$subheading      = alex_field( 'subheading', 'A selection of WordPress and Shopify builds — chosen for the problems they solved, not how many screenshots they make.' );
 $featured_eyebrow = alex_field( 'featured_eyebrow', 'Featured project' );
-$featured_title   = alex_field( 'featured_title', 'Coldharbour Lights' );
-$featured_body    = alex_field( 'featured_body', 'A Shopify storefront rebuild for a lighting brand — cleaner product templates, faster collection browsing, and a checkout path that converted more of the traffic they already had.' );
-$featured_scope   = alex_field( 'featured_scope', 'Shopify rebuild' );
-$featured_client  = alex_field( 'featured_client', 'Coldharbour Lights' );
-$featured_year    = alex_field( 'featured_year', '2025' );
-$featured_link    = alex_button( get_field( 'featured_link' ), 'View project', $contact_url );
-$archive_eyebrow  = alex_field( 'archive_eyebrow', 'Archive' );
-$archive_heading  = alex_field( 'archive_heading', 'Everything else' );
-$projects         = alex_field(
-	'projects',
-	array(
-		array(
-			'title'    => 'Pel & Co',
-			'platform' => 'WooCommerce',
-			'result'   => 'Theme rebuild — <em>+28% average order value</em>, Core Web Vitals pass',
-			'url'      => $contact_url,
-		),
-		array(
-			'title'    => 'Northbridge Studio',
-			'platform' => 'WordPress',
-			'result'   => 'Bespoke theme — <em>1.2s LCP</em>, editorial layout system',
-			'url'      => $contact_url,
-		),
-		array(
-			'title'    => 'Harbour & Field',
-			'platform' => 'Shopify',
-			'result'   => 'Migration & redesign — <em>zero downtime</em>, cleaner checkout',
-			'url'      => $contact_url,
-		),
-		array(
-			'title'    => 'Ashworth & Co',
-			'platform' => 'WordPress',
-			'result'   => 'Divi 5 marketing site — <em>structured for search</em>, easy to edit',
-			'url'      => $contact_url,
-		),
-		array(
-			'title'    => 'Kin & Clay',
-			'platform' => 'Shopify',
-			'result'   => 'Custom theme — <em>collection UX overhaul</em>, faster add-to-cart',
-			'url'      => $contact_url,
-		),
-		array(
-			'title'    => 'Eastgate Legal',
-			'platform' => 'WordPress',
-			'result'   => 'Practice site rebuild — <em>enquiry form conversion up</em>, clearer IA',
-			'url'      => $contact_url,
-		),
-	)
-);
+$featured_link   = alex_button( get_field( 'featured_link' ), 'View project', '' );
+$archive_eyebrow = alex_field( 'archive_eyebrow', 'Archive' );
+$archive_heading = alex_field( 'archive_heading', 'Everything else' );
 
-$has_featured_link = ! empty( $featured_link['button_text'] ) && ! empty( $featured_link['button_url'] );
+$featured_id = 0;
+if ( function_exists( 'get_field' ) ) {
+	$featured_raw = get_field( 'featured_work' );
+	if ( is_object( $featured_raw ) && ! empty( $featured_raw->ID ) ) {
+		$featured_id = (int) $featured_raw->ID;
+	} elseif ( is_numeric( $featured_raw ) ) {
+		$featured_id = (int) $featured_raw;
+	}
+}
+
+$featured = $featured_id ? alex_work_item( $featured_id ) : null;
+
+// Fall back to the latest Work post when none is selected.
+if ( ! $featured ) {
+	$latest = alex_query_work( array( 'posts_per_page' => 1 ) );
+	if ( $latest->have_posts() ) {
+		$latest->the_post();
+		$featured_id = get_the_ID();
+		$featured    = alex_work_item( $featured_id );
+		wp_reset_postdata();
+	}
+}
+
+$archive_args = array( 'posts_per_page' => -1 );
+if ( $featured_id ) {
+	$archive_args['post__not_in'] = array( $featured_id );
+}
+$archive_query = alex_query_work( $archive_args );
+
+$featured_url  = $featured ? $featured['url'] : '';
+$featured_text = ! empty( $featured_link['button_text'] ) ? $featured_link['button_text'] : __( 'View project', 'alex-theme' );
+if ( ! empty( $featured_link['button_url'] ) ) {
+	$featured_url = $featured_link['button_url'];
+}
+$has_featured_link = $featured && $featured_url && $featured_text;
 ?>
 <section class="page-hero my-work-hero" aria-label="<?php esc_attr_e( 'Work', 'alex-theme' ); ?>">
 	<div class="page-hero-line" aria-hidden="true"></div>
@@ -70,31 +56,45 @@ $has_featured_link = ! empty( $featured_link['button_text'] ) && ! empty( $featu
 </section>
 
 <section class="my-work" aria-label="<?php esc_attr_e( 'Selected projects', 'alex-theme' ); ?>">
-	<article class="my-work__featured rv">
-		<div class="my-work__featured-media" aria-hidden="true"></div>
-		<div class="my-work__featured-copy">
-			<p class="s-eyebrow"><?php echo esc_html( $featured_eyebrow ); ?></p>
-			<h2 class="s-h"><?php echo esc_html( $featured_title ); ?></h2>
-			<p class="s-body"><?php echo esc_html( $featured_body ); ?></p>
-			<dl class="my-work__meta">
-				<div>
-					<dt><?php esc_html_e( 'Scope', 'alex-theme' ); ?></dt>
-					<dd><?php echo esc_html( $featured_scope ); ?></dd>
-				</div>
-				<div>
-					<dt><?php esc_html_e( 'Client', 'alex-theme' ); ?></dt>
-					<dd><?php echo esc_html( $featured_client ); ?></dd>
-				</div>
-				<div>
-					<dt><?php esc_html_e( 'Year', 'alex-theme' ); ?></dt>
-					<dd><?php echo esc_html( $featured_year ); ?></dd>
-				</div>
-			</dl>
-			<?php if ( $has_featured_link ) : ?>
-				<a href="<?php echo esc_url( $featured_link['button_url'] ); ?>" class="my-work__link"><?php echo esc_html( $featured_link['button_text'] ); ?> →</a>
-			<?php endif; ?>
-		</div>
-	</article>
+	<?php if ( $featured ) : ?>
+		<article class="my-work__featured rv">
+			<div class="my-work__featured-media" aria-hidden="true">
+				<?php if ( $featured['image'] ) : ?>
+					<img src="<?php echo esc_url( $featured['image'] ); ?>" alt="" loading="lazy" decoding="async" />
+				<?php endif; ?>
+			</div>
+			<div class="my-work__featured-copy">
+				<p class="s-eyebrow"><?php echo esc_html( $featured_eyebrow ); ?></p>
+				<h2 class="s-h"><?php echo esc_html( $featured['title'] ); ?></h2>
+				<?php if ( $featured['body'] ) : ?>
+					<p class="s-body"><?php echo esc_html( $featured['body'] ); ?></p>
+				<?php endif; ?>
+				<dl class="my-work__meta">
+					<?php if ( $featured['scope'] ) : ?>
+						<div>
+							<dt><?php esc_html_e( 'Scope', 'alex-theme' ); ?></dt>
+							<dd><?php echo esc_html( $featured['scope'] ); ?></dd>
+						</div>
+					<?php endif; ?>
+					<?php if ( $featured['client'] ) : ?>
+						<div>
+							<dt><?php esc_html_e( 'Client', 'alex-theme' ); ?></dt>
+							<dd><?php echo esc_html( $featured['client'] ); ?></dd>
+						</div>
+					<?php endif; ?>
+					<?php if ( $featured['year'] ) : ?>
+						<div>
+							<dt><?php esc_html_e( 'Year', 'alex-theme' ); ?></dt>
+							<dd><?php echo esc_html( $featured['year'] ); ?></dd>
+						</div>
+					<?php endif; ?>
+				</dl>
+				<?php if ( $has_featured_link ) : ?>
+					<a href="<?php echo esc_url( $featured_url ); ?>" class="my-work__link"><?php echo esc_html( $featured_text ); ?> →</a>
+				<?php endif; ?>
+			</div>
+		</article>
+	<?php endif; ?>
 
 	<div class="my-work__archive">
 		<div class="rv">
@@ -102,31 +102,39 @@ $has_featured_link = ! empty( $featured_link['button_text'] ) && ! empty( $featu
 			<h2 class="s-h"><?php echo wp_kses_post( $archive_heading ); ?></h2>
 		</div>
 
-		<div class="work__grid my-work__grid">
-			<?php foreach ( $projects as $i => $project ) : ?>
+		<?php if ( $archive_query->have_posts() ) : ?>
+			<div class="work__grid my-work__grid">
 				<?php
-				$title    = isset( $project['title'] ) ? (string) $project['title'] : '';
-				$platform = isset( $project['platform'] ) ? (string) $project['platform'] : '';
-				$result   = isset( $project['result'] ) ? (string) $project['result'] : '';
-				$url      = isset( $project['url'] ) ? (string) $project['url'] : '';
-				?>
-				<?php if ( $url && ( $title || $platform || $result ) ) : ?>
-					<a href="<?php echo esc_url( $url ); ?>" class="work__card rv rv<?php echo esc_attr( (string) min( $i + 1, 4 ) ); ?>">
-						<div class="work__media" aria-hidden="true"></div>
-						<div class="work__meta">
-							<?php if ( $title ) : ?>
-								<span class="work__title"><?php echo esc_html( $title ); ?></span>
-							<?php endif; ?>
-							<?php if ( $platform ) : ?>
-								<span class="work__platform"><?php echo esc_html( $platform ); ?></span>
+				$i = 0;
+				while ( $archive_query->have_posts() ) :
+					$archive_query->the_post();
+					$project = alex_work_item( get_post() );
+					if ( ! $project || ! $project['url'] ) {
+						continue;
+					}
+					++$i;
+					?>
+					<a href="<?php echo esc_url( $project['url'] ); ?>" class="work__card rv rv<?php echo esc_attr( (string) min( $i, 4 ) ); ?>">
+						<div class="work__media" aria-hidden="true">
+							<?php if ( $project['image'] ) : ?>
+								<img src="<?php echo esc_url( $project['image'] ); ?>" alt="" loading="lazy" decoding="async" />
 							<?php endif; ?>
 						</div>
-						<?php if ( $result ) : ?>
-							<p class="work__result"><?php echo wp_kses_post( $result ); ?></p>
+						<div class="work__meta">
+							<?php if ( $project['title'] ) : ?>
+								<span class="work__title"><?php echo esc_html( $project['title'] ); ?></span>
+							<?php endif; ?>
+							<?php if ( $project['platform'] ) : ?>
+								<span class="work__platform"><?php echo esc_html( $project['platform'] ); ?></span>
+							<?php endif; ?>
+						</div>
+						<?php if ( $project['result'] ) : ?>
+							<p class="work__result"><?php echo wp_kses_post( $project['result'] ); ?></p>
 						<?php endif; ?>
 					</a>
-				<?php endif; ?>
-			<?php endforeach; ?>
-		</div>
+				<?php endwhile; ?>
+				<?php wp_reset_postdata(); ?>
+			</div>
+		<?php endif; ?>
 	</div>
 </section>

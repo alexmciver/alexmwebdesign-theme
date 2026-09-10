@@ -40,6 +40,14 @@
 	aspect-ratio: 4 / 3;
 	background: $paper-3;
 	border-radius: $radius-panel;
+	overflow: hidden;
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 }
 
 .my-work__featured-copy {

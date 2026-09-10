@@ -47,6 +47,119 @@ function alex_theme_setup() {
 add_action( 'after_setup_theme', 'alex_theme_setup' );
 
 /**
+ * Register Work custom post type.
+ */
+function alex_register_work_cpt() {
+	$labels = array(
+		'name'               => __( 'Work', 'alex-theme' ),
+		'singular_name'      => __( 'Work', 'alex-theme' ),
+		'menu_name'          => __( 'Work', 'alex-theme' ),
+		'name_admin_bar'     => __( 'Work', 'alex-theme' ),
+		'add_new'            => __( 'Add New', 'alex-theme' ),
+		'add_new_item'       => __( 'Add New Work', 'alex-theme' ),
+		'new_item'           => __( 'New Work', 'alex-theme' ),
+		'edit_item'          => __( 'Edit Work', 'alex-theme' ),
+		'view_item'          => __( 'View Work', 'alex-theme' ),
+		'all_items'          => __( 'All Work', 'alex-theme' ),
+		'search_items'       => __( 'Search Work', 'alex-theme' ),
+		'parent_item_colon'  => __( 'Parent Work:', 'alex-theme' ),
+		'not_found'          => __( 'No work found.', 'alex-theme' ),
+		'not_found_in_trash' => __( 'No work found in Trash.', 'alex-theme' ),
+	);
+
+	register_post_type(
+		'work',
+		array(
+			'labels'             => $labels,
+			'public'             => true,
+			'publicly_queryable' => true,
+			'show_ui'            => true,
+			'show_in_menu'       => true,
+			'show_in_rest'       => true,
+			'query_var'          => true,
+			'rewrite'            => array( 'slug' => 'work' ),
+			'capability_type'    => 'post',
+			'has_archive'        => false,
+			'hierarchical'       => false,
+			'menu_position'      => 5,
+			'menu_icon'          => 'dashicons-portfolio',
+			'supports'           => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
+		)
+	);
+}
+add_action( 'init', 'alex_register_work_cpt' );
+
+/**
+ * Flush rewrite rules when the theme is switched on.
+ */
+function alex_theme_flush_rewrites() {
+	alex_register_work_cpt();
+	flush_rewrite_rules();
+}
+add_action( 'after_switch_theme', 'alex_theme_flush_rewrites' );
+
+/**
+ * Work listing URL (Work page, or CPT archive fallback).
+ *
+ * @return string
+ */
+function alex_work_archive_url() {
+	$page = get_page_by_path( 'work' );
+	if ( $page ) {
+		return get_permalink( $page );
+	}
+	$link = get_post_type_archive_link( 'work' );
+	return $link ? $link : home_url( '/work/' );
+}
+
+/**
+ * Query Work posts.
+ *
+ * @param array $args Optional WP_Query args.
+ * @return WP_Query
+ */
+function alex_query_work( $args = array() ) {
+	$defaults = array(
+		'post_type'              => 'work',
+		'post_status'            => 'publish',
+		'posts_per_page'         => -1,
+		'orderby'                => 'date',
+		'order'                  => 'DESC',
+		'no_found_rows'          => true,
+		'update_post_meta_cache' => true,
+		'update_post_term_cache' => false,
+	);
+	return new WP_Query( array_merge( $defaults, $args ) );
+}
+
+/**
+ * Normalised Work item for cards and featured layouts.
+ *
+ * @param int|WP_Post|null $post Post object or ID.
+ * @return array{title:string,platform:string,result:string,scope:string,client:string,year:string,body:string,url:string,image:string}|null
+ */
+function alex_work_item( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post || 'work' !== $post->post_type ) {
+		return null;
+	}
+
+	$image = get_the_post_thumbnail_url( $post, 'large' );
+
+	return array(
+		'title'    => get_the_title( $post ),
+		'platform' => (string) alex_field( 'platform', '', $post->ID ),
+		'result'   => (string) alex_field( 'result', '', $post->ID ),
+		'scope'    => (string) alex_field( 'scope', '', $post->ID ),
+		'client'   => (string) alex_field( 'client', '', $post->ID ),
+		'year'     => (string) alex_field( 'year', '', $post->ID ),
+		'body'     => has_excerpt( $post ) ? get_the_excerpt( $post ) : '',
+		'url'      => get_permalink( $post ),
+		'image'    => $image ? $image : '',
+	);
+}
+
+/**
  * Fallback desktop nav when no menu is assigned.
  */
 function alex_nav_fallback() {
@@ -85,7 +198,7 @@ function alex_footer_nav_fallback() {
  */
 function alex_default_nav_links() {
 	return array(
-		'Work'     => home_url( '/work/' ),
+		'Work'     => alex_work_archive_url(),
 		'Services' => home_url( '/services/' ),
 		'About'    => home_url( '/about/' ),
 		'Contact'  => home_url( '/contact/' ),
