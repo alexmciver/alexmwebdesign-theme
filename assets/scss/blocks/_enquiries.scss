@@ -73,6 +73,11 @@
   margin: 0;
 }
 
+.enquiries__form-slot,
+.enquiries__form-wrap .wpcf7 {
+  min-width: 0;
+}
+
 .enquiries__form {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -88,13 +93,18 @@
   flex-direction: column;
   gap: 10px;
 
-  span {
+  > span:first-child {
     font-family: $sans;
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.35);
+  }
+
+  .wpcf7-form-control-wrap {
+    display: block;
+    width: 100%;
   }
 
   input,
@@ -146,10 +156,42 @@
   }
 }
 
-.enquiries__submit {
+.enquiries__submit,
+.enquiries__form .wpcf7-submit {
   grid-column: 1 / -1;
   justify-self: start;
   margin-top: 8px;
+}
+
+.enquiries .wpcf7-not-valid-tip {
+  font-family: $sans;
+  font-size: 12px;
+  margin-top: 8px;
+  color: #ff8f8f;
+}
+
+.enquiries .wpcf7-response-output {
+  grid-column: 1 / -1;
+  margin: 8px 0 0;
+  padding: 12px 0 0;
+  border: none;
+  border-top: 1px solid $line-dark;
+  font-family: $sans;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.enquiries .wpcf7-mail-sent-ok,
+.enquiries form.sent .wpcf7-response-output {
+  color: #3dd68c;
+  border-top-color: rgba(61, 214, 140, 0.35);
+}
+
+.enquiries__form-missing {
+  font-family: $sans;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 // Contact page — process + form on paper
@@ -168,7 +210,7 @@
   }
 
   .enquiries__form {
-    .enq-field span {
+    .enq-field > span:first-child {
       color: $ink-light;
     }
 
@@ -191,6 +233,29 @@
       background-image: linear-gradient(45deg, transparent 50%, $ink-mid 50%),
         linear-gradient(135deg, $ink-mid 50%, transparent 50%);
     }
+  }
+
+  .wpcf7-not-valid-tip {
+    color: #c44b3a;
+  }
+
+  .wpcf7-response-output {
+    color: $ink-mid;
+    border-top-color: $line;
+  }
+
+  .wpcf7-mail-sent-ok,
+  form.sent .wpcf7-response-output {
+    color: #1f7a4d;
+    border-top-color: rgba(31, 122, 77, 0.35);
+  }
+
+  .enquiries__form-missing {
+    color: $ink-mid;
+  }
+
+  .enquiries__disclaimer {
+    margin-top: 20px;
   }
 }
 

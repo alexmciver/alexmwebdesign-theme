@@ -514,6 +514,28 @@
             "rows": 2,
             "placeholder": "",
             "new_lines": ""
+        },
+        {
+            "key": "field_alex_enquiries_cf7_form_id",
+            "label": "Contact Form 7 ID",
+            "name": "cf7_form_id",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Optional. Leave blank to use the default form for this layout (Home enquiry / Contact enquiry).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": 1,
+            "max": "",
+            "placeholder": "",
+            "step": 1,
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -537,5 +559,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1789047000
+    "modified": 1789090000
 }
