@@ -4,20 +4,13 @@
  * Enqueue styles and scripts.
  */
 function my_theme_enqueue_assets() {
-	wp_enqueue_style(
-		'alex-fonts',
-		'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@400;500;600&display=swap',
-		array(),
-		null
-	);
-
 	$css = get_template_directory() . '/assets/css/styles.css';
 	$js  = get_template_directory() . '/assets/js/main.js';
 
 	wp_enqueue_style(
 		'theme-style',
 		get_template_directory_uri() . '/assets/css/styles.css',
-		array( 'alex-fonts' ),
+		array(),
 		file_exists( $css ) ? filemtime( $css ) : null
 	);
 
