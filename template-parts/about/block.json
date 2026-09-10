@@ -1,10 +1,12 @@
 {
     "name": "alex-theme/about",
     "title": "About",
-    "description": "A custom About block.",
+    "description": "About page — hero and introduction with stats.",
     "category": "alex-blocks",
     "keywords": [
-        "about"
+        "about",
+        "bio",
+        "experience"
     ],
     "acf": {
         "mode": "preview",

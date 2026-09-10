@@ -59,3 +59,26 @@
 .hire-me--services .hire-me__title {
 	font-style: italic;
 }
+
+.hire-me--about {
+	background: var(--ink);
+	padding: 100px 64px;
+
+	@include bp {
+		padding: 72px 24px;
+	}
+
+	.hire-me__title {
+		font-style: normal;
+		font-weight: 300;
+
+		em {
+			font-style: italic;
+			color: var(--orange);
+		}
+	}
+
+	.hire-me__sub {
+		color: rgba(255, 255, 255, 0.45);
+	}
+}

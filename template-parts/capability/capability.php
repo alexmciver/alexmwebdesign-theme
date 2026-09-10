@@ -2,6 +2,8 @@
 /**
  * Capability block — production stack across platforms.
  */
+$is_about = is_page( 'about' );
+
 $groups = array(
 	array(
 		'label' => 'Platforms',
@@ -21,10 +23,16 @@ $groups = array(
 	),
 );
 ?>
-<section id="capability" class="capability" aria-label="<?php esc_attr_e( 'Technical capability', 'alex-theme' ); ?>">
+<section id="capability" class="capability<?php echo $is_about ? ' capability--about' : ''; ?>" aria-label="<?php esc_attr_e( 'Technical capability', 'alex-theme' ); ?>">
 	<div class="rv">
-		<p class="s-eyebrow"><?php esc_html_e( 'Capability', 'alex-theme' ); ?></p>
-		<h2 class="s-h"><?php esc_html_e( 'Five years of production work across both major platforms.', 'alex-theme' ); ?></h2>
+		<p class="s-eyebrow"><?php echo $is_about ? esc_html__( 'Expertise', 'alex-theme' ) : esc_html__( 'Capability', 'alex-theme' ); ?></p>
+		<h2 class="s-h">
+			<?php
+			echo $is_about
+				? wp_kses_post( __( 'What I work with, <em>properly</em>', 'alex-theme' ) )
+				: esc_html__( 'Five years of production work across both major platforms.', 'alex-theme' );
+			?>
+		</h2>
 	</div>
 
 	<div class="cap-grid">

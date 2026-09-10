@@ -13,6 +13,32 @@
   }
 }
 
+.capability--about {
+  background: var(--paper-2);
+
+  .s-h {
+    color: var(--ink);
+    max-width: 14ch;
+
+    em {
+      font-style: italic;
+      color: var(--orange);
+    }
+  }
+
+  .cap-grid {
+    background: var(--line-soft);
+  }
+
+  .cap-group {
+    background: var(--paper-2);
+  }
+
+  .cap-list li {
+    color: var(--ink-mid);
+  }
+}
+
 .cap-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

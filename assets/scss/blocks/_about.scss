@@ -1,20 +1,241 @@
-.about {
-  padding: 150px 64px;
+// About page — hero, intro, expertise and story
 
-  @include bp {
-    padding: 88px 24px;
-  }
+.about-hero {
+	position: relative;
+	overflow: hidden;
+	background: var(--ink);
+	padding: 180px 64px 0;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 80px;
+	align-items: end;
 
-  &__content {
-    width: 50%;
-    max-width: 620px;
+	@include bp {
+		grid-template-columns: 1fr;
+		padding: 150px 24px 0;
+		gap: 48px;
+	}
 
-    @include bp {
-      width: 100%;
-    }
-  }
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(
+			ellipse 50% 70% at 80% 40%,
+			var(--orange-soft) 0%,
+			transparent 55%
+		);
+		pointer-events: none;
+	}
+}
 
-  h2 {
-    @extend .s-eyebrow;
-  }
+.about-hero__line {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(255, 77, 0, 0.4),
+		transparent
+	);
+}
+
+.about-hero__left {
+	position: relative;
+	z-index: 1;
+	padding-bottom: 80px;
+
+	@include bp {
+		padding-bottom: 0;
+	}
+
+	.s-eyebrow {
+		color: var(--orange);
+
+		&::after {
+			background: var(--orange);
+		}
+	}
+
+	h1 {
+		font-family: var(--serif);
+		font-weight: 300;
+		font-size: clamp(64px, 7vw, 110px);
+		line-height: 0.95;
+		letter-spacing: -0.035em;
+		color: #fff;
+		margin: 0;
+
+		em {
+			font-style: italic;
+			color: var(--orange);
+		}
+	}
+}
+
+.about-hero__sub {
+	font-family: var(--sans);
+	font-size: 17px;
+	line-height: 1.75;
+	color: rgba(255, 255, 255, 0.45);
+	max-width: 42ch;
+	margin: 24px 0 40px;
+}
+
+.about-hero__btns {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.about-hero__right {
+	position: relative;
+	z-index: 1;
+	align-self: end;
+
+	@include bp {
+		display: none;
+	}
+}
+
+.about-hero__photo {
+	width: 100%;
+	aspect-ratio: 4 / 5;
+	background: linear-gradient(145deg, #1a1d36, #0d1020);
+	border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.about-hero__photo-label {
+	font-family: var(--sans);
+	font-size: 12px;
+	letter-spacing: 0.06em;
+	color: rgba(255, 255, 255, 0.22);
+}
+
+// Intro + stats
+.about-intro {
+	background: #fff;
+	padding: 120px 64px;
+	display: grid;
+	grid-template-columns: 1.15fr 0.85fr;
+	gap: 80px;
+	align-items: start;
+
+	@include bp {
+		grid-template-columns: 1fr;
+		padding: 88px 24px;
+		gap: 56px;
+	}
+}
+
+.about-intro__quote {
+	font-family: var(--serif);
+	font-weight: 300;
+	font-style: italic;
+	font-size: clamp(26px, 3.2vw, 40px);
+	line-height: 1.25;
+	letter-spacing: -0.02em;
+	color: var(--ink);
+	margin: 0 0 36px;
+	max-width: 18ch;
+}
+
+.about-intro__text {
+	font-family: var(--sans);
+	font-size: 15px;
+	line-height: 1.8;
+	color: var(--ink-mid);
+	max-width: 52ch;
+
+	p {
+		margin: 0 0 18px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	strong {
+		color: var(--ink);
+		font-weight: 600;
+	}
+}
+
+.about-stats {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1px;
+	background: var(--line-soft);
+	border: 1px solid var(--line-soft);
+	margin-bottom: 48px;
+}
+
+.about-stat {
+	background: #fff;
+	padding: 28px 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.about-stat__n {
+	font-family: var(--serif);
+	font-weight: 300;
+	font-size: clamp(36px, 4vw, 48px);
+	line-height: 1;
+	letter-spacing: -0.03em;
+	color: var(--ink);
+}
+
+.about-stat__l {
+	font-family: var(--sans);
+	font-size: 12px;
+	line-height: 1.4;
+	color: var(--ink-light);
+}
+
+.about-exp__label {
+	font-family: var(--sans);
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--orange);
+	margin: 0 0 16px;
+}
+
+.about-exp__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid var(--line-soft);
+
+	li {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 16px;
+		padding: 16px 0;
+		border-bottom: 1px solid var(--line-soft);
+	}
+}
+
+.about-exp__role {
+	font-family: var(--sans);
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--ink);
+}
+
+.about-exp__meta {
+	font-family: var(--sans);
+	font-size: 12px;
+	color: var(--ink-light);
+	white-space: nowrap;
 }

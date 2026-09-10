@@ -75,3 +75,129 @@
     max-width: none;
   }
 }
+
+// About page — timeline + values
+.approach--about {
+  background: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+
+  @include bp {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+
+  .s-h {
+    margin-bottom: 48px;
+    max-width: 10ch;
+  }
+}
+
+.about-story__col {
+  min-width: 0;
+}
+
+.about-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  padding-left: 28px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--line-soft);
+  }
+}
+
+.about-tl {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--line);
+    box-sizing: border-box;
+  }
+}
+
+.about-tl__date {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin: 0 0 10px;
+}
+
+.about-tl__title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+
+.about-tl__org {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-mid);
+  margin: 0 0 10px;
+}
+
+.about-tl__body {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-light);
+  margin: 0;
+  max-width: 42ch;
+}
+
+.about-values {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-value {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line-soft);
+
+  &:first-child {
+    border-top: 1px solid var(--line-soft);
+  }
+}
+
+.about-value__title {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.about-value__body {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-mid);
+  margin: 0;
+  max-width: 42ch;
+}
