@@ -2,48 +2,70 @@
 /**
  * Capability block — production stack across platforms.
  */
-$is_about = is_page( 'about' );
+$about_style = get_field( 'about_style' );
+if ( empty( $about_style ) && is_page( 'about' ) ) {
+	$about_style = true;
+}
 
-$groups = array(
+$default_eyebrow = $about_style ? 'Expertise' : 'Capability';
+$default_heading = $about_style
+	? 'What I work with, <em>properly</em>'
+	: 'Five years of production work across both major platforms.';
+
+$eyebrow = alex_field( 'eyebrow', $default_eyebrow );
+$heading = alex_field( 'heading', $default_heading );
+$groups  = alex_field(
+	'groups',
 	array(
-		'label' => 'Platforms',
-		'tags'  => array( 'WordPress', 'Shopify', 'WooCommerce', 'Divi 5', 'ACF Pro', 'Gravity Forms' ),
-	),
-	array(
-		'label' => 'Engineering',
-		'tags'  => array( 'PHP', 'JavaScript', 'Liquid', 'HTML & CSS', 'MySQL', 'Git' ),
-	),
-	array(
-		'label' => 'Infrastructure',
-		'tags'  => array( 'WP Engine', 'Cloudflare', 'DNS & SSL', 'CDN configuration', 'Migrations', 'Backups' ),
-	),
-	array(
-		'label' => 'Performance',
-		'tags'  => array( 'Core Web Vitals', 'Technical SEO', 'Structured data', 'Search Console', 'GA4', 'Yoast' ),
-	),
+		array(
+			'label' => 'Platforms',
+			'tags'  => "WordPress\nShopify\nWooCommerce\nDivi 5\nACF Pro\nGravity Forms",
+		),
+		array(
+			'label' => 'Engineering',
+			'tags'  => "PHP\nJavaScript\nLiquid\nHTML & CSS\nMySQL\nGit",
+		),
+		array(
+			'label' => 'Infrastructure',
+			'tags'  => "WP Engine\nCloudflare\nDNS & SSL\nCDN configuration\nMigrations\nBackups",
+		),
+		array(
+			'label' => 'Performance',
+			'tags'  => "Core Web Vitals\nTechnical SEO\nStructured data\nSearch Console\nGA4\nYoast",
+		),
+	)
 );
 ?>
-<section id="capability" class="capability<?php echo $is_about ? ' capability--about' : ''; ?>" aria-label="<?php esc_attr_e( 'Technical capability', 'alex-theme' ); ?>">
+<section id="capability" class="capability<?php echo $about_style ? ' capability--about' : ''; ?>" aria-label="<?php esc_attr_e( 'Technical capability', 'alex-theme' ); ?>">
 	<div class="rv">
-		<p class="s-eyebrow"><?php echo $is_about ? esc_html__( 'Expertise', 'alex-theme' ) : esc_html__( 'Capability', 'alex-theme' ); ?></p>
-		<h2 class="s-h">
-			<?php
-			echo $is_about
-				? wp_kses_post( __( 'What I work with, <em>properly</em>', 'alex-theme' ) )
-				: esc_html__( 'Five years of production work across both major platforms.', 'alex-theme' );
-			?>
-		</h2>
+		<p class="s-eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+		<h2 class="s-h"><?php echo wp_kses_post( $heading ); ?></h2>
 	</div>
 
 	<div class="cap-grid">
-		<?php foreach ( $groups as $i => $group ) : ?>
-			<div class="cap-group rv rv<?php echo esc_attr( (string) ( $i + 1 ) ); ?>">
-				<p class="cap-label"><?php echo esc_html( $group['label'] ); ?></p>
-				<ul class="cap-list">
-					<?php foreach ( $group['tags'] as $tag ) : ?>
-						<li><?php echo esc_html( $tag ); ?></li>
-					<?php endforeach; ?>
-				</ul>
+		<?php
+		$n = 0;
+		foreach ( $groups as $group ) :
+			$label    = isset( $group['label'] ) ? (string) $group['label'] : '';
+			$tags_raw = isset( $group['tags'] ) ? (string) $group['tags'] : '';
+			$tags     = preg_split( '/\r\n|\r|\n/', $tags_raw );
+			$tags     = array_filter( array_map( 'trim', (array) $tags ) );
+			if ( ! $label && ! $tags ) {
+				continue;
+			}
+			++$n;
+			?>
+			<div class="cap-group rv rv<?php echo esc_attr( (string) $n ); ?>">
+				<?php if ( $label ) : ?>
+					<p class="cap-label"><?php echo esc_html( $label ); ?></p>
+				<?php endif; ?>
+				<?php if ( $tags ) : ?>
+					<ul class="cap-list">
+						<?php foreach ( $tags as $tag ) : ?>
+							<li><?php echo esc_html( $tag ); ?></li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
 			</div>
 		<?php endforeach; ?>
 	</div>

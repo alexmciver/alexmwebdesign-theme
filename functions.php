@@ -129,6 +129,57 @@ class Alex_Flat_Nav_Walker extends Walker_Nav_Menu {
 	public function end_el( &$output, $item, $depth = 0, $args = null ) {}
 }
 
+/**
+ * ACF field value, or a fallback when empty.
+ *
+ * @param string $name    Field name.
+ * @param mixed  $default Fallback value.
+ * @param mixed  $post_id Optional post ID / 'option'.
+ * @return mixed
+ */
+function alex_field( $name, $default = '', $post_id = false ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return $default;
+	}
+	$value = false === $post_id ? get_field( $name ) : get_field( $name, $post_id );
+	if ( null === $value || false === $value || '' === $value ) {
+		return $default;
+	}
+	if ( is_array( $value ) && empty( $value ) ) {
+		return $default;
+	}
+	return $value;
+}
+
+/**
+ * Button group (button_text + button_url) with fallbacks.
+ *
+ * @param mixed  $field         Group field value.
+ * @param string $default_text  Fallback label.
+ * @param string $default_url   Fallback URL.
+ * @return array{button_text: string, button_url: string}
+ */
+function alex_button( $field, $default_text = '', $default_url = '' ) {
+	$btn  = is_array( $field ) ? $field : array();
+	$text = ! empty( $btn['button_text'] ) ? (string) $btn['button_text'] : $default_text;
+	$url  = ! empty( $btn['button_url'] ) ? (string) $btn['button_url'] : $default_url;
+	return array(
+		'button_text' => $text,
+		'button_url'  => $url,
+	);
+}
+
+/**
+ * Permalink for a page slug, with path fallback.
+ *
+ * @param string $slug Page slug.
+ * @return string
+ */
+function alex_page_url( $slug ) {
+	$page = get_page_by_path( $slug );
+	return $page ? get_permalink( $page ) : home_url( '/' . trailingslashit( $slug ) );
+}
+
 // ACF Local JSON — save field groups into the theme
 add_filter(
 	'acf/settings/save_json',
@@ -173,6 +224,26 @@ function alex_register_acf_blocks() {
 	}
 }
 add_action( 'acf/init', 'alex_register_acf_blocks' );
+
+/**
+ * Theme Settings options page.
+ */
+add_action(
+	'acf/init',
+	function () {
+		if ( function_exists( 'acf_add_options_page' ) ) {
+			acf_add_options_page(
+				array(
+					'page_title' => 'Theme Settings',
+					'menu_title' => 'Theme Settings',
+					'menu_slug'  => 'theme-settings',
+					'capability' => 'edit_theme_options',
+					'redirect'   => false,
+				)
+			);
+		}
+	}
+);
 
 /**
  * Custom block category.

@@ -4,49 +4,81 @@
  */
 $calendly = 'https://calendly.com/alexmwebdesign/1-hour-website-chat';
 
-$details = array(
+$eyebrow    = alex_field( 'eyebrow', 'Contact' );
+$heading    = alex_field( 'heading', "Let's talk about <em>the work.</em>" );
+$subheading = alex_field( 'subheading', 'Every enquiry is read and answered by me, within one working day. No automated replies, no sales sequences.' );
+$details    = alex_field(
+	'details',
 	array(
-		'label' => __( 'Email', 'alex-theme' ),
-		'type'  => 'email',
-		'value' => 'info@alexmwebdesign.co.uk',
-		'href'  => 'mailto:info@alexmwebdesign.co.uk',
-	),
-	array(
-		'label' => __( 'Telephone', 'alex-theme' ),
-		'type'  => 'tel',
-		'value' => '+44 7804 187711',
-		'href'  => 'tel:+447804187711',
-	),
-	array(
-		'label' => __( 'Calendar', 'alex-theme' ),
-		'type'  => 'link',
-		'value' => __( 'Book a call', 'alex-theme' ) . ' →',
-		'href'  => $calendly,
-	),
-	array(
-		'label' => __( 'Location', 'alex-theme' ),
-		'type'  => 'text',
-		'value' => __( 'London / Remote', 'alex-theme' ),
-	),
+		array(
+			'label' => 'Email',
+			'type'  => 'email',
+			'value' => 'info@alexmwebdesign.co.uk',
+			'url'   => '',
+		),
+		array(
+			'label' => 'Telephone',
+			'type'  => 'tel',
+			'value' => '+44 7804 187711',
+			'url'   => '',
+		),
+		array(
+			'label' => 'Calendar',
+			'type'  => 'link',
+			'value' => 'Book a call →',
+			'url'   => $calendly,
+		),
+		array(
+			'label' => 'Location',
+			'type'  => 'text',
+			'value' => 'London / Remote',
+			'url'   => '',
+		),
+	)
 );
 ?>
 <section class="contact-hero" aria-label="<?php esc_attr_e( 'Contact', 'alex-theme' ); ?>">
 	<div class="contact-hero__line" aria-hidden="true"></div>
 	<div class="contact-hero__left rv">
-		<p class="s-eyebrow"><?php esc_html_e( 'Contact', 'alex-theme' ); ?></p>
-		<h1><?php echo wp_kses_post( __( "Let's talk about <em>the work.</em>", 'alex-theme' ) ); ?></h1>
-		<p class="contact-hero__sub"><?php esc_html_e( 'Every enquiry is read and answered by me, within one working day. No automated replies, no sales sequences.', 'alex-theme' ); ?></p>
+		<p class="s-eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+		<h1><?php echo wp_kses_post( $heading ); ?></h1>
+		<p class="contact-hero__sub"><?php echo esc_html( $subheading ); ?></p>
 	</div>
 	<div class="contact-hero__right rv rv2">
 		<ul class="contact-hero__details">
 			<?php foreach ( $details as $row ) : ?>
+				<?php
+				$label = isset( $row['label'] ) ? (string) $row['label'] : '';
+				$type  = isset( $row['type'] ) ? (string) $row['type'] : 'text';
+				$value = isset( $row['value'] ) ? (string) $row['value'] : '';
+				$url   = isset( $row['url'] ) ? (string) $row['url'] : '';
+
+				if ( ! $value && ! $label ) {
+					continue;
+				}
+
+				$href = $url;
+				if ( ! $href ) {
+					if ( 'email' === $type && $value ) {
+						$href = 'mailto:' . $value;
+					} elseif ( 'tel' === $type && $value ) {
+						$href = 'tel:' . preg_replace( '/[^\d+]/', '', $value );
+					}
+				}
+
+				$blank_attrs = ( 'link' === $type || ( $href && false !== stripos( $href, 'calendly.com' ) ) )
+					? ' target="_blank" rel="noopener noreferrer"'
+					: '';
+				?>
 				<li>
-					<span class="contact-hero__label"><?php echo esc_html( $row['label'] ); ?></span>
+					<?php if ( $label ) : ?>
+						<span class="contact-hero__label"><?php echo esc_html( $label ); ?></span>
+					<?php endif; ?>
 					<span class="contact-hero__value">
-						<?php if ( 'text' === $row['type'] ) : ?>
-							<?php echo esc_html( $row['value'] ); ?>
+						<?php if ( 'text' === $type || ! $href ) : ?>
+							<?php echo esc_html( $value ); ?>
 						<?php else : ?>
-							<a href="<?php echo esc_url( $row['href'] ); ?>"<?php echo 'link' === $row['type'] ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $row['value'] ); ?></a>
+							<a href="<?php echo esc_url( $href ); ?>"<?php echo $blank_attrs; ?>><?php echo esc_html( $value ); ?></a>
 						<?php endif; ?>
 					</span>
 				</li>
