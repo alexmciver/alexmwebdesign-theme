@@ -2,25 +2,42 @@
 /**
  * Hero block — home intro with code window, stats and tech strip.
  */
-$work_page    = get_page_by_path( 'work' );
-$work_url     = $work_page ? get_permalink( $work_page ) : home_url( '/work/' );
-$contact_page = get_page_by_path( 'contact' );
-$contact_url  = $contact_page ? get_permalink( $contact_page ) : home_url( '/contact/' );
-$platforms    = array( 'WordPress', 'Shopify', 'WooCommerce', 'Divi 5', 'WP Engine', 'Cloudflare' );
+$location          = get_field( 'location' );
+$heading           = get_field( 'heading' );
+$subheading        = get_field( 'subheading' );
+$primary           = get_field( 'primary_button' );
+$secondary         = get_field( 'secondary_button' );
+$code_window_title = get_field( 'code_window_title' );
+$stats             = get_field( 'stats' );
+$strip_label       = get_field( 'strip_label' );
+$platforms         = get_field( 'platforms' );
 ?>
+
 <section class="hero hero-parallax" aria-label="<?php esc_attr_e( 'Freelance WordPress and Shopify Developer London', 'alex-theme' ); ?>">
 	<div class="hero-bg-parallax" data-parallax="0.12" aria-hidden="true"></div>
 	<div class="hero-grid-lines" aria-hidden="true"></div>
 
 	<div class="hero-main">
 		<div class="hero-left">
-			<p class="hero-loc"><?php esc_html_e( 'London & remote', 'alex-theme' ); ?></p>
-			<h1><?php echo wp_kses_post( __( 'Websites built with the same care as <em>the business</em> behind them.', 'alex-theme' ) ); ?></h1>
-			<p class="hero-sub"><?php esc_html_e( "I'm Alex — a WordPress and Shopify developer in London. I work with a small number of clients at a time, building sites that are fast, considered, and genuinely easy to run.", 'alex-theme' ); ?></p>
-			<div class="hero-btns">
-				<a href="<?php echo esc_url( $contact_url ); ?>" class="btn btn-primary"><?php esc_html_e( 'Start a conversation', 'alex-theme' ); ?></a>
-				<a href="<?php echo esc_url( $work_url ); ?>" class="btn btn-outline-white"><?php esc_html_e( 'Selected work', 'alex-theme' ); ?></a>
-			</div>
+			<?php if ( $location ) : ?>
+				<p class="hero-loc"><?php echo esc_html( $location ); ?></p>
+			<?php endif; ?>
+			<?php if ( $heading ) : ?>
+				<h1><?php echo wp_kses_post( $heading ); ?></h1>
+			<?php endif; ?>
+			<?php if ( $subheading ) : ?>
+				<p class="hero-sub"><?php echo esc_html( $subheading ); ?></p>
+			<?php endif; ?>
+			<?php if ( ( ! empty( $primary['button_text'] ) && ! empty( $primary['button_url'] ) ) || ( ! empty( $secondary['button_text'] ) && ! empty( $secondary['button_url'] ) ) ) : ?>
+				<div class="hero-btns">
+					<?php if ( ! empty( $primary['button_text'] ) && ! empty( $primary['button_url'] ) ) : ?>
+						<a href="<?php echo esc_url( $primary['button_url'] ); ?>" class="btn btn-primary"><?php echo esc_html( $primary['button_text'] ); ?></a>
+					<?php endif; ?>
+					<?php if ( ! empty( $secondary['button_text'] ) && ! empty( $secondary['button_url'] ) ) : ?>
+						<a href="<?php echo esc_url( $secondary['button_url'] ); ?>" class="btn btn-outline-white"><?php echo esc_html( $secondary['button_text'] ); ?></a>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="hero-right">
@@ -29,7 +46,9 @@ $platforms    = array( 'WordPress', 'Shopify', 'WooCommerce', 'Divi 5', 'WP Engi
 					<div class="cw-dot r"></div>
 					<div class="cw-dot y"></div>
 					<div class="cw-dot g"></div>
-					<span class="cw-title">theme / functions.php</span>
+					<?php if ( $code_window_title ) : ?>
+						<span class="cw-title"><?php echo esc_html( $code_window_title ); ?></span>
+					<?php endif; ?>
 				</div>
 				<div class="cw-body">
 					<span class="cw-line"><span class="cm">// Inline critical CSS — cut largest contentful paint</span></span>
@@ -45,27 +64,43 @@ $platforms    = array( 'WordPress', 'Shopify', 'WooCommerce', 'Divi 5', 'WP Engi
 		</div>
 	</div>
 
-	<div class="hero-stats">
-		<div class="stat">
-			<div class="stat-n" data-count="5">0</div>
-			<div class="stat-l"><?php esc_html_e( 'Years', 'alex-theme' ); ?></div>
-		</div>
-		<div class="stat">
-			<div class="stat-n" data-count="30" data-suffix="+">0</div>
-			<div class="stat-l"><?php esc_html_e( 'Projects', 'alex-theme' ); ?></div>
-		</div>
-		<div class="stat">
-			<div class="stat-n">24h</div>
-			<div class="stat-l"><?php esc_html_e( 'Reply time', 'alex-theme' ); ?></div>
-		</div>
-	</div>
-
-	<div class="hero-strip" aria-label="<?php esc_attr_e( 'Platforms I work across', 'alex-theme' ); ?>">
-		<span class="hero-strip__label"><?php esc_html_e( 'Working across', 'alex-theme' ); ?></span>
-		<ul class="hero-strip__list">
-			<?php foreach ( $platforms as $platform ) : ?>
-				<li><?php echo esc_html( $platform ); ?></li>
+	<?php if ( $stats ) : ?>
+		<div class="hero-stats">
+			<?php foreach ( $stats as $stat ) : ?>
+				<?php
+				$value  = isset( $stat['value'] ) ? (string) $stat['value'] : '';
+				$suffix = isset( $stat['suffix'] ) ? (string) $stat['suffix'] : '';
+				$label  = isset( $stat['label'] ) ? (string) $stat['label'] : '';
+				$is_num = (bool) preg_match( '/^\d+$/', $value );
+				?>
+				<div class="stat">
+					<?php if ( $is_num ) : ?>
+						<div class="stat-n" data-count="<?php echo esc_attr( $value ); ?>"<?php echo '' !== $suffix ? ' data-suffix="' . esc_attr( $suffix ) . '"' : ''; ?>>0</div>
+					<?php else : ?>
+						<div class="stat-n"><?php echo esc_html( $value ); ?></div>
+					<?php endif; ?>
+					<?php if ( $label ) : ?>
+						<div class="stat-l"><?php echo esc_html( $label ); ?></div>
+					<?php endif; ?>
+				</div>
 			<?php endforeach; ?>
-		</ul>
-	</div>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( $strip_label || $platforms ) : ?>
+		<div class="hero-strip" aria-label="<?php esc_attr_e( 'Platforms I work across', 'alex-theme' ); ?>">
+			<?php if ( $strip_label ) : ?>
+				<span class="hero-strip__label"><?php echo esc_html( $strip_label ); ?></span>
+			<?php endif; ?>
+			<?php if ( $platforms ) : ?>
+				<ul class="hero-strip__list">
+					<?php foreach ( $platforms as $platform ) : ?>
+						<?php if ( ! empty( $platform['label'] ) ) : ?>
+							<li><?php echo esc_html( $platform['label'] ); ?></li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
+		</div>
+	<?php endif; ?>
 </section>
