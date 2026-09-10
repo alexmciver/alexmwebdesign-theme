@@ -11,6 +11,7 @@ $subheading  = alex_field( 'subheading', "I'm a London-based WordPress and Shopi
 $primary     = alex_button( get_field( 'primary_button' ), "Let's work together", $contact_url );
 $secondary   = alex_button( get_field( 'secondary_button' ), 'Book a call', $calendly );
 $photo_label = alex_field( 'photo_label', 'Photo of Alex' );
+$photo_url   = alex_field( 'photo_url', 'https://alexmwebdesign.co.uk/wp-content/uploads/2022/11/1648737707408-min.webp' );
 $intro_quote = alex_field( 'intro_quote', 'I build digital products with the same care as the business behind them.' );
 $intro_text  = alex_field(
 	'intro_text',
@@ -83,9 +84,13 @@ $has_secondary = ! empty( $secondary['button_text'] ) && ! empty( $secondary['bu
 			</div>
 		<?php endif; ?>
 	</div>
-	<div class="about-hero__right rv rv2" aria-hidden="true">
+	<div class="about-hero__right rv rv2">
 		<div class="about-hero__photo">
-			<span class="about-hero__photo-label"><?php echo esc_html( $photo_label ); ?></span>
+			<?php if ( $photo_url ) : ?>
+				<img src="<?php echo esc_url( $photo_url ); ?>" alt="<?php echo esc_attr( $photo_label ); ?>" width="800" height="1000" loading="eager" decoding="async" />
+			<?php else : ?>
+				<span class="about-hero__photo-label"><?php echo esc_html( $photo_label ); ?></span>
+			<?php endif; ?>
 		</div>
 	</div>
 </section>
