@@ -1,20 +1,20 @@
 .my-work-hero {
 	.s-eyebrow {
-		color: var(--orange);
+		color: $orange;
 
 		&::after {
-			background: var(--orange);
+			background: $orange;
 		}
 	}
 
 	h1 em {
 		font-style: italic;
-		color: var(--orange);
+		color: $orange;
 	}
 }
 
 .my-work {
-	background: var(--paper);
+	background: $paper;
 	padding: 120px 64px;
 
 	@include bp {
@@ -38,8 +38,8 @@
 
 .my-work__featured-media {
 	aspect-ratio: 4 / 3;
-	background: var(--paper-3);
-	border-radius: var(--radius-panel);
+	background: $paper-3;
+	border-radius: $radius-panel;
 }
 
 .my-work__featured-copy {
@@ -66,36 +66,36 @@
 	}
 
 	dt {
-		font-family: var(--sans);
+		font-family: $sans;
 		font-size: 10px;
 		font-weight: 600;
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		color: var(--orange);
+		color: $orange;
 		margin-bottom: 8px;
 	}
 
 	dd {
-		font-family: var(--sans);
+		font-family: $sans;
 		font-size: 15px;
-		color: var(--ink);
+		color: $ink;
 		margin: 0;
 		line-height: 1.4;
 	}
 }
 
 .my-work__link {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: var(--ink);
+	color: $ink;
 	text-decoration: none;
-	transition: color 0.25s var(--ease);
+	transition: color 0.25s $ease;
 
 	&:hover {
-		color: var(--orange);
+		color: $orange;
 	}
 }
 
