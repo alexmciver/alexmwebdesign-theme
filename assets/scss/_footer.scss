@@ -1,6 +1,6 @@
 .site-footer {
-  background: var(--ink);
-  border-top: 1px solid var(--line-dark-soft);
+  background: $ink;
+  border-top: 1px solid $line-dark-soft;
   padding: 100px 64px 44px;
 
   @include bp {
@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font-family: var(--serif);
+  font-family: $serif;
   font-size: 26px;
   font-weight: 400;
   color: #fff;
@@ -34,7 +34,7 @@
     display: inline-block;
     width: 6px;
     height: 6px;
-    background: var(--orange);
+    background: $orange;
     border-radius: 50%;
   }
 }
@@ -47,7 +47,7 @@
 }
 
 .footer-col-title {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -65,10 +65,10 @@
   a {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.5);
-    transition: color 0.25s var(--ease);
+    transition: color 0.25s $ease;
 
     &:hover {
-      color: var(--orange);
+      color: $orange;
     }
   }
 }
@@ -79,10 +79,10 @@
     font-size: 14px;
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 13px;
-    transition: color 0.25s var(--ease);
+    transition: color 0.25s $ease;
 
     &:hover {
-      color: var(--orange);
+      color: $orange;
     }
   }
 }
@@ -94,7 +94,7 @@
   flex-wrap: wrap;
   gap: 16px;
   padding-top: 26px;
-  border-top: 1px solid var(--line-dark-soft);
+  border-top: 1px solid $line-dark-soft;
 
   @include bp {
     flex-direction: column;
@@ -116,7 +116,7 @@
 }
 
 .footer-cert {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.09em;

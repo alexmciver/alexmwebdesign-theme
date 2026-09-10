@@ -4,31 +4,31 @@ $bp: 1000px;
 
 :root {
   // Colour
-  --ink: #0e1018;
-  --ink-2: #1a1d28;
-  --ink-mid: #5a5f70;
-  --ink-light: #9096a6;
-  --paper: #faf9f7;
-  --paper-2: #f3f1ed;
-  --paper-3: #e9e6e0;
-  --orange: #ff4d00;
-  --orange-soft: rgba(255, 77, 0, 0.09);
+  $ink: #0e1018;
+  $ink-2: #1a1d28;
+  $ink-mid: #5a5f70;
+  $ink-light: #9096a6;
+  $paper: #faf9f7;
+  $paper-2: #f3f1ed;
+  $paper-3: #e9e6e0;
+  $orange: #ff4d00;
+  $orange-soft: rgba(255, 77, 0, 0.09);
 
   // Hairlines
-  --line: rgba(14, 16, 24, 0.1);
-  --line-soft: rgba(14, 16, 24, 0.06);
-  --line-dark: rgba(255, 255, 255, 0.09);
-  --line-dark-soft: rgba(255, 255, 255, 0.055);
+  $line: rgba(14, 16, 24, 0.1);
+  $line-soft: rgba(14, 16, 24, 0.06);
+  $line-dark: rgba(255, 255, 255, 0.09);
+  $line-dark-soft: rgba(255, 255, 255, 0.055);
 
   // Type
-  --serif: "Cormorant Garamond", Georgia, serif;
-  --sans: "DM Sans", system-ui, sans-serif;
+  $serif: "Cormorant Garamond", Georgia, serif;
+  $sans: "DM Sans", system-ui, sans-serif;
 
   // Motion
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  $ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   // Radius
-  --radius: 2px;
-  --radius-panel: 3px;
-  --radius-float: 6px;
+  $radius: 2px;
+  $radius-panel: 3px;
+  $radius-float: 6px;
 }

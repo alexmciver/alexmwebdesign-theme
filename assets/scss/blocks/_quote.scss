@@ -1,5 +1,5 @@
 .quote {
-  background: var(--orange);
+  background: $orange;
   padding: 100px 64px;
   text-align: center;
 
@@ -9,7 +9,7 @@
 }
 
 .quote__text {
-  font-family: var(--serif);
+  font-family: $serif;
   font-weight: 300;
   font-style: italic;
   font-size: clamp(28px, 3.6vw, 48px);
@@ -21,7 +21,7 @@
 }
 
 .quote__attr {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.16em;

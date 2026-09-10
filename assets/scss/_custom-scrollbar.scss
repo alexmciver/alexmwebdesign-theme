@@ -5,11 +5,11 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--orange);
-    border-radius: var(--radius);
+    background: $orange;
+    border-radius: $radius;
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--paper-2);
+    background: $paper-2;
   }
 }

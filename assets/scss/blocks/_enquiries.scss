@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: start;
-  background: var(--ink);
+  background: $ink;
   padding: 120px 64px;
 
   @include bp {
@@ -13,7 +13,7 @@
   }
 
   .s-eyebrow {
-    color: var(--orange);
+    color: $orange;
   }
 
   .s-h {
@@ -24,7 +24,7 @@
 }
 
 .enquiries__intro {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 16px;
   line-height: 1.75;
   color: rgba(255, 255, 255, 0.5);
@@ -41,21 +41,21 @@
   gap: 20px;
 
   a {
-    font-family: var(--sans);
+    font-family: $sans;
     font-size: 15px;
     color: #fff;
     text-decoration: none;
-    transition: color 0.25s var(--ease);
+    transition: color 0.25s $ease;
 
     &:hover {
-      color: var(--orange);
+      color: $orange;
     }
   }
 }
 
 .enquiries__label {
   display: block;
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -65,7 +65,7 @@
 }
 
 .enquiries__note {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 13px;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.35);
@@ -89,7 +89,7 @@
   gap: 10px;
 
   span {
-    font-family: var(--sans);
+    font-family: $sans;
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -103,21 +103,21 @@
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 1px solid var(--line-dark);
+    border-bottom: 1px solid $line-dark;
     border-radius: 0;
     padding: 10px 0 12px;
-    font-family: var(--sans);
+    font-family: $sans;
     font-size: 15px;
     color: #fff;
     outline: none;
-    transition: border-color 0.25s var(--ease);
+    transition: border-color 0.25s $ease;
 
     &::placeholder {
       color: rgba(255, 255, 255, 0.25);
     }
 
     &:focus {
-      border-color: var(--orange);
+        border-color: $orange;
     }
   }
 
@@ -132,7 +132,7 @@
     cursor: pointer;
 
     option {
-      color: var(--ink);
+      color: $ink;
     }
   }
 
@@ -154,42 +154,42 @@
 
 // Contact page — process + form on paper
 .enquiries--contact {
-  background: var(--paper);
+  background: $paper;
   align-items: start;
 
   .s-h {
-    color: var(--ink);
+    color: $ink;
     max-width: 14ch;
 
     em {
       font-style: italic;
-      color: var(--orange);
+      color: $orange;
     }
   }
 
   .enquiries__form {
     .enq-field span {
-      color: var(--ink-light);
+      color: $ink-light;
     }
 
     input,
     select,
     textarea {
-      color: var(--ink);
-      border-bottom-color: var(--line);
+      color: $ink;
+      border-bottom-color: $line;
 
       &::placeholder {
-        color: var(--ink-light);
+        color: $ink-light;
       }
 
       &:focus {
-        border-color: var(--orange);
+        border-color: $orange;
       }
     }
 
     select {
-      background-image: linear-gradient(45deg, transparent 50%, var(--ink-mid) 50%),
-        linear-gradient(135deg, var(--ink-mid) 50%, transparent 50%);
+      background-image: linear-gradient(45deg, transparent 50%, $ink-mid 50%),
+        linear-gradient(135deg, $ink-mid 50%, transparent 50%);
     }
   }
 }
@@ -212,10 +212,10 @@
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    font-family: var(--sans);
+    font-family: $sans;
     font-size: 15px;
     line-height: 1.65;
-    color: var(--ink-mid);
+    color: $ink-mid;
   }
 }
 
@@ -225,7 +225,7 @@
   height: 18px;
   margin-top: 2px;
   border-radius: 50%;
-  background: var(--orange-soft);
+  background: $orange-soft;
   position: relative;
 
   &::after {
@@ -235,23 +235,23 @@
     top: 3px;
     width: 5px;
     height: 9px;
-    border: solid var(--orange);
+    border: solid $orange;
     border-width: 0 1.5px 1.5px 0;
     transform: rotate(45deg);
   }
 }
 
 .enquiries__status {
-  background: var(--ink);
+  background: $ink;
   padding: 28px 28px 26px;
-  border-radius: var(--radius-panel);
+  border-radius: $radius-panel;
 }
 
 .enquiries__status-live {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 13px;
   font-weight: 600;
   color: #fff;
@@ -268,7 +268,7 @@
 }
 
 .enquiries__status-note {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 14px;
   line-height: 1.65;
   color: rgba(255, 255, 255, 0.45);
@@ -284,19 +284,19 @@
 }
 
 .enquiries__form-intro {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 15px;
   line-height: 1.7;
-  color: var(--ink-mid);
+  color: $ink-mid;
   margin: 0 0 32px;
   max-width: 42ch;
 }
 
 .enquiries__disclaimer {
   grid-column: 1 / -1;
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 12px;
   line-height: 1.6;
-  color: var(--ink-light);
+  color: $ink-light;
   margin: 4px 0 0;
 }

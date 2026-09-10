@@ -1,5 +1,5 @@
 .capability {
-  background: var(--ink);
+  background: $ink;
   padding: 120px 64px;
 
   @include bp {
@@ -14,28 +14,28 @@
 }
 
 .capability--about {
-  background: var(--paper-2);
+  background: $paper-2;
 
   .s-h {
-    color: var(--ink);
+    color: $ink;
     max-width: 14ch;
 
     em {
       font-style: italic;
-      color: var(--orange);
+      color: $orange;
     }
   }
 
   .cap-grid {
-    background: var(--line-soft);
+    background: $line-soft;
   }
 
   .cap-group {
-    background: var(--paper-2);
+    background: $paper-2;
   }
 
   .cap-list li {
-    color: var(--ink-mid);
+    color: $ink-mid;
   }
 }
 
@@ -51,7 +51,7 @@
 }
 
 .cap-group {
-  background: var(--ink);
+  background: $ink;
   padding: 40px 32px;
 
   @include bp {
@@ -60,12 +60,12 @@
 }
 
 .cap-label {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: $orange;
   margin-bottom: 24px;
 }
 
@@ -78,7 +78,7 @@
   gap: 12px;
 
   li {
-    font-family: var(--sans);
+    font-family: $sans;
     font-size: 15px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.55);

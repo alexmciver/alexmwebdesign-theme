@@ -1,5 +1,5 @@
 .work {
-  background: var(--paper);
+  background: $paper;
   padding: 120px 64px;
 
   @include bp {
@@ -32,19 +32,19 @@
 }
 
 .work__all {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: $ink;
   text-decoration: none;
   white-space: nowrap;
   padding-bottom: 8px;
-  transition: color 0.25s var(--ease);
+  transition: color 0.25s $ease;
 
   &:hover {
-    color: var(--orange);
+    color: $orange;
   }
 }
 
@@ -66,21 +66,21 @@
 
   &:hover {
     .work__media {
-      background: var(--paper-2);
+      background: $paper-2;
     }
 
     .work__title {
-      color: var(--orange);
+      color: $orange;
     }
   }
 }
 
 .work__media {
   aspect-ratio: 4 / 3;
-  background: var(--paper-3);
-  border-radius: var(--radius-panel);
+  background: $paper-3;
+  border-radius: $radius-panel;
   margin-bottom: 20px;
-  transition: background 0.3s var(--ease);
+  transition: background 0.3s $ease;
 }
 
 .work__meta {
@@ -92,35 +92,35 @@
 }
 
 .work__title {
-  font-family: var(--serif);
+  font-family: $serif;
   font-size: clamp(22px, 2vw, 28px);
   font-weight: 400;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: $ink;
   line-height: 1.15;
-  transition: color 0.25s var(--ease);
+  transition: color 0.25s $ease;
 }
 
 .work__platform {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-light);
+  color: $ink-light;
   white-space: nowrap;
 }
 
 .work__result {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 14px;
   line-height: 1.6;
-  color: var(--ink-mid);
+  color: $ink-mid;
   margin: 0;
 
   em {
     font-style: normal;
-    color: var(--orange);
+    color: $orange;
     font-weight: 500;
   }
 }

@@ -1,5 +1,5 @@
 .hire-me {
-	background: var(--orange);
+	background: $orange;
 	padding: 100px 64px;
 	text-align: center;
 
@@ -14,7 +14,7 @@
 }
 
 .hire-me__title {
-	font-family: var(--serif);
+	font-family: $serif;
 	font-weight: 300;
 	font-style: italic;
 	font-size: clamp(32px, 4.2vw, 56px);
@@ -25,7 +25,7 @@
 }
 
 .hire-me__sub {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 15px;
 	line-height: 1.7;
 	color: rgba(255, 255, 255, 0.78);
@@ -43,7 +43,7 @@
 }
 
 .hire-me .btn-white:hover {
-	background: var(--ink);
+	background: $ink;
 	color: #fff;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .hire-me--about {
-	background: var(--ink);
+	background: $ink;
 	padding: 100px 64px;
 
 	@include bp {
@@ -74,7 +74,7 @@
 
 		em {
 			font-style: italic;
-			color: var(--orange);
+			color: $orange;
 		}
 	}
 
@@ -84,7 +84,7 @@
 }
 
 .hire-me--contact {
-	background: var(--paper-2);
+	background: $paper-2;
 	padding: 100px 64px;
 
 	@include bp {
@@ -94,16 +94,16 @@
 	.hire-me__title {
 		font-style: normal;
 		font-weight: 300;
-		color: var(--ink);
+		color: $ink;
 
 		em {
 			font-style: italic;
-			color: var(--orange);
+			color: $orange;
 		}
 	}
 
 	.hire-me__sub {
-		color: var(--ink-mid);
+		color: $ink-mid;
 	}
 
 	.hire-me__btns {
@@ -112,11 +112,11 @@
 }
 
 .hire-me__meta {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 10px;
 	font-weight: 600;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: var(--ink-light);
+	color: $ink-light;
 	margin: 0;
 }

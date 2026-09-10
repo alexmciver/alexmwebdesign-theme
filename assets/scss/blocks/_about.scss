@@ -3,7 +3,7 @@
 .about-hero {
 	position: relative;
 	overflow: hidden;
-	background: var(--ink);
+	background: $ink;
 	padding: 180px 64px 0;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -22,7 +22,7 @@
 		inset: 0;
 		background: radial-gradient(
 			ellipse 50% 70% at 80% 40%,
-			var(--orange-soft) 0%,
+			$orange-soft 0%,
 			transparent 55%
 		);
 		pointer-events: none;
@@ -53,15 +53,15 @@
 	}
 
 	.s-eyebrow {
-		color: var(--orange);
+		color: $orange;
 
 		&::after {
-			background: var(--orange);
+			background: $orange;
 		}
 	}
 
 	h1 {
-		font-family: var(--serif);
+		font-family: $serif;
 		font-weight: 300;
 		font-size: clamp(64px, 7vw, 110px);
 		line-height: 0.95;
@@ -71,13 +71,13 @@
 
 		em {
 			font-style: italic;
-			color: var(--orange);
+			color: $orange;
 		}
 	}
 }
 
 .about-hero__sub {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 17px;
 	line-height: 1.75;
 	color: rgba(255, 255, 255, 0.45);
@@ -105,14 +105,14 @@
 	width: 100%;
 	aspect-ratio: 4 / 5;
 	background: linear-gradient(145deg, #1a1d36, #0d1020);
-	border-radius: var(--radius-panel) var(--radius-panel) 0 0;
+	border-radius: $radius-panel $radius-panel 0 0;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
 .about-hero__photo-label {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 12px;
 	letter-spacing: 0.06em;
 	color: rgba(255, 255, 255, 0.22);
@@ -135,22 +135,22 @@
 }
 
 .about-intro__quote {
-	font-family: var(--serif);
+	font-family: $serif;
 	font-weight: 300;
 	font-style: italic;
 	font-size: clamp(26px, 3.2vw, 40px);
 	line-height: 1.25;
 	letter-spacing: -0.02em;
-	color: var(--ink);
+	color: $ink;
 	margin: 0 0 36px;
 	max-width: 18ch;
 }
 
 .about-intro__text {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 15px;
 	line-height: 1.8;
-	color: var(--ink-mid);
+	color: $ink-mid;
 	max-width: 52ch;
 
 	p {
@@ -162,7 +162,7 @@
 	}
 
 	strong {
-		color: var(--ink);
+		color: $ink;
 		font-weight: 600;
 	}
 }
@@ -171,8 +171,8 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 1px;
-	background: var(--line-soft);
-	border: 1px solid var(--line-soft);
+	background: $line-soft;
+	border: 1px solid $line-soft;
 	margin-bottom: 48px;
 }
 
@@ -185,28 +185,28 @@
 }
 
 .about-stat__n {
-	font-family: var(--serif);
+	font-family: $serif;
 	font-weight: 300;
 	font-size: clamp(36px, 4vw, 48px);
 	line-height: 1;
 	letter-spacing: -0.03em;
-	color: var(--ink);
+	color: $ink;
 }
 
 .about-stat__l {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 12px;
 	line-height: 1.4;
-	color: var(--ink-light);
+	color: $ink-light;
 }
 
 .about-exp__label {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 10px;
 	font-weight: 600;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: var(--orange);
+	color: $orange;
 	margin: 0 0 16px;
 }
 
@@ -214,7 +214,7 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	border-top: 1px solid var(--line-soft);
+	border-top: 1px solid $line-soft;
 
 	li {
 		display: flex;
@@ -222,20 +222,20 @@
 		align-items: baseline;
 		gap: 16px;
 		padding: 16px 0;
-		border-bottom: 1px solid var(--line-soft);
+		border-bottom: 1px solid $line-soft;
 	}
 }
 
 .about-exp__role {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 14px;
 	font-weight: 500;
-	color: var(--ink);
+	color: $ink;
 }
 
 .about-exp__meta {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 12px;
-	color: var(--ink-light);
+	color: $ink-light;
 	white-space: nowrap;
 }

@@ -5,7 +5,7 @@
   padding: 130px 64px 0;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(140deg, var(--ink) 0%, #13151f 55%, #0e1218 100%);
+  background: linear-gradient(140deg, $ink 0%, #13151f 55%, #0e1218 100%);
 
   @include bp {
     padding: 110px 24px 0;
@@ -25,7 +25,7 @@
     ),
     radial-gradient(
       ellipse 40% 50% at 82% 28%,
-      var(--orange-soft) 0%,
+      $orange-soft 0%,
       transparent 50%
     );
 }
@@ -74,7 +74,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -86,7 +86,7 @@
     content: "";
     width: 6px;
     height: 6px;
-    background: var(--orange);
+    background: $orange;
     border-radius: 50%;
     flex-shrink: 0;
     animation: hero-pulse 2s infinite;
@@ -114,7 +114,7 @@
 }
 
 .hero h1 {
-  font-family: var(--serif);
+  font-family: $serif;
   font-size: clamp(44px, 5.4vw, 78px);
   font-weight: 300;
   line-height: 1.02;
@@ -130,12 +130,12 @@
 
   em {
     font-style: italic;
-    color: var(--orange);
+    color: $orange;
   }
 }
 
 .hero-sub {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 16px;
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.75;
@@ -186,7 +186,7 @@
 }
 
 .stat-n {
-  font-family: var(--serif);
+  font-family: $serif;
   font-size: 44px;
   font-weight: 300;
   color: #f5f5ff;
@@ -195,7 +195,7 @@
 }
 
 .stat-l {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -222,7 +222,7 @@
 }
 
 .hero-strip__label {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -240,7 +240,7 @@
   padding: 0;
 
   li {
-    font-family: var(--sans);
+    font-family: $sans;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -291,7 +291,7 @@
   margin-left: 6px;
   font-size: 11px;
   color: rgba(255, 255, 255, 0.25);
-  font-family: var(--sans);
+  font-family: $sans;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -299,7 +299,7 @@
 .cw-body {
   padding: 18px 22px;
   background: #0d1117;
-  font-family: "Courier New", monospace;
+  font-family: $mono;
   font-size: 12.5px;
   line-height: 1.7;
 }
@@ -310,7 +310,7 @@
   color: #6e7681;
   opacity: 0;
   transform: translateX(-8px);
-  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  transition: opacity 0.4s $ease, transform 0.4s $ease;
 
   &.show {
     opacity: 1;
@@ -343,7 +343,7 @@
   display: inline-block;
   width: 2px;
   height: 13px;
-  background: var(--orange);
+  background: $orange;
   vertical-align: middle;
   animation: cw-blink 1s infinite;
 }

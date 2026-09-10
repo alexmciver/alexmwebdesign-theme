@@ -3,7 +3,7 @@
 .contact-hero {
 	position: relative;
 	overflow: hidden;
-	background: var(--ink);
+	background: $ink;
 	padding: 180px 64px 100px;
 	display: grid;
 	grid-template-columns: 1.1fr 0.9fr;
@@ -23,7 +23,7 @@
 		inset: 0;
 		background: radial-gradient(
 			ellipse 50% 70% at 80% 40%,
-			var(--orange-soft) 0%,
+			$orange-soft 0%,
 			transparent 55%
 		);
 		pointer-events: none;
@@ -49,15 +49,15 @@
 	z-index: 1;
 
 	.s-eyebrow {
-		color: var(--orange);
+		color: $orange;
 
 		&::after {
-			background: var(--orange);
+			background: $orange;
 		}
 	}
 
 	h1 {
-		font-family: var(--serif);
+		font-family: $serif;
 		font-weight: 300;
 		font-size: clamp(48px, 6.2vw, 92px);
 		line-height: 0.98;
@@ -68,13 +68,13 @@
 
 		em {
 			font-style: italic;
-			color: var(--orange);
+			color: $orange;
 		}
 	}
 }
 
 .contact-hero__sub {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 16px;
 	line-height: 1.75;
 	color: rgba(255, 255, 255, 0.45);
@@ -91,7 +91,7 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	border-top: 1px solid var(--line-dark);
+	border-top: 1px solid $line-dark;
 
 	li {
 		display: grid;
@@ -99,7 +99,7 @@
 		gap: 24px;
 		align-items: baseline;
 		padding: 20px 0;
-		border-bottom: 1px solid var(--line-dark);
+		border-bottom: 1px solid $line-dark;
 
 		@include bp {
 			grid-template-columns: 1fr;
@@ -108,20 +108,20 @@
 	}
 
 	a {
-		font-family: var(--sans);
+		font-family: $sans;
 		font-size: 15px;
 		color: #fff;
 		text-decoration: none;
-		transition: color 0.25s var(--ease);
+		transition: color 0.25s $ease;
 
 		&:hover {
-			color: var(--orange);
+			color: $orange;
 		}
 	}
 }
 
 .contact-hero__label {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 10px;
 	font-weight: 600;
 	letter-spacing: 0.14em;
@@ -130,7 +130,7 @@
 }
 
 .contact-hero__value {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 15px;
 	color: #fff;
 }

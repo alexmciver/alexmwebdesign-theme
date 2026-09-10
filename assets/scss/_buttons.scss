@@ -2,16 +2,16 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--sans);
+  font-family: $sans;
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   border: none;
-  border-radius: var(--radius);
+  border-radius: $radius;
   cursor: none;
-  transition: background 0.3s var(--ease), color 0.3s var(--ease),
-    border-color 0.3s var(--ease), transform 0.3s var(--ease);
+  transition: background 0.3s $ease, color 0.3s $ease,
+    border-color 0.3s $ease, transform 0.3s $ease;
   position: relative;
 
   @include bp {
@@ -21,11 +21,11 @@
 
 .btn-primary {
   padding: 16px 30px;
-  background: var(--orange);
+  background: $orange;
   color: #fff;
 
   &:hover {
-    background: var(--ink);
+    background: $ink;
     color: #fff;
     transform: translateY(-2px);
   }
@@ -34,21 +34,21 @@
 .btn-outline {
   padding: 15px 30px;
   background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--line);
+  color: $ink;
+  border: 1px solid $line;
 
   &:hover {
-    border-color: var(--ink);
+    border-color: $ink;
   }
 }
 
 .btn-white {
   padding: 16px 30px;
   background: #fff;
-  color: var(--ink);
+  color: $ink;
 
   &:hover {
-    background: var(--ink);
+    background: $ink;
     color: #fff;
     transform: translateY(-2px);
   }
@@ -56,12 +56,12 @@
 
 .btn-ink {
   padding: 16px 30px;
-  background: var(--ink);
+  background: $ink;
   color: #fff;
 
   &:hover {
     background: #fff;
-    color: var(--ink);
+    color: $ink;
     transform: translateY(-2px);
   }
 }

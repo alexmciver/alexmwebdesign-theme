@@ -1,9 +1,9 @@
 .my-services-hero {
 	.s-eyebrow {
-		color: var(--orange);
+		color: $orange;
 
 		&::after {
-			background: var(--orange);
+			background: $orange;
 		}
 	}
 
@@ -13,7 +13,7 @@
 }
 
 .my-services {
-	background: var(--paper);
+	background: $paper;
 	padding: 0 64px 40px;
 
 	@include bp {
@@ -26,10 +26,10 @@
 	grid-template-columns: 0.95fr 1.35fr;
 	gap: 64px;
 	padding: 72px 0;
-	border-bottom: 1px solid var(--line-soft);
+	border-bottom: 1px solid $line-soft;
 
 	&:first-child {
-		border-top: 1px solid var(--line-soft);
+		border-top: 1px solid $line-soft;
 	}
 
 	@include bp {
@@ -41,56 +41,56 @@
 
 .svc-detail__n {
 	display: block;
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 0.08em;
-	color: var(--orange);
+	color: $orange;
 	margin-bottom: 18px;
 }
 
 .svc-detail__title {
-	font-family: var(--serif);
+	font-family: $serif;
 	font-weight: 400;
 	font-size: clamp(28px, 3vw, 40px);
 	line-height: 1.1;
 	letter-spacing: -0.025em;
-	color: var(--ink);
+	color: $ink;
 	margin: 0 0 20px;
 	max-width: 12ch;
 }
 
 .svc-detail__body {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 15px;
 	line-height: 1.75;
-	color: var(--ink-mid);
+	color: $ink-mid;
 	margin: 0 0 28px;
 	max-width: 38ch;
 }
 
 .svc-detail__cta {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: var(--ink);
+	color: $ink;
 	text-decoration: none;
-	transition: color 0.25s var(--ease);
+	transition: color 0.25s $ease;
 
 	&:hover {
-		color: var(--orange);
+		color: $orange;
 	}
 }
 
 .svc-detail__label {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 10px;
 	font-weight: 600;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: var(--ink-light);
+	color: $ink-light;
 	margin: 0 0 20px;
 }
 
@@ -101,7 +101,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 0 40px;
-	border-top: 1px solid var(--line-soft);
+	border-top: 1px solid $line-soft;
 
 	@include bp {
 		grid-template-columns: 1fr;
@@ -109,12 +109,12 @@
 	}
 
 	li {
-		font-family: var(--sans);
+		font-family: $sans;
 		font-size: 14px;
 		line-height: 1.5;
-		color: var(--ink);
+		color: $ink;
 		padding: 16px 0;
-		border-bottom: 1px solid var(--line-soft);
+		border-bottom: 1px solid $line-soft;
 	}
 }
 
@@ -127,17 +127,17 @@
 	gap: 8px 18px;
 
 	li {
-		font-family: var(--sans);
+		font-family: $sans;
 		font-size: 10px;
 		font-weight: 600;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		color: var(--ink-light);
+		color: $ink-light;
 	}
 }
 
 .platform {
-	background: var(--ink);
+	background: $ink;
 	padding: 120px 64px;
 
 	@include bp {
@@ -145,10 +145,10 @@
 	}
 
 	.s-eyebrow {
-		color: var(--orange);
+		color: $orange;
 
 		&::after {
-			background: var(--orange);
+			background: $orange;
 		}
 	}
 }
@@ -168,7 +168,7 @@
 	grid-template-columns: 1fr 1fr;
 	gap: 80px;
 	padding-top: 56px;
-	border-top: 1px solid var(--line-dark);
+	border-top: 1px solid $line-dark;
 
 	@include bp {
 		grid-template-columns: 1fr;
@@ -178,17 +178,17 @@
 }
 
 .platform__label {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 10px;
 	font-weight: 600;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: var(--orange);
+	color: $orange;
 	margin: 0 0 16px;
 }
 
 .platform__title {
-	font-family: var(--serif);
+	font-family: $serif;
 	font-weight: 400;
 	font-size: clamp(32px, 3.2vw, 44px);
 	letter-spacing: -0.025em;
@@ -198,7 +198,7 @@
 }
 
 .platform__body {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 15px;
 	line-height: 1.75;
 	color: rgba(255, 255, 255, 0.48);
@@ -210,30 +210,30 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	border-top: 1px solid var(--line-dark);
+	border-top: 1px solid $line-dark;
 
 	li {
-		font-family: var(--sans);
+		font-family: $sans;
 		font-size: 14px;
 		line-height: 1.5;
 		color: rgba(255, 255, 255, 0.62);
 		padding: 16px 0;
-		border-bottom: 1px solid var(--line-dark);
+		border-bottom: 1px solid $line-dark;
 	}
 }
 
 .platform__note {
 	margin: 56px 0 0;
 	text-align: center;
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 14px;
 	line-height: 1.7;
 	color: rgba(255, 255, 255, 0.45);
 
 	a {
-		color: var(--orange);
+		color: $orange;
 		text-decoration: none;
-		transition: opacity 0.25s var(--ease);
+		transition: opacity 0.25s $ease;
 
 		&:hover {
 			opacity: 0.8;
@@ -242,7 +242,7 @@
 }
 
 .care-tiers {
-	background: var(--paper);
+	background: $paper;
 	padding: 120px 64px;
 
 	@include bp {
@@ -263,7 +263,7 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 0;
-	border-top: 1px solid var(--line-soft);
+	border-top: 1px solid $line-soft;
 
 	@include bp {
 		grid-template-columns: 1fr;
@@ -275,7 +275,7 @@
 
 	&:not(:first-child) {
 		padding-left: 36px;
-		border-left: 1px solid var(--line-soft);
+		border-left: 1px solid $line-soft;
 	}
 
 	@include bp {
@@ -283,7 +283,7 @@
 		border-left: none !important;
 
 		&:not(:first-child) {
-			border-top: 1px solid var(--line-soft);
+			border-top: 1px solid $line-soft;
 			margin-top: 8px;
 			padding-top: 36px;
 		}
@@ -291,21 +291,21 @@
 }
 
 .care-tier__title {
-	font-family: var(--serif);
+	font-family: $serif;
 	font-weight: 400;
 	font-size: clamp(26px, 2.4vw, 34px);
 	letter-spacing: -0.02em;
-	color: var(--ink);
+	color: $ink;
 	margin: 0 0 10px;
 	line-height: 1.15;
 }
 
 .care-tier__sub {
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 12px;
 	font-weight: 600;
 	letter-spacing: 0.04em;
-	color: var(--orange);
+	color: $orange;
 	margin: 0 0 28px;
 }
 
@@ -313,25 +313,25 @@
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	border-top: 1px solid var(--line-soft);
+	border-top: 1px solid $line-soft;
 
 	li {
-		font-family: var(--sans);
+		font-family: $sans;
 		font-size: 14px;
 		line-height: 1.5;
-		color: var(--ink);
+		color: $ink;
 		padding: 16px 0;
-		border-bottom: 1px solid var(--line-soft);
+		border-bottom: 1px solid $line-soft;
 	}
 }
 
 .care-tiers__note {
 	margin: 48px 0 0;
 	text-align: center;
-	font-family: var(--sans);
+	font-family: $sans;
 	font-size: 13px;
 	line-height: 1.7;
-	color: var(--ink-mid);
+	color: $ink-mid;
 	max-width: 42ch;
 	margin-left: auto;
 	margin-right: auto;

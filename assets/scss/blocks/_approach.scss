@@ -1,5 +1,5 @@
 .approach {
-  background: var(--paper);
+  background: $paper;
   padding: 120px 64px;
 
   @include bp {
@@ -24,7 +24,7 @@
 
 .approach__step {
   padding: 0 32px;
-  border-left: 1px solid var(--line-soft);
+  border-left: 1px solid $line-soft;
 
   &:first-child {
     padding-left: 0;
@@ -34,7 +34,7 @@
   @include bp {
     padding: 28px 0;
     border-left: none;
-    border-top: 1px solid var(--line-soft);
+    border-top: 1px solid $line-soft;
 
     &:first-child {
       border-top: none;
@@ -44,30 +44,30 @@
 }
 
 .approach__label {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: $orange;
   margin-bottom: 16px;
 }
 
 .approach__title {
-  font-family: var(--serif);
+  font-family: $serif;
   font-size: clamp(24px, 2.2vw, 32px);
   font-weight: 400;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: $ink;
   margin-bottom: 16px;
   line-height: 1.15;
 }
 
 .approach__body {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 14px;
   line-height: 1.7;
-  color: var(--ink-mid);
+  color: $ink-mid;
   margin: 0;
   max-width: 280px;
 
@@ -113,7 +113,7 @@
     top: 6px;
     bottom: 6px;
     width: 1px;
-    background: var(--line-soft);
+    background: $line-soft;
   }
 }
 
@@ -129,44 +129,44 @@
     height: 15px;
     border-radius: 50%;
     background: #fff;
-    border: 2px solid var(--line);
+    border: 2px solid $line;
     box-sizing: border-box;
   }
 }
 
 .about-tl__date {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: $orange;
   margin: 0 0 10px;
 }
 
 .about-tl__title {
-  font-family: var(--serif);
+  font-family: $serif;
   font-weight: 400;
   font-size: 22px;
   line-height: 1.2;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: $ink;
   margin: 0 0 6px;
 }
 
 .about-tl__org {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 13px;
   font-weight: 600;
-  color: var(--ink-mid);
+  color: $ink-mid;
   margin: 0 0 10px;
 }
 
 .about-tl__body {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 14px;
   line-height: 1.7;
-  color: var(--ink-light);
+  color: $ink-light;
   margin: 0;
   max-width: 42ch;
 }
@@ -178,26 +178,26 @@
 
 .about-value {
   padding: 28px 0;
-  border-bottom: 1px solid var(--line-soft);
+  border-bottom: 1px solid $line-soft;
 
   &:first-child {
-    border-top: 1px solid var(--line-soft);
+    border-top: 1px solid $line-soft;
   }
 }
 
 .about-value__title {
-  font-family: var(--sans);
+  font-family: $sans;
   font-weight: 600;
   font-size: 16px;
-  color: var(--ink);
+  color: $ink;
   margin: 0 0 10px;
 }
 
 .about-value__body {
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 14px;
   line-height: 1.7;
-  color: var(--ink-mid);
+  color: $ink-mid;
   margin: 0;
   max-width: 42ch;
 }

@@ -3,7 +3,7 @@
   grid-template-columns: 0.9fr 1.1fr;
   gap: 80px;
   align-items: start;
-  background: var(--paper);
+  background: $paper;
   padding: 120px 64px;
 
   @include bp {
@@ -18,7 +18,7 @@
 
     em {
       font-style: italic;
-      color: var(--orange);
+      color: $orange;
     }
   }
 
@@ -29,29 +29,29 @@
 
 .questions__link {
   display: inline-flex;
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: $ink;
   text-decoration: none;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid $ink;
   padding-bottom: 4px;
-  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+  transition: color 0.25s $ease, border-color 0.25s $ease;
 
   &:hover {
-    color: var(--orange);
-    border-color: var(--orange);
+    color: $orange;
+    border-color: $orange;
   }
 }
 
 .questions__list {
-  border-top: 1px solid var(--line-soft);
+  border-top: 1px solid $line-soft;
 }
 
 .faq-item {
-  border-bottom: 1px solid var(--line-soft);
+  border-bottom: 1px solid $line-soft;
 }
 
 .faq-q {
@@ -65,10 +65,10 @@
   border: none;
   cursor: none;
   text-align: left;
-  font-family: var(--sans);
+  font-family: $sans;
   font-size: 16px;
   font-weight: 600;
-  color: var(--ink);
+  color: $ink;
   line-height: 1.35;
 
   @include bp {
@@ -97,8 +97,8 @@
   &::after {
     content: "";
     position: absolute;
-    background: var(--ink-mid);
-    transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+    background: $ink-mid;
+    transition: transform 0.25s $ease, opacity 0.25s $ease;
   }
 
   &::before {
@@ -120,10 +120,10 @@
   padding: 0 40px 24px 0;
 
   p {
-    font-family: var(--sans);
+    font-family: $sans;
     font-size: 14px;
     line-height: 1.75;
-    color: var(--ink-mid);
+    color: $ink-mid;
     margin: 0;
     max-width: 520px;
   }

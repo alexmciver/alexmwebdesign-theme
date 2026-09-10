@@ -10,8 +10,8 @@
   padding: 28px 64px;
   border-bottom: 1px solid transparent;
   background: transparent;
-  transition: padding 0.4s var(--ease), background 0.4s var(--ease),
-    border-color 0.4s var(--ease);
+  transition: padding 0.4s $ease, background 0.4s $ease,
+    border-color 0.4s $ease;
 
   @include bp {
     padding: 18px 24px;
@@ -22,22 +22,22 @@
     background: rgba(250, 249, 247, 0.88);
     backdrop-filter: blur(24px) saturate(1.4);
     -webkit-backdrop-filter: blur(24px) saturate(1.4);
-    border-color: var(--line);
+    border-color: $line;
 
     @include bp {
       padding: 18px 24px;
     }
 
     .nav-logo {
-      color: var(--ink);
+      color: $ink;
     }
 
     .nav-links a {
-      color: var(--ink);
+      color: $ink;
     }
 
     .nav-burger span {
-      background: var(--ink);
+      background: $ink;
     }
   }
 }
@@ -46,18 +46,18 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font-family: var(--serif);
+  font-family: $serif;
   font-size: 21px;
   font-weight: 500;
   letter-spacing: -0.015em;
   color: #fff;
-  transition: color 0.4s var(--ease);
+  transition: color 0.4s $ease;
 
   span {
     display: inline-block;
     width: 5px;
     height: 5px;
-    background: var(--orange);
+    background: $orange;
     border-radius: 50%;
   }
 }
@@ -74,13 +74,13 @@
 
   a {
     position: relative;
-    font-family: var(--sans);
+    font-family: $sans;
     font-weight: 500;
     font-size: 12px;
     letter-spacing: 0.07em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.55);
-    transition: color 0.25s var(--ease);
+    transition: color 0.25s $ease;
 
     &::after {
       content: "";
@@ -89,15 +89,15 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: var(--orange);
+        background: $orange;
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 0.4s var(--ease);
+      transition: transform 0.4s $ease;
     }
 
     &:hover,
     &.active {
-      color: var(--orange);
+      color: $orange;
     }
 
     &:hover::after,
@@ -108,7 +108,7 @@
 
   .current-menu-item > a,
   .current_page_item > a {
-    color: var(--orange);
+    color: $orange;
 
     &::after {
       transform: scaleX(1);
@@ -134,7 +134,7 @@
     width: 100%;
     height: 1.5px;
     background: #fff;
-    transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+    transition: background 0.3s $ease, transform 0.3s $ease;
   }
 
   &.open span:nth-child(1) {
@@ -159,21 +159,21 @@
   justify-content: center;
   align-items: center;
   gap: 32px;
-  background: var(--ink);
+  background: $ink;
 
   &.open {
     display: flex;
   }
 
   a {
-    font-family: var(--serif);
+    font-family: $serif;
     font-weight: 300;
     font-size: 38px;
     color: rgba(255, 255, 255, 0.7);
-    transition: color 0.25s var(--ease);
+    transition: color 0.25s $ease;
 
     &:hover {
-      color: var(--orange);
+      color: $orange;
     }
   }
 }
@@ -182,15 +182,15 @@
 body.has-light-nav {
   #nav:not(.scrolled) {
     .nav-logo {
-      color: var(--ink);
+      color: $ink;
     }
 
     .nav-links a {
-      color: var(--ink-mid);
+      color: $ink-mid;
     }
 
     .nav-burger span {
-      background: var(--ink);
+      background: $ink;
     }
   }
 }
