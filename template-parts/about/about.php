@@ -42,27 +42,30 @@ $stats = alex_field(
 	)
 );
 $experience_label = alex_field( 'experience_label', 'Experience' );
-$experience       = alex_field(
-	'experience',
-	array(
+$cv_experience    = function_exists( 'alex_cv_experience_rows' ) ? alex_cv_experience_rows() : array();
+$experience       = ! empty( $cv_experience )
+	? $cv_experience
+	: alex_field(
+		'experience',
 		array(
-			'role' => 'Lead Developer · Hewitt Matthews',
-			'meta' => '2022 – Present',
-		),
-		array(
-			'role' => 'Freelance · Alex M Web Design',
-			'meta' => '2020 – Present',
-		),
-		array(
-			'role' => 'Junior Web Developer',
-			'meta' => '2019 – 2022',
-		),
-		array(
-			'role' => 'Based in Clapham, London',
-			'meta' => 'Remote-friendly',
-		),
-	)
-);
+			array(
+				'role' => 'Developer · Wade Digital',
+				'meta' => 'May 2026 – Present',
+			),
+			array(
+				'role' => 'Freelance · Alex M Web Design',
+				'meta' => '2020 – Present',
+			),
+			array(
+				'role' => 'Developer · Hewitt Matthews',
+				'meta' => 'July 2024 – May 2026',
+			),
+			array(
+				'role' => 'Based in Clapham, London',
+				'meta' => 'Remote-friendly',
+			),
+		)
+	);
 
 $has_primary   = ! empty( $primary['button_text'] ) && ! empty( $primary['button_url'] );
 $has_secondary = ! empty( $secondary['button_text'] ) && ! empty( $secondary['button_url'] );

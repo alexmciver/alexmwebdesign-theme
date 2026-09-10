@@ -1,5 +1,7 @@
 <?php
 
+require_once get_template_directory() . '/inc/cv-sync.php';
+
 /**
  * Enqueue styles and scripts.
  */

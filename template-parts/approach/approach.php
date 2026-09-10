@@ -7,29 +7,32 @@ $layout = alex_field( 'layout', is_page( 'about' ) ? 'story' : 'process' );
 if ( 'story' === $layout ) :
 	$story_eyebrow  = alex_field( 'story_eyebrow', 'Background' );
 	$story_heading  = alex_field( 'story_heading', 'How I got here' );
-	$timeline       = alex_field(
-		'timeline',
-		array(
+	$cv_timeline = function_exists( 'alex_cv_timeline_rows' ) ? alex_cv_timeline_rows() : array();
+	$timeline    = ! empty( $cv_timeline )
+		? $cv_timeline
+		: alex_field(
+			'timeline',
 			array(
-				'date'  => '2022 – Present',
-				'title' => 'Lead Developer & Support Specialist',
-				'org'   => 'Hewitt Matthews, London',
-				'body'  => 'Managing the full support desk and delivering bespoke WordPress and Shopify builds for performance marketing clients — plugin development, WooCommerce, server config and CDN management.',
-			),
-			array(
-				'date'  => '2020 – Present',
-				'title' => 'Freelance Web Developer',
-				'org'   => 'Alex M Web Design, London',
-				'body'  => 'Independent projects for small businesses — WordPress redesigns, Shopify stores, SEO audits and ongoing care. Thirty-plus sites delivered.',
-			),
-			array(
-				'date'  => '2019 – 2022',
-				'title' => 'Junior Web Developer',
-				'org'   => 'Digital Agency, London',
-				'body'  => 'First professional role — building WordPress themes, learning client communication, and discovering that the best code is the kind clients never have to think about.',
-			),
-		)
-	);
+				array(
+					'date'  => 'May 2026 – Present',
+					'title' => 'Developer',
+					'org'   => 'Wade Digital, Remote',
+					'body'  => 'Create custom plugins and functionality across WordPress projects. Integrate forms, CRMs, analytics, and automation platforms.',
+				),
+				array(
+					'date'  => '2020 – Present',
+					'title' => 'Freelance Web Developer',
+					'org'   => 'Alex M Web Design, London',
+					'body'  => 'Independent projects for small businesses — WordPress redesigns, Shopify stores, SEO audits and ongoing care.',
+				),
+				array(
+					'date'  => 'July 2024 – May 2026',
+					'title' => 'Developer',
+					'org'   => 'Hewitt Matthews, Remote',
+					'body'  => 'Architect and maintain high-performance WordPress ecosystems, prioritising enterprise-grade security and page speed.',
+				),
+			)
+		);
 	$values_eyebrow = alex_field( 'values_eyebrow', 'Approach' );
 	$values_heading = alex_field( 'values_heading', 'How I work' );
 	$values         = alex_field(
