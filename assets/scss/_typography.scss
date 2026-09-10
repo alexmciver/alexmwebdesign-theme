@@ -7,6 +7,11 @@
   line-height: 0.94;
   letter-spacing: -0.038em;
   color: #fff;
+
+  em {
+    font-style: italic;
+    color: var(--orange);
+  }
 }
 
 .s-h {

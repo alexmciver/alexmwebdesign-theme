@@ -1,17 +1,19 @@
 <?php
-/*
-Template Name: Hire Me
-*/
+/**
+ * Hire Me block — orange CTA band for work and services pages.
+ */
+$contact_page  = get_page_by_path( 'contact' );
+$contact_url   = $contact_page ? get_permalink( $contact_page ) : home_url( '/contact/' );
+$services_page = get_page_by_path( 'services' );
+$services_url  = $services_page ? get_permalink( $services_page ) : home_url( '/services/' );
 ?>
-<div class="hire-me">
-    <div class="container">
-        <div class="hire-me__content">
-            <h2>Hire Me</h2>
-            <div class="hire-me__grid">
-                <div class="hire-me__item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/hire-me-1.jpg" alt="Hire Me 1">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<section class="hire-me" aria-label="<?php esc_attr_e( 'Start a project', 'alex-theme' ); ?>">
+	<div class="hire-me__inner rv">
+		<h2 class="hire-me__title"><?php esc_html_e( 'Something similar in mind?', 'alex-theme' ); ?></h2>
+		<p class="hire-me__sub"><?php esc_html_e( "If you're planning a WordPress or Shopify build, I'd be glad to talk it through.", 'alex-theme' ); ?></p>
+		<div class="hire-me__btns">
+			<a href="<?php echo esc_url( $contact_url ); ?>" class="btn btn-white"><?php esc_html_e( 'Start a project', 'alex-theme' ); ?></a>
+			<a href="<?php echo esc_url( $services_url ); ?>" class="btn btn-outline-white"><?php esc_html_e( 'View services', 'alex-theme' ); ?></a>
+		</div>
+	</div>
+</section>

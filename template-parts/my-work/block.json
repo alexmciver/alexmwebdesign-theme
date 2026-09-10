@@ -1,9 +1,12 @@
 {
     "name": "alex-theme/my-work",
     "title": "My Work",
-    "description": "A custom My Work block.",
+    "description": "Work page hero, featured project and archive grid.",
     "category": "alex-blocks",
     "keywords": [
+        "work",
+        "portfolio",
+        "projects",
         "my-work"
     ],
     "acf": {

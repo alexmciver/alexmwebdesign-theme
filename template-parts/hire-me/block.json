@@ -1,10 +1,12 @@
 {
     "name": "alex-theme/hire-me",
     "title": "Hire Me",
-    "description": "A custom Hire Me block.",
+    "description": "Orange CTA band — start a project / view services.",
     "category": "alex-blocks",
     "keywords": [
-        "hire-me"
+        "cta",
+        "hire",
+        "contact"
     ],
     "acf": {
         "mode": "preview",
