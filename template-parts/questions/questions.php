@@ -5,8 +5,32 @@
 $contact_page = get_page_by_path( 'contact' );
 $contact_url  = $contact_page ? get_permalink( $contact_page ) : home_url( '/contact/' );
 $is_services  = is_page( 'services' );
+$is_contact   = is_page( 'contact' );
 
-if ( $is_services ) {
+if ( $is_contact ) {
+	$faqs = array(
+		array(
+			'q' => 'How quickly will you reply?',
+			'a' => 'Within one working day. Every enquiry is read and answered by me — no autoresponders, no sales sequences.',
+		),
+		array(
+			'q' => 'Do I need a brief ready?',
+			'a' => "No. A sentence or two about the business and what you need is enough to start. We'll shape a proper brief together if it looks like a fit.",
+		),
+		array(
+			'q' => 'Which city are you based in?',
+			'a' => "Clapham, London — though most of the work happens remotely. Calls are scheduled around London hours.",
+		),
+		array(
+			'q' => "I'm not in London — does that matter?",
+			'a' => "Not at all. Most projects are fully remote. As long as we can overlap for calls, location isn't a barrier.",
+		),
+		array(
+			'q' => 'What if I only need something small?',
+			'a' => "Small, well-scoped jobs are welcome — fixes, refinements, audits. Tell me what you need and I'll say honestly whether it's a fit.",
+		),
+	);
+} elseif ( $is_services ) {
 	$faqs = array(
 		array(
 			'q' => "Why aren't prices published?",
@@ -64,15 +88,21 @@ if ( $is_services ) {
 ?>
 <section id="questions" class="questions" aria-label="<?php esc_attr_e( 'Frequently asked questions', 'alex-theme' ); ?>">
 	<div class="questions__left rv">
-		<p class="s-eyebrow"><?php esc_html_e( 'Questions', 'alex-theme' ); ?></p>
-		<?php if ( $is_services ) : ?>
+		<?php if ( $is_contact ) : ?>
+			<p class="s-eyebrow"><?php esc_html_e( 'Before you write', 'alex-theme' ); ?></p>
+			<h2 class="s-h"><?php echo wp_kses_post( __( 'Quick <em>answers</em>', 'alex-theme' ) ); ?></h2>
+			<p class="s-body"><?php esc_html_e( 'The things most people want to know before getting in touch.', 'alex-theme' ); ?></p>
+		<?php elseif ( $is_services ) : ?>
+			<p class="s-eyebrow"><?php esc_html_e( 'Questions', 'alex-theme' ); ?></p>
 			<h2 class="s-h"><?php echo wp_kses_post( __( 'Before we <em>begin</em>', 'alex-theme' ) ); ?></h2>
 			<p class="s-body"><?php esc_html_e( 'The things clients usually want settled first.', 'alex-theme' ); ?></p>
+			<a href="<?php echo esc_url( $contact_url ); ?>" class="questions__link"><?php esc_html_e( 'Ask something else', 'alex-theme' ); ?> →</a>
 		<?php else : ?>
+			<p class="s-eyebrow"><?php esc_html_e( 'Questions', 'alex-theme' ); ?></p>
 			<h2 class="s-h"><?php echo wp_kses_post( __( 'Things worth <em>asking</em>', 'alex-theme' ) ); ?></h2>
 			<p class="s-body"><?php esc_html_e( 'The questions that come up most often before a project starts.', 'alex-theme' ); ?></p>
+			<a href="<?php echo esc_url( $contact_url ); ?>" class="questions__link"><?php esc_html_e( 'Ask something else', 'alex-theme' ); ?> →</a>
 		<?php endif; ?>
-		<a href="<?php echo esc_url( $contact_url ); ?>" class="questions__link"><?php esc_html_e( 'Ask something else', 'alex-theme' ); ?> →</a>
 	</div>
 
 	<div class="questions__list" data-faq>

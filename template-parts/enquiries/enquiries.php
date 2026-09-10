@@ -1,9 +1,81 @@
 <?php
 /**
- * Enquiries block — contact details and enquiry form.
+ * Enquiries block — contact details and enquiry form,
+ * or contact-page process + form layout.
  */
-$calendly = 'https://calendly.com/alexmwebdesign/1-hour-website-chat';
+$calendly   = 'https://calendly.com/alexmwebdesign/1-hour-website-chat';
+$is_contact = is_page( 'contact' );
+
+$process = array(
+	'You\'ll hear back from me — not an assistant — within one working day.',
+	'A short conversation to understand the business and what the site needs to do.',
+	'A written proposal with one figure and a clear scope. Nothing starts until that\'s agreed.',
+	'Work begins once we\'re both certain it\'s a good fit.',
+);
 ?>
+<?php if ( $is_contact ) : ?>
+<section id="enquiries" class="enquiries enquiries--contact" aria-label="<?php esc_attr_e( 'Enquiry', 'alex-theme' ); ?>">
+	<div class="enquiries__process rv">
+		<p class="s-eyebrow"><?php esc_html_e( 'Process', 'alex-theme' ); ?></p>
+		<h2 class="s-h"><?php echo wp_kses_post( __( 'A straightforward <em>process</em>', 'alex-theme' ) ); ?></h2>
+		<ul class="enquiries__steps">
+			<?php foreach ( $process as $step ) : ?>
+				<li>
+					<span class="enquiries__check" aria-hidden="true"></span>
+					<span><?php echo esc_html( $step ); ?></span>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+		<div class="enquiries__status">
+			<p class="enquiries__status-live">
+				<span class="enquiries__dot" aria-hidden="true"></span>
+				<?php esc_html_e( 'Currently accepting new work.', 'alex-theme' ); ?>
+			</p>
+			<p class="enquiries__status-note"><?php esc_html_e( 'I take on a limited number of projects at a time so each one gets proper focus.', 'alex-theme' ); ?></p>
+		</div>
+	</div>
+
+	<div class="enquiries__form-wrap rv rv2">
+		<h2 class="s-h"><?php esc_html_e( 'Send an enquiry', 'alex-theme' ); ?></h2>
+		<p class="enquiries__form-intro"><?php esc_html_e( 'A few details are enough to start — the business, the rough scope, and anything already decided.', 'alex-theme' ); ?></p>
+		<form class="enquiries__form" action="#" method="post" novalidate>
+			<label class="enq-field">
+				<span><?php esc_html_e( 'Name', 'alex-theme' ); ?></span>
+				<input type="text" name="name" placeholder="<?php esc_attr_e( 'Your name', 'alex-theme' ); ?>" autocomplete="name" required>
+			</label>
+			<label class="enq-field">
+				<span><?php esc_html_e( 'Email', 'alex-theme' ); ?></span>
+				<input type="email" name="email" placeholder="<?php esc_attr_e( 'you@company.com', 'alex-theme' ); ?>" autocomplete="email" required>
+			</label>
+			<label class="enq-field">
+				<span><?php esc_html_e( 'Company', 'alex-theme' ); ?></span>
+				<input type="text" name="company" placeholder="<?php esc_attr_e( 'Optional', 'alex-theme' ); ?>" autocomplete="organization">
+			</label>
+			<label class="enq-field">
+				<span><?php esc_html_e( 'Website URL', 'alex-theme' ); ?></span>
+				<input type="url" name="website" placeholder="<?php esc_attr_e( 'Optional', 'alex-theme' ); ?>" autocomplete="url">
+			</label>
+			<label class="enq-field enq-field--full">
+				<span><?php esc_html_e( 'Project budget', 'alex-theme' ); ?></span>
+				<select name="budget" required>
+					<option value=""><?php esc_html_e( 'Please select…', 'alex-theme' ); ?></option>
+					<option value="under-3k"><?php esc_html_e( 'Under £3,000', 'alex-theme' ); ?></option>
+					<option value="3-6k"><?php esc_html_e( '£3,000 – £6,000', 'alex-theme' ); ?></option>
+					<option value="6-12k"><?php esc_html_e( '£6,000 – £12,000', 'alex-theme' ); ?></option>
+					<option value="12k-plus"><?php esc_html_e( '£12,000+', 'alex-theme' ); ?></option>
+					<option value="unsure"><?php esc_html_e( 'Not sure yet', 'alex-theme' ); ?></option>
+				</select>
+			</label>
+			<label class="enq-field enq-field--full">
+				<span><?php esc_html_e( 'About the project', 'alex-theme' ); ?></span>
+				<textarea name="message" rows="5" placeholder="<?php esc_attr_e( 'A rough description of the business and what you need is plenty to start with.', 'alex-theme' ); ?>" required></textarea>
+			</label>
+			<button type="submit" class="btn btn-primary enquiries__submit"><?php esc_html_e( 'Send an enquiry', 'alex-theme' ); ?></button>
+			<p class="enquiries__disclaimer"><?php esc_html_e( 'Your details stay with me. No mailing lists, no sales sequences.', 'alex-theme' ); ?></p>
+		</form>
+	</div>
+</section>
+<?php else : ?>
 <section id="enquiries" class="enquiries" aria-label="<?php esc_attr_e( 'Enquiries', 'alex-theme' ); ?>">
 	<div class="enquiries__left rv">
 		<p class="s-eyebrow"><?php esc_html_e( 'Enquiries', 'alex-theme' ); ?></p>
@@ -59,3 +131,4 @@ $calendly = 'https://calendly.com/alexmwebdesign/1-hour-website-chat';
 		<button type="submit" class="btn btn-primary enquiries__submit"><?php esc_html_e( 'Send enquiry', 'alex-theme' ); ?></button>
 	</form>
 </section>
+<?php endif; ?>

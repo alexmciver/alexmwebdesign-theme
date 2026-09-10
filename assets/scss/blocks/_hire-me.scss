@@ -82,3 +82,41 @@
 		color: rgba(255, 255, 255, 0.45);
 	}
 }
+
+.hire-me--contact {
+	background: var(--paper-2);
+	padding: 100px 64px;
+
+	@include bp {
+		padding: 72px 24px;
+	}
+
+	.hire-me__title {
+		font-style: normal;
+		font-weight: 300;
+		color: var(--ink);
+
+		em {
+			font-style: italic;
+			color: var(--orange);
+		}
+	}
+
+	.hire-me__sub {
+		color: var(--ink-mid);
+	}
+
+	.hire-me__btns {
+		margin-bottom: 20px;
+	}
+}
+
+.hire-me__meta {
+	font-family: var(--sans);
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--ink-light);
+	margin: 0;
+}
