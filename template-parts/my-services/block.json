@@ -1,0 +1,22 @@
+{
+    "name": "alex-theme/my-services",
+    "title": "My Services",
+    "description": "Services page — hero, detailed offerings, platform compare and care tiers.",
+    "category": "alex-blocks",
+    "keywords": [
+        "services",
+        "wordpress",
+        "shopify",
+        "care"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/my-services/my-services.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

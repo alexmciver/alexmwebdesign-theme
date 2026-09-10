@@ -163,6 +163,7 @@ function alex_register_acf_blocks() {
 		'enquiries',
 		'about',
 		'my-work',
+		'my-services',
 		'hire-me',
 		'contact',
 	);

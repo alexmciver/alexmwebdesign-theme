@@ -54,6 +54,18 @@
   }
 }
 
+.btn-ink {
+  padding: 16px 30px;
+  background: var(--ink);
+  color: #fff;
+
+  &:hover {
+    background: #fff;
+    color: var(--ink);
+    transform: translateY(-2px);
+  }
+}
+
 .btn-outline-white {
   padding: 15px 30px;
   background: transparent;
