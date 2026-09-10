@@ -1,0 +1,61 @@
+.capability {
+  background: var(--ink);
+  padding: 120px 64px;
+
+  @include bp {
+    padding: 88px 24px;
+  }
+
+  .s-h {
+    color: #f5f5ff;
+    margin-bottom: 64px;
+    max-width: 18ch;
+  }
+}
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+
+  @include bp {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cap-group {
+  background: var(--ink);
+  padding: 40px 32px;
+
+  @include bp {
+    padding: 32px 24px;
+  }
+}
+
+.cap-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 24px;
+}
+
+.cap-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  li {
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.4;
+  }
+}

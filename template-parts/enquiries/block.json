@@ -1,0 +1,21 @@
+{
+    "name": "alex-theme/enquiries",
+    "title": "Enquiries",
+    "description": "Homepage contact details and enquiry form.",
+    "category": "alex-blocks",
+    "keywords": [
+        "contact",
+        "enquiries",
+        "form"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/enquiries/enquiries.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

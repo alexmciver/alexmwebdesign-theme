@@ -1,0 +1,21 @@
+{
+    "name": "alex-theme/capability",
+    "title": "Capability",
+    "description": "Platform and technical capability grid.",
+    "category": "alex-blocks",
+    "keywords": [
+        "skills",
+        "capability",
+        "platforms"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/capability/capability.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

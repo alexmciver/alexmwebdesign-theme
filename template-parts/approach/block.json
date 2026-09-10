@@ -1,0 +1,20 @@
+{
+    "name": "alex-theme/approach",
+    "title": "Approach",
+    "description": "Four-step process from conversation to handover.",
+    "category": "alex-blocks",
+    "keywords": [
+        "process",
+        "approach"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/approach/approach.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

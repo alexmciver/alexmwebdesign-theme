@@ -1,0 +1,20 @@
+{
+    "name": "alex-theme/problem",
+    "title": "The Problem",
+    "description": "Homepage problem statement with pain points.",
+    "category": "alex-blocks",
+    "keywords": [
+        "problem",
+        "pain"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/problem/problem.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

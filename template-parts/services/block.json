@@ -1,0 +1,21 @@
+{
+    "name": "alex-theme/services",
+    "title": "Services",
+    "description": "Four ways of working — numbered service rows.",
+    "category": "alex-blocks",
+    "keywords": [
+        "services",
+        "wordpress",
+        "shopify"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/services/services.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

@@ -1,0 +1,126 @@
+.work {
+  background: var(--paper);
+  padding: 120px 64px;
+
+  @include bp {
+    padding: 88px 24px;
+  }
+}
+
+.work__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 56px;
+
+  @include bp {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .s-h {
+    margin-bottom: 0;
+    max-width: 12ch;
+  }
+
+  .s-eyebrow {
+    margin-bottom: 20px;
+  }
+}
+
+.work__all {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-bottom: 8px;
+  transition: color 0.25s var(--ease);
+
+  &:hover {
+    color: var(--orange);
+  }
+}
+
+.work__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px 32px;
+
+  @include bp {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.work__card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    .work__media {
+      background: var(--paper-2);
+    }
+
+    .work__title {
+      color: var(--orange);
+    }
+  }
+}
+
+.work__media {
+  aspect-ratio: 4 / 3;
+  background: var(--paper-3);
+  border-radius: var(--radius-panel);
+  margin-bottom: 20px;
+  transition: background 0.3s var(--ease);
+}
+
+.work__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.work__title {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.15;
+  transition: color 0.25s var(--ease);
+}
+
+.work__platform {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  white-space: nowrap;
+}
+
+.work__result {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-mid);
+  margin: 0;
+
+  em {
+    font-style: normal;
+    color: var(--orange);
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,20 @@
+{
+    "name": "alex-theme/quote",
+    "title": "Quote",
+    "description": "Full-bleed orange quote band.",
+    "category": "alex-blocks",
+    "keywords": [
+        "quote",
+        "cta"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/quote/quote.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

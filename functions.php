@@ -151,7 +151,21 @@ add_filter(
  * Register ACF blocks.
  */
 function alex_register_acf_blocks() {
-	$block_templates = array( 'hero', 'about', 'my-work', 'hire-me', 'contact' );
+	$block_templates = array(
+		'hero',
+		'problem',
+		'capability',
+		'services',
+		'work',
+		'quote',
+		'approach',
+		'questions',
+		'enquiries',
+		'about',
+		'my-work',
+		'hire-me',
+		'contact',
+	);
 
 	foreach ( $block_templates as $template ) {
 		register_block_type( get_template_directory() . '/template-parts/' . $template );

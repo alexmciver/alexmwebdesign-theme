@@ -1,0 +1,21 @@
+{
+    "name": "alex-theme/work",
+    "title": "Selected Work",
+    "description": "Homepage project grid.",
+    "category": "alex-blocks",
+    "keywords": [
+        "work",
+        "portfolio",
+        "projects"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/work/work.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

@@ -1,0 +1,141 @@
+.services {
+  background: var(--paper);
+  padding: 120px 64px;
+
+  @include bp {
+    padding: 88px 24px;
+  }
+}
+
+.services__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 56px;
+
+  @include bp {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .s-h {
+    margin-bottom: 0;
+    max-width: 12ch;
+  }
+
+  .s-eyebrow {
+    margin-bottom: 20px;
+  }
+}
+
+.services__all {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-bottom: 8px;
+  transition: color 0.25s var(--ease);
+
+  &:hover {
+    color: var(--orange);
+  }
+}
+
+.services__list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line-soft);
+}
+
+.services__row {
+  display: grid;
+  grid-template-columns: 48px minmax(180px, 0.9fr) 1.4fr 40px;
+  gap: 24px;
+  align-items: center;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--line-soft);
+  text-decoration: none;
+  color: inherit;
+  transition: padding 0.3s var(--ease);
+
+  &:hover {
+    .services__title {
+      color: var(--orange);
+    }
+
+    .services__arr {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+      transform: translate(2px, -2px);
+    }
+  }
+
+  @include bp {
+    grid-template-columns: 36px 1fr 32px;
+    gap: 16px;
+    padding: 28px 0;
+  }
+}
+
+.services__n {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--orange);
+}
+
+.services__title {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  transition: color 0.25s var(--ease);
+
+  @include bp {
+    grid-column: 2;
+  }
+}
+
+.services__body {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-mid);
+  max-width: 520px;
+
+  @include bp {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+.services__arr {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-mid);
+  justify-self: end;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease),
+    color 0.25s var(--ease), transform 0.25s var(--ease);
+
+  @include bp {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    align-self: center;
+  }
+}

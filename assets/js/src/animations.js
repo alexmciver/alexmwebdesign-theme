@@ -260,6 +260,37 @@
     obs.observe(codeWin);
   }
 
+  // FAQ accordion
+  function initFaq() {
+    var lists = document.querySelectorAll("[data-faq]");
+    if (!lists.length) return;
+
+    lists.forEach(function (list) {
+      list.querySelectorAll(".faq-q").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var item = btn.closest(".faq-item");
+          var panel = item ? item.querySelector(".faq-a") : null;
+          if (!panel) return;
+
+          var open = btn.getAttribute("aria-expanded") === "true";
+
+          list.querySelectorAll(".faq-item").forEach(function (other) {
+            var otherBtn = other.querySelector(".faq-q");
+            var otherPanel = other.querySelector(".faq-a");
+            if (!otherBtn || !otherPanel) return;
+            otherBtn.setAttribute("aria-expanded", "false");
+            otherPanel.hidden = true;
+          });
+
+          if (!open) {
+            btn.setAttribute("aria-expanded", "true");
+            panel.hidden = false;
+          }
+        });
+      });
+    });
+  }
+
   function onScroll() {
     updateProgress();
     updateNav();
@@ -274,6 +305,7 @@
     initMagnetic();
     initParallax();
     initCodeWindow();
+    initFaq();
     window.addEventListener("scroll", onScroll, { passive: true });
   });
 })();
