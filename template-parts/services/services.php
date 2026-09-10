@@ -3,7 +3,7 @@
  * Services block — numbered ways of working.
  */
 $eyebrow  = alex_field( 'eyebrow', 'Services' );
-$heading  = alex_field( 'heading', 'Four ways I tend to work' );
+$heading  = alex_field( 'heading', 'Four ways I tend to <em>work</em>' );
 $all_link = alex_button( get_field( 'all_link' ), 'All services', alex_page_url( 'services' ) );
 $services = alex_field(
 	'services',
@@ -37,7 +37,7 @@ $arrow = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidde
 	<div class="services__head">
 		<div class="rv">
 			<p class="s-eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
-			<h2 class="s-h"><?php echo esc_html( $heading ); ?></h2>
+			<h2 class="s-h"><?php echo wp_kses_post( $heading ); ?></h2>
 		</div>
 		<a href="<?php echo esc_url( $all_link['button_url'] ); ?>" class="services__all rv rv2"><?php echo esc_html( $all_link['button_text'] ); ?> →</a>
 	</div>

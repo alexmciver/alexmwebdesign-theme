@@ -99,7 +99,7 @@ $has_featured_link = ! empty( $featured_link['button_text'] ) && ! empty( $featu
 	<div class="my-work__archive">
 		<div class="rv">
 			<p class="s-eyebrow"><?php echo esc_html( $archive_eyebrow ); ?></p>
-			<h2 class="s-h"><?php echo esc_html( $archive_heading ); ?></h2>
+			<h2 class="s-h"><?php echo wp_kses_post( $archive_heading ); ?></h2>
 		</div>
 
 		<div class="work__grid my-work__grid">

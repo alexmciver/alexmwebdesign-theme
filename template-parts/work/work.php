@@ -3,7 +3,7 @@
  * Selected Work block — recent project grid.
  */
 $eyebrow  = alex_field( 'eyebrow', 'Selected work' );
-$heading  = alex_field( 'heading', 'A few recent projects' );
+$heading  = alex_field( 'heading', 'A few recent <em>projects</em>' );
 $all_link = alex_button( get_field( 'all_link' ), 'Full portfolio', alex_page_url( 'work' ) );
 $projects = alex_field(
 	'projects',
@@ -39,7 +39,7 @@ $projects = alex_field(
 	<div class="work__head">
 		<div class="rv">
 			<p class="s-eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
-			<h2 class="s-h"><?php echo esc_html( $heading ); ?></h2>
+			<h2 class="s-h"><?php echo wp_kses_post( $heading ); ?></h2>
 		</div>
 		<a href="<?php echo esc_url( $all_link['button_url'] ); ?>" class="work__all rv rv2"><?php echo esc_html( $all_link['button_text'] ); ?> →</a>
 	</div>

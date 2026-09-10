@@ -28,7 +28,7 @@
             "label": "Heading",
             "name": "heading",
             "aria-label": "",
-            "type": "text",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -40,9 +40,9 @@
             "default_value": "",
             "maxlength": "",
             "allow_in_bindings": 0,
+            "rows": "",
             "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "new_lines": ""
         },
         {
             "key": "field_alex_services_all_link",
@@ -218,5 +218,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1789047000
+    "modified": 1789058781
 }

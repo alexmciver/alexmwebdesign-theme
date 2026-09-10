@@ -28,7 +28,7 @@
             "label": "Heading",
             "name": "heading",
             "aria-label": "",
-            "type": "text",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -40,9 +40,9 @@
             "default_value": "",
             "maxlength": "",
             "allow_in_bindings": 0,
+            "rows": "",
             "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "new_lines": ""
         },
         {
             "key": "field_alex_work_all_link",
@@ -177,7 +177,7 @@
                     "name": "result",
                     "aria-label": "",
                     "type": "textarea",
-                    "instructions": "HTML allowed for emphasis, e.g. &lt;em&gt;word&lt;/em&gt;. Do not wrap in &lt;p&gt; tags.",
+                    "instructions": "HTML allowed for emphasis, e.g. &lt;em&gt;word&lt;\/em&gt;. Do not wrap in &lt;p&gt; tags.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -240,5 +240,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1789047000
+    "modified": 1789058692
 }
