@@ -196,6 +196,41 @@
     });
   }
 
+  function initWorkFilter() {
+    var filter = document.querySelector("[data-work-filter]");
+    var grid = document.querySelector("[data-work-grid]");
+    if (!filter || !grid) return;
+
+    var buttons = filter.querySelectorAll("[data-filter]");
+    var cards = grid.querySelectorAll(".work__card");
+    var empty = document.querySelector("[data-work-empty]");
+
+    function applyFilter(value) {
+      var visible = 0;
+      cards.forEach(function (card) {
+        var platform = card.getAttribute("data-platform") || "";
+        var show = value === "all" || platform === value;
+        card.classList.toggle("is-filtered-out", !show);
+        if (show) visible += 1;
+      });
+      if (empty) {
+        empty.hidden = visible > 0;
+      }
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var value = btn.getAttribute("data-filter") || "all";
+        buttons.forEach(function (other) {
+          var active = other === btn;
+          other.classList.toggle("is-active", active);
+          other.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+        applyFilter(value);
+      });
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     updateNav();
     initReveals();
@@ -203,6 +238,7 @@
     initMarquees();
     initServicePreviews();
     initFaq();
+    initWorkFilter();
     window.addEventListener("scroll", updateNav, { passive: true });
   });
 })();

@@ -306,11 +306,26 @@ function alex_work_preview( $post, $fallback_index = 0 ) {
 }
 
 /**
+ * Whether a Work post has a real write-up (editor content).
+ *
+ * @param int|WP_Post|null $post Post object or ID.
+ * @return bool
+ */
+function alex_work_has_writeup( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post || 'work' !== $post->post_type ) {
+		return false;
+	}
+	$content = trim( wp_strip_all_tags( (string) $post->post_content ) );
+	return '' !== $content;
+}
+
+/**
  * Normalised Work item for cards and featured layouts.
  *
  * @param int|WP_Post|null $post Post object or ID.
  * @param int              $fallback_index Optional placeholder image index (0–3) when no thumbnail.
- * @return array{title:string,platform:string,result:string,scope:string,client:string,year:string,body:string,url:string,project_url:string,image:string,image_mode:string}|null
+ * @return array{title:string,platform:string,result:string,scope:string,client:string,year:string,body:string,url:string,project_url:string,has_writeup:bool,image:string,image_mode:string}|null
  */
 function alex_work_item( $post = null, $fallback_index = 0 ) {
 	$post = get_post( $post );
@@ -318,7 +333,8 @@ function alex_work_item( $post = null, $fallback_index = 0 ) {
 		return null;
 	}
 
-	$preview = alex_work_preview( $post, $fallback_index );
+	$preview     = alex_work_preview( $post, $fallback_index );
+	$has_writeup = alex_work_has_writeup( $post );
 
 	return array(
 		'title'       => get_the_title( $post ),
@@ -330,9 +346,95 @@ function alex_work_item( $post = null, $fallback_index = 0 ) {
 		'body'        => has_excerpt( $post ) ? get_the_excerpt( $post ) : '',
 		'url'         => get_permalink( $post ),
 		'project_url' => (string) alex_field( 'project_url', '', $post->ID ),
+		'has_writeup' => $has_writeup,
 		'image'       => $preview['image'],
 		'image_mode'  => $preview['mode'],
 	);
+}
+
+/**
+ * Hover / touch action links for a Work preview.
+ *
+ * @param array  $project           From alex_work_item().
+ * @param string $write_label       Optional write-up label.
+ * @param string $write_url_override Optional explicit write-up URL.
+ */
+function alex_work_actions( $project, $write_label = '', $write_url_override = '' ) {
+	if ( empty( $project ) || ! is_array( $project ) ) {
+		return;
+	}
+
+	$site_url    = ! empty( $project['project_url'] ) ? $project['project_url'] : '';
+	$write_url   = $write_url_override ? $write_url_override : ( ( ! empty( $project['has_writeup'] ) && ! empty( $project['url'] ) ) ? $project['url'] : '' );
+	$write_label = $write_label ? $write_label : __( 'Read write-up', 'alex-theme' );
+	$title       = ! empty( $project['title'] ) ? $project['title'] : '';
+
+	if ( ! $site_url && ! $write_url ) {
+		return;
+	}
+	?>
+	<div class="work__actions">
+		<?php if ( $title ) : ?>
+			<p class="work__hover-title"><?php echo esc_html( $title ); ?></p>
+		<?php endif; ?>
+		<div class="work__action-list">
+			<?php if ( $site_url ) : ?>
+				<a href="<?php echo esc_url( $site_url ); ?>" class="work__action" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'View site', 'alex-theme' ); ?></a>
+			<?php endif; ?>
+			<?php if ( $write_url ) : ?>
+				<a href="<?php echo esc_url( $write_url ); ?>" class="work__action"><?php echo esc_html( $write_label ); ?></a>
+			<?php endif; ?>
+		</div>
+	</div>
+	<?php
+}
+
+/**
+ * Render a Work grid card with site / write-up hover actions.
+ *
+ * @param array $project  From alex_work_item().
+ * @param int   $rv_index Reveal delay index (1–4).
+ */
+function alex_render_work_card( $project, $rv_index = 0 ) {
+	if ( empty( $project ) || ! is_array( $project ) ) {
+		return;
+	}
+
+	$rv_index  = absint( $rv_index );
+	$rv_class  = $rv_index > 0 ? ' rv rv' . min( $rv_index, 4 ) : '';
+	$media_mod = ( ! empty( $project['image_mode'] ) && 'logo' === $project['image_mode'] ) ? ' work__media--logo' : '';
+	$title_url = '';
+	if ( ! empty( $project['has_writeup'] ) && ! empty( $project['url'] ) ) {
+		$title_url = $project['url'];
+	} elseif ( ! empty( $project['project_url'] ) ) {
+		$title_url = $project['project_url'];
+	}
+	$platform_slug = ! empty( $project['platform'] ) ? sanitize_title( $project['platform'] ) : '';
+	?>
+	<article class="work__card<?php echo esc_attr( $rv_class ); ?>"<?php echo $platform_slug ? ' data-platform="' . esc_attr( $platform_slug ) . '"' : ''; ?>>
+		<div class="work__media<?php echo esc_attr( $media_mod ); ?>">
+			<?php if ( ! empty( $project['image'] ) ) : ?>
+				<img src="<?php echo esc_url( $project['image'] ); ?>" alt="<?php echo esc_attr( sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $project['title'] ) ); ?>" loading="lazy" decoding="async" />
+			<?php endif; ?>
+			<?php alex_work_actions( $project ); ?>
+		</div>
+		<div class="work__meta">
+			<?php if ( ! empty( $project['title'] ) ) : ?>
+				<?php if ( $title_url ) : ?>
+					<a href="<?php echo esc_url( $title_url ); ?>" class="work__title"<?php echo ( ! empty( $project['project_url'] ) && $title_url === $project['project_url'] ) ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $project['title'] ); ?></a>
+				<?php else : ?>
+					<span class="work__title"><?php echo esc_html( $project['title'] ); ?></span>
+				<?php endif; ?>
+			<?php endif; ?>
+			<?php if ( ! empty( $project['platform'] ) ) : ?>
+				<span class="work__platform"><?php echo esc_html( $project['platform'] ); ?></span>
+			<?php endif; ?>
+		</div>
+		<?php if ( ! empty( $project['result'] ) ) : ?>
+			<p class="work__result"><?php echo wp_kses_post( $project['result'] ); ?></p>
+		<?php endif; ?>
+	</article>
+	<?php
 }
 
 /**

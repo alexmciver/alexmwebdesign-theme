@@ -28,32 +28,14 @@ $work_query = alex_query_work(
 			while ( $work_query->have_posts() ) :
 				$work_query->the_post();
 				$project = alex_work_item( get_post(), $n );
-				if ( ! $project || ! $project['url'] ) {
+				if ( ! $project ) {
 					continue;
 				}
 				++$n;
-				$media_mod = ( ! empty( $project['image_mode'] ) && 'logo' === $project['image_mode'] ) ? ' work__media--logo' : '';
-				?>
-				<a href="<?php echo esc_url( $project['url'] ); ?>" class="work__card rv rv<?php echo esc_attr( (string) min( $n, 4 ) ); ?>">
-					<div class="work__media<?php echo esc_attr( $media_mod ); ?>">
-						<?php if ( $project['image'] ) : ?>
-							<img src="<?php echo esc_url( $project['image'] ); ?>" alt="<?php echo esc_attr( sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $project['title'] ) ); ?>" loading="lazy" decoding="async" />
-						<?php endif; ?>
-					</div>
-					<div class="work__meta">
-						<?php if ( $project['title'] ) : ?>
-							<span class="work__title"><?php echo esc_html( $project['title'] ); ?></span>
-						<?php endif; ?>
-						<?php if ( $project['platform'] ) : ?>
-							<span class="work__platform"><?php echo esc_html( $project['platform'] ); ?></span>
-						<?php endif; ?>
-					</div>
-					<?php if ( $project['result'] ) : ?>
-						<p class="work__result"><?php echo wp_kses_post( $project['result'] ); ?></p>
-					<?php endif; ?>
-				</a>
-			<?php endwhile; ?>
-			<?php wp_reset_postdata(); ?>
+				alex_render_work_card( $project, $n );
+			endwhile;
+			wp_reset_postdata();
+			?>
 		</div>
 	<?php endif; ?>
 </section>
