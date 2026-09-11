@@ -1,34 +1,33 @@
 <?php
 /**
- * Hero block — home intro with code window, stats and tech strip.
+ * Hero block — premium home intro.
  */
-$location          = alex_field( 'location', 'London & remote' );
-$heading           = alex_field( 'heading', 'Websites built with the same care as <em>the business</em> behind them.' );
-$subheading        = alex_field( 'subheading', "I'm Alex — a WordPress and Shopify developer in London. I work with a small number of clients at a time, building sites that are fast, considered, and genuinely easy to run." );
-$primary           = alex_button( get_field( 'primary_button' ), 'Start a conversation', alex_page_url( 'contact' ) );
-$secondary         = alex_button( get_field( 'secondary_button' ), 'Selected work', alex_page_url( 'work' ) );
-$code_window_title = alex_field( 'code_window_title', 'theme / functions.php' );
-$stats             = alex_field(
+$location   = alex_field( 'location', 'Independent · London' );
+$heading    = alex_field( 'heading', 'Websites that earn their place in <em>the business</em>.' );
+$subheading = alex_field( 'subheading', 'I take on a limited number of WordPress and Shopify projects each year. Fixed scope, fixed fee — and a site your team can run without calling a developer.' );
+$primary    = alex_button( get_field( 'primary_button' ), 'Enquire about a project', alex_page_url( 'contact' ) );
+$secondary  = alex_button( get_field( 'secondary_button' ), 'Selected work', alex_page_url( 'work' ) );
+$stats      = alex_field(
 	'stats',
 	array(
 		array(
 			'value'  => '5',
 			'suffix' => '',
-			'label'  => 'Years',
+			'label'  => 'Years in practice',
 		),
 		array(
 			'value'  => '30',
 			'suffix' => '+',
-			'label'  => 'Projects',
+			'label'  => 'Projects delivered',
 		),
 		array(
 			'value'  => '24h',
 			'suffix' => '',
-			'label'  => 'Reply time',
+			'label'  => 'Typical reply',
 		),
 	)
 );
-$strip_label = alex_field( 'strip_label', 'Working across' );
+$strip_label = alex_field( 'strip_label', 'Platforms' );
 $platforms   = alex_field(
 	'platforms',
 	array(
@@ -40,12 +39,11 @@ $platforms   = alex_field(
 		array( 'label' => 'Cloudflare' ),
 	)
 );
+$hero_image = alex_field( 'hero_image', alex_theme_image( 'alex-portrait' ) );
+$hero_alt   = alex_field( 'hero_image_alt', 'Alex McIver, independent WordPress and Shopify developer' );
 ?>
 
-<section class="hero hero-parallax" aria-label="<?php esc_attr_e( 'Freelance WordPress and Shopify Developer London', 'alex-theme' ); ?>">
-	<div class="hero-bg-parallax" data-parallax="0.12" aria-hidden="true"></div>
-	<div class="hero-grid-lines" aria-hidden="true"></div>
-
+<section class="hero" aria-label="<?php esc_attr_e( 'Alex McIver — Independent WordPress and Shopify developer, London', 'alex-theme' ); ?>">
 	<div class="hero-main">
 		<div class="hero-left">
 			<p class="hero-loc"><?php echo esc_html( $location ); ?></p>
@@ -58,24 +56,11 @@ $platforms   = alex_field(
 		</div>
 
 		<div class="hero-right">
-			<div class="code-win" id="code-win" aria-hidden="true">
-				<div class="cw-bar">
-					<div class="cw-dot r"></div>
-					<div class="cw-dot y"></div>
-					<div class="cw-dot g"></div>
-					<span class="cw-title"><?php echo esc_html( $code_window_title ); ?></span>
-				</div>
-				<div class="cw-body">
-					<span class="cw-line"><span class="cm">// Inline critical CSS — cut largest contentful paint</span></span>
-					<span class="cw-line"><span class="fn">add_action</span>( <span class="str">'wp_enqueue_scripts'</span>, <span class="kw">function</span> () {</span>
-					<span class="cw-line">  <span class="fn">wp_dequeue_style</span>( <span class="str">'theme-main'</span> );</span>
-					<span class="cw-line">  <span class="var">$critical</span> = <span class="fn">file_get_contents</span>(</span>
-					<span class="cw-line">    <span class="fn">get_theme_file_path</span>( <span class="str">'critical.css'</span> )</span>
-					<span class="cw-line">  );</span>
-					<span class="cw-line">  <span class="fn">wp_add_inline_style</span>( <span class="str">'theme-base'</span>, <span class="var">$critical</span> );</span>
-					<span class="cw-line">} );<span class="cw-cur"></span></span>
-				</div>
-			</div>
+			<?php if ( $hero_image ) : ?>
+				<figure class="hero-visual hero-visual--portrait">
+					<img src="<?php echo esc_url( $hero_image ); ?>" alt="<?php echo esc_attr( $hero_alt ); ?>" width="800" height="1000" loading="eager" decoding="async" />
+				</figure>
+			<?php endif; ?>
 		</div>
 	</div>
 
@@ -85,14 +70,9 @@ $platforms   = alex_field(
 			$value  = isset( $stat['value'] ) ? (string) $stat['value'] : '';
 			$suffix = isset( $stat['suffix'] ) ? (string) $stat['suffix'] : '';
 			$label  = isset( $stat['label'] ) ? (string) $stat['label'] : '';
-			$is_num = (bool) preg_match( '/^\d+$/', $value );
 			?>
 			<div class="stat">
-				<?php if ( $is_num ) : ?>
-					<div class="stat-n" data-count="<?php echo esc_attr( $value ); ?>"<?php echo '' !== $suffix ? ' data-suffix="' . esc_attr( $suffix ) . '"' : ''; ?> aria-label="<?php echo esc_attr( $value . $suffix . ( $label ? ' ' . $label : '' ) ); ?>">0</div>
-				<?php else : ?>
-					<div class="stat-n"><?php echo esc_html( $value ); ?></div>
-				<?php endif; ?>
+				<div class="stat-n"><?php echo esc_html( $value . $suffix ); ?></div>
 				<?php if ( $label ) : ?>
 					<div class="stat-l"><?php echo esc_html( $label ); ?></div>
 				<?php endif; ?>

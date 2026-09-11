@@ -1,6 +1,6 @@
 <?php
 /**
- * Theme header — fixed nav + chrome overlays.
+ * Theme header — fixed nav.
  */
 ?>
 <!DOCTYPE html>
@@ -15,14 +15,9 @@
 
 <a class="skip-link" href="#content"><?php esc_html_e( 'Skip to content', 'alex-theme' ); ?></a>
 
-<div id="scroll-progress" aria-hidden="true"></div>
-<div id="grain" aria-hidden="true"></div>
-<div id="cur" aria-hidden="true"></div>
-<div id="cur-r" aria-hidden="true"></div>
-
 <header>
 	<nav id="nav" aria-label="<?php esc_attr_e( 'Main navigation', 'alex-theme' ); ?>">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo"><span aria-hidden="true"></span>Alex M</a>
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo">Alex McIver</a>
 		<?php
 		wp_nav_menu(
 			array(

@@ -2,14 +2,14 @@
 
 $bp: 1000px;
 
-// Colour
+// Colour — cooler paper, orange reserved for CTAs
 $ink: #0e1018;
-$ink-2: #1a1d28;
+$ink-2: #16181f;
 $ink-mid: #5a5f70;
 $ink-light: #686d7d; // ≥4.5:1 on $paper (WCAG AA)
-$paper: #faf9f7;
-$paper-2: #f3f1ed;
-$paper-3: #e9e6e0;
+$paper: #f5f5f3;
+$paper-2: #ecece8;
+$paper-3: #e2e2dc;
 $orange: #ff4d00; // Brand accent on dark / large text
 $orange-deep: #c43c00; // AA text & solid fills on light / with white text
 $orange-soft: rgba(255, 77, 0, 0.09);
@@ -20,23 +20,23 @@ $muted-on-ink-soft: rgba(255, 255, 255, 0.5);
 $label-on-ink: rgba(255, 255, 255, 0.55);
 
 // Hairlines
-$line: rgba(14, 16, 24, 0.1);
-$line-soft: rgba(14, 16, 24, 0.06);
-$line-dark: rgba(255, 255, 255, 0.09);
-$line-dark-soft: rgba(255, 255, 255, 0.055);
+$line: rgba(14, 16, 24, 0.12);
+$line-soft: rgba(14, 16, 24, 0.07);
+$line-dark: rgba(255, 255, 255, 0.12);
+$line-dark-soft: rgba(255, 255, 255, 0.07);
 
-// Type
+// Type — sans leads (agency), serif for quotes only
 $serif: "Cormorant Garamond", Georgia, serif;
 $sans: "DM Sans", system-ui, sans-serif;
 $mono: "Courier New", Courier, monospace;
 
 // Motion
-$ease: cubic-bezier(0.16, 1, 0.3, 1);
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-// Radius
-$radius: 2px;
-$radius-panel: 3px;
-$radius-float: 6px;
+// Radius — sharp, studio-like
+$radius: 0;
+$radius-panel: 0;
+$radius-float: 0;
 
 :root {
   // Colour

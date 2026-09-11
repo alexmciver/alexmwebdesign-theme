@@ -1,10 +1,6 @@
 .my-work-hero {
 	.s-eyebrow {
-		color: $orange;
-
-		&::after {
-			background: $orange;
-		}
+		color: $muted-on-ink;
 	}
 
 	h1 em {
@@ -96,8 +92,8 @@
 	font-family: $sans;
 	font-size: 11px;
 	font-weight: 600;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
+	letter-spacing: -0.01em;
+	text-transform: none;
 	color: $ink;
 	text-decoration: none;
 	transition: color 0.25s $ease;

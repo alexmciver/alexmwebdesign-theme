@@ -135,7 +135,15 @@ if ( 'story' === $layout ) :
 
 	<div class="approach__grid">
 		<?php foreach ( $steps as $i => $step ) : ?>
+			<?php
+			$img = alex_theme_image( 'approach-0' . (string) ( $i + 1 ) );
+			?>
 			<div class="approach__step rv rv<?php echo esc_attr( (string) ( $i + 1 ) ); ?>">
+				<?php if ( $img ) : ?>
+					<figure class="approach__media img-reveal">
+						<img src="<?php echo esc_url( $img ); ?>" alt="" width="400" height="300" loading="lazy" decoding="async" />
+					</figure>
+				<?php endif; ?>
 				<?php if ( ! empty( $step['label'] ) ) : ?>
 					<p class="approach__label"><?php echo esc_html( $step['label'] ); ?></p>
 				<?php endif; ?>

@@ -1,63 +1,105 @@
 .hire-me {
-	background: $orange-deep;
+	position: relative;
+	overflow: hidden;
+	background: $ink;
 	padding: 100px 64px;
-	text-align: center;
+	text-align: left;
 
 	@include bp {
 		padding: 72px 24px;
 	}
 }
 
+.hire-me__bg {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		filter: grayscale(0.35) contrast(1.05);
+		opacity: 0.38;
+		transform: scale(1.04);
+	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, rgba(14, 16, 24, 0.92) 0%, rgba(14, 16, 24, 0.72) 55%, rgba(14, 16, 24, 0.55) 100%);
+	}
+}
+
 .hire-me__inner {
-	max-width: 720px;
-	margin: 0 auto;
+	position: relative;
+	z-index: 1;
+	max-width: 760px;
+	margin: 0;
+}
+
+.hire-me__eyebrow {
+	font-family: $sans;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: $label-on-ink;
+	margin: 0 0 20px;
 }
 
 .hire-me__title {
-	font-family: $serif;
-	font-weight: 300;
-	font-style: italic;
-	font-size: clamp(32px, 4.2vw, 56px);
-	line-height: 1.15;
-	letter-spacing: -0.025em;
+	font-family: $sans;
+	font-weight: 500;
+	font-style: normal;
+	font-size: clamp(36px, 4.4vw, 60px);
+	line-height: 1.05;
+	letter-spacing: -0.04em;
 	color: #fff;
 	margin: 0 0 18px;
+
+	em {
+		font-family: $serif;
+		font-style: italic;
+		font-weight: 400;
+		color: inherit;
+	}
 }
 
 .hire-me__sub {
 	font-family: $sans;
-	font-size: 15px;
-	line-height: 1.7;
-	color: #fff;
-	margin: 0 0 36px;
+	font-size: 17px;
+	line-height: 1.65;
+	color: $muted-on-ink-soft;
+	margin: 0 0 28px;
 	max-width: 42ch;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 .hire-me__btns {
 	display: flex;
-	justify-content: center;
 	flex-wrap: wrap;
-	gap: 14px;
+	gap: 12px;
 }
 
 .hire-me .btn-white:hover {
-	background: $ink;
+	background: $orange-deep;
 	color: #fff;
 }
 
 .hire-me .btn-outline-white {
-	border-color: $muted-on-ink-soft;
+	border-color: $muted-on-ink;
 
 	&:hover {
 		border-color: #fff;
-		background: transparent;
+		background: #fff;
+		color: $ink;
 	}
 }
 
 .hire-me--services .hire-me__title {
-	font-style: italic;
+	font-style: normal;
 }
 
 .hire-me--about {
@@ -70,12 +112,7 @@
 
 	.hire-me__title {
 		font-style: normal;
-		font-weight: 300;
-
-		em {
-			font-style: italic;
-			color: $orange;
-		}
+		font-weight: 500;
 	}
 
 	.hire-me__sub {
@@ -85,21 +122,24 @@
 
 .hire-me--contact {
 	background: $paper-2;
-	padding: 100px 64px;
+	padding: 88px 64px;
 
 	@include bp {
-		padding: 72px 24px;
+		padding: 64px 24px;
+	}
+
+	.hire-me__bg {
+		display: none;
+	}
+
+	.hire-me__eyebrow {
+		color: $ink-mid;
 	}
 
 	.hire-me__title {
 		font-style: normal;
-		font-weight: 300;
+		font-weight: 500;
 		color: $ink;
-
-		em {
-			font-style: italic;
-			color: $orange;
-		}
 	}
 
 	.hire-me__sub {
@@ -113,10 +153,14 @@
 
 .hire-me__meta {
 	font-family: $sans;
-	font-size: 10px;
-	font-weight: 600;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: -0.01em;
+	text-transform: none;
+	color: $label-on-ink;
+	margin: 24px 0 0;
+}
+
+.hire-me--contact .hire-me__meta {
 	color: $ink-light;
-	margin: 0;
 }

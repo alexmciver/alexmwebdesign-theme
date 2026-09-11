@@ -1,15 +1,15 @@
 .questions {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
-  gap: 80px;
+  gap: 56px;
   align-items: start;
   background: $paper;
-  padding: 120px 64px;
+  padding: 96px 64px;
 
   @include bp {
     grid-template-columns: 1fr;
-    gap: 48px;
-    padding: 88px 24px;
+    gap: 40px;
+    padding: 72px 24px;
   }
 
   .s-h {
@@ -32,8 +32,8 @@
   font-family: $sans;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  text-transform: none;
   color: $ink;
   text-decoration: none;
   border-bottom: 1px solid $ink;

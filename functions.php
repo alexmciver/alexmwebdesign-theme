@@ -138,15 +138,19 @@ function alex_query_work( $args = array() ) {
  * Normalised Work item for cards and featured layouts.
  *
  * @param int|WP_Post|null $post Post object or ID.
+ * @param int              $fallback_index Optional placeholder image index (0–3) when no thumbnail.
  * @return array{title:string,platform:string,result:string,scope:string,client:string,year:string,body:string,url:string,image:string}|null
  */
-function alex_work_item( $post = null ) {
+function alex_work_item( $post = null, $fallback_index = 0 ) {
 	$post = get_post( $post );
 	if ( ! $post || 'work' !== $post->post_type ) {
 		return null;
 	}
 
 	$image = get_the_post_thumbnail_url( $post, 'large' );
+	if ( ! $image ) {
+		$image = alex_work_placeholder( $fallback_index );
+	}
 
 	return array(
 		'title'    => get_the_title( $post ),
@@ -159,6 +163,62 @@ function alex_work_item( $post = null ) {
 		'url'      => get_permalink( $post ),
 		'image'    => $image ? $image : '',
 	);
+}
+
+/**
+ * Theme image URL from assets/images (WebP preferred).
+ *
+ * Royalty-free Unsplash placeholders (Unsplash License):
+ * - hero-workspace — Christopher Gower
+ * - work-featured — Daniel Korpai
+ * - work-01 — Lee Campbell
+ * - work-02 — Luke Chesser
+ * - work-03 — CardMapr.nl
+ * - work-04 — William Iven
+ *
+ * @param string $slug Filename without extension.
+ * @return string
+ */
+function alex_theme_image( $slug ) {
+	$base = get_template_directory() . '/assets/images/' . $slug;
+	$uri  = get_template_directory_uri() . '/assets/images/' . $slug;
+	if ( file_exists( $base . '.webp' ) ) {
+		return $uri . '.webp';
+	}
+	if ( file_exists( $base . '.jpg' ) ) {
+		return $uri . '.jpg';
+	}
+	if ( file_exists( $base . '.png' ) ) {
+		return $uri . '.png';
+	}
+	return '';
+}
+
+/**
+ * Cycle of work placeholder images (royalty-free).
+ *
+ * @param int $index Zero-based index.
+ * @return string
+ */
+function alex_work_placeholder( $index = 0 ) {
+	$slugs = array( 'work-01', 'work-02', 'work-03', 'work-04', 'work-05', 'work-06' );
+	$count = count( $slugs );
+	$slug  = $slugs[ absint( $index ) % $count ];
+	return alex_theme_image( $slug );
+}
+
+/**
+ * Featured work image, or royalty-free placeholder.
+ *
+ * @param array $item Work item from alex_work_item().
+ * @return string
+ */
+function alex_featured_image( $item ) {
+	if ( ! empty( $item['image'] ) && false === strpos( $item['image'], '/work-0' ) ) {
+		return $item['image'];
+	}
+	$featured = alex_theme_image( 'work-featured' );
+	return $featured ? $featured : ( ! empty( $item['image'] ) ? $item['image'] : '' );
 }
 
 /**

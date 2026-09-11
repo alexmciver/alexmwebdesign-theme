@@ -1,27 +1,23 @@
 .enquiries {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 56px;
   align-items: start;
   background: $ink;
-  padding: 120px 64px;
+  padding: 96px 64px;
 
   @include bp {
     grid-template-columns: 1fr;
-    gap: 56px;
-    padding: 88px 24px;
+    gap: 40px;
+    padding: 72px 24px;
   }
 
   .s-eyebrow {
-    color: $orange;
-
-    &::after {
-      background: $orange;
-    }
-  }
+		color: $muted-on-ink;
+	}
 
   .s-h {
-    color: #f5f5ff;
+    color: #ffffff;
     margin-bottom: 24px;
     max-width: 12ch;
   }
@@ -60,10 +56,10 @@
 .enquiries__label {
   display: block;
   font-family: $sans;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
   color: $label-on-ink;
   margin-bottom: 6px;
 }
@@ -99,10 +95,10 @@
 
   > span:first-child {
     font-family: $sans;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-transform: none;
     color: $label-on-ink;
   }
 
@@ -206,11 +202,7 @@
   align-items: start;
 
   .s-eyebrow {
-    color: $orange-deep;
-
-    &::after {
-      background: $orange-deep;
-    }
+    color: $ink-mid;
   }
 
   .s-h {
@@ -218,8 +210,10 @@
     max-width: 14ch;
 
     em {
+      font-family: $serif;
       font-style: italic;
-      color: $orange;
+      font-weight: 400;
+      color: inherit;
     }
   }
 

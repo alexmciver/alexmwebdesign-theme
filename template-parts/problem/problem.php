@@ -5,7 +5,7 @@
 $eyebrow = alex_field( 'eyebrow', 'The problem' );
 $heading = alex_field( 'heading', 'Most websites are built to <em>exist</em>, not to work.' );
 $body    = alex_field( 'body', "They look acceptable, they load slowly, and they quietly cost their owners business every single day. The difference is rarely design taste. It's judgement." );
-$link    = alex_button( get_field( 'link' ), 'Talk it through', alex_page_url( 'contact' ) );
+$link    = alex_button( get_field( 'link' ), 'Enquire about a project', alex_page_url( 'contact' ) );
 $items   = alex_field(
 	'items',
 	array(

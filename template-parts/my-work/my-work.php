@@ -58,9 +58,10 @@ $has_featured_link = $featured && $featured_url && $featured_text;
 <section class="my-work" aria-label="<?php esc_attr_e( 'Selected projects', 'alex-theme' ); ?>">
 	<?php if ( $featured ) : ?>
 		<article class="my-work__featured rv">
-			<div class="my-work__featured-media" aria-hidden="true">
-				<?php if ( $featured['image'] ) : ?>
-					<img src="<?php echo esc_url( $featured['image'] ); ?>" alt="" loading="lazy" decoding="async" />
+			<?php $featured_image = alex_featured_image( $featured ); ?>
+			<div class="my-work__featured-media">
+				<?php if ( $featured_image ) : ?>
+					<img src="<?php echo esc_url( $featured_image ); ?>" alt="<?php echo esc_attr( sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $featured['title'] ) ); ?>" loading="lazy" decoding="async" />
 				<?php endif; ?>
 			</div>
 			<div class="my-work__featured-copy">
@@ -108,16 +109,16 @@ $has_featured_link = $featured && $featured_url && $featured_text;
 				$i = 0;
 				while ( $archive_query->have_posts() ) :
 					$archive_query->the_post();
-					$project = alex_work_item( get_post() );
+					$project = alex_work_item( get_post(), $i );
 					if ( ! $project || ! $project['url'] ) {
 						continue;
 					}
 					++$i;
 					?>
 					<a href="<?php echo esc_url( $project['url'] ); ?>" class="work__card rv rv<?php echo esc_attr( (string) min( $i, 4 ) ); ?>">
-						<div class="work__media" aria-hidden="true">
+						<div class="work__media">
 							<?php if ( $project['image'] ) : ?>
-								<img src="<?php echo esc_url( $project['image'] ); ?>" alt="" loading="lazy" decoding="async" />
+								<img src="<?php echo esc_url( $project['image'] ); ?>" alt="<?php echo esc_attr( sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $project['title'] ) ); ?>" loading="lazy" decoding="async" />
 							<?php endif; ?>
 						</div>
 						<div class="work__meta">

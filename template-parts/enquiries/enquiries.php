@@ -102,13 +102,13 @@ if ( 'contact' === $layout ) :
 </section>
 <?php else :
 	$eyebrow        = alex_field( 'eyebrow', 'Enquiries' );
-	$heading        = alex_field( 'heading', "Let's talk about what you're <em>building</em>" );
-	$intro          = alex_field( 'intro', "I reply to everything personally, within one working day. If it isn't a fit I'll tell you, and point you somewhere better." );
+	$heading        = alex_field( 'heading', "Tell me what you're <em>building</em>" );
+	$intro          = alex_field( 'intro', "Every enquiry is read by me within one working day. If it isn't a fit, I'll say so — and point you somewhere better." );
 	$email          = alex_field( 'email', 'info@alexmwebdesign.co.uk' );
 	$telephone      = alex_field( 'telephone', '+44 7804 187711' );
 	$calendar_url   = alex_field( 'calendar_url', 'https://calendly.com/alexmwebdesign/1-hour-website-chat' );
-	$calendar_label = alex_field( 'calendar_label', 'Book a call' );
-	$note           = alex_field( 'note', 'Client references available on request. Currently taking on a limited number of projects.' );
+	$calendar_label = alex_field( 'calendar_label', 'Book a discovery call' );
+	$note           = alex_field( 'note', 'References available on request. Currently accepting a limited number of new projects.' );
 	$tel_href       = $telephone ? preg_replace( '/\s+/', '', $telephone ) : '';
 	$cf7_id         = $alex_enquiries_cf7_id( alex_field( 'cf7_form_id', '' ), 'Home enquiry' );
 	?>

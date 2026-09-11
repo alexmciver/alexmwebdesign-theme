@@ -1,10 +1,6 @@
 .my-services-hero {
 	.s-eyebrow {
-		color: $orange;
-
-		&::after {
-			background: $orange;
-		}
+		color: $muted-on-ink;
 	}
 
 	h1 {
@@ -44,8 +40,8 @@
 	font-family: $sans;
 	font-size: 11px;
 	font-weight: 600;
-	letter-spacing: 0.08em;
-	color: $orange-deep;
+	letter-spacing: -0.01em;
+	color: $ink-mid;
 	margin-bottom: 18px;
 }
 
@@ -73,8 +69,8 @@
 	font-family: $sans;
 	font-size: 11px;
 	font-weight: 600;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
+	letter-spacing: -0.01em;
+	text-transform: none;
 	color: $ink;
 	text-decoration: none;
 	transition: color 0.25s $ease;
@@ -88,8 +84,8 @@
 	font-family: $sans;
 	font-size: 10px;
 	font-weight: 600;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
+	letter-spacing: -0.01em;
+	text-transform: none;
 	color: $ink-light;
 	margin: 0 0 20px;
 }
@@ -145,11 +141,7 @@
 	}
 
 	.s-eyebrow {
-		color: $orange;
-
-		&::after {
-			background: $orange;
-		}
+		color: $muted-on-ink;
 	}
 }
 
@@ -181,8 +173,8 @@
 	font-family: $sans;
 	font-size: 10px;
 	font-weight: 600;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
+	letter-spacing: -0.01em;
+	text-transform: none;
 	color: $orange;
 	margin: 0 0 16px;
 }
@@ -306,7 +298,7 @@
 	font-size: 12px;
 	font-weight: 600;
 	letter-spacing: 0.04em;
-	color: $orange-deep;
+	color: $ink-mid;
 	margin: 0 0 28px;
 }
 

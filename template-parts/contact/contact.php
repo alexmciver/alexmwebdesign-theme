@@ -6,7 +6,7 @@ $calendly = 'https://calendly.com/alexmwebdesign/1-hour-website-chat';
 
 $eyebrow    = alex_field( 'eyebrow', 'Contact' );
 $heading    = alex_field( 'heading', "Let's talk about <em>the work.</em>" );
-$subheading = alex_field( 'subheading', 'Every enquiry is read and answered by me, within one working day. No automated replies, no sales sequences.' );
+$subheading = alex_field( 'subheading', 'Every enquiry is read by me within one working day. If it isn\'t a fit, I\'ll say so — and point you somewhere better.' );
 $details    = alex_field(
 	'details',
 	array(
@@ -25,7 +25,7 @@ $details    = alex_field(
 		array(
 			'label' => 'Calendar',
 			'type'  => 'link',
-			'value' => 'Book a call →',
+			'value' => 'Book a discovery call →',
 			'url'   => $calendly,
 		),
 		array(

@@ -1,13 +1,13 @@
 .approach {
   background: $paper;
-  padding: 120px 64px;
+  padding: 96px 64px;
 
   @include bp {
-    padding: 88px 24px;
+    padding: 72px 24px;
   }
 
   .s-h {
-    margin-bottom: 64px;
+    margin-bottom: 40px;
     max-width: 16ch;
   }
 }
@@ -23,7 +23,7 @@
 }
 
 .approach__step {
-  padding: 0 32px;
+  padding: 0 28px;
   border-left: 1px solid $line-soft;
 
   &:first-child {
@@ -43,23 +43,42 @@
   }
 }
 
+.approach__media {
+  margin: 0 0 20px;
+  overflow: hidden;
+  aspect-ratio: 5 / 4;
+  background: $paper-3;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s $ease;
+  }
+}
+
+.approach__step:hover .approach__media img {
+  transform: scale(1.05);
+}
+
 .approach__label {
   font-family: $sans;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: $orange-deep;
-  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: $ink-mid;
+  margin-bottom: 12px;
 }
 
 .approach__title {
-  font-family: $serif;
-  font-size: clamp(24px, 2.2vw, 32px);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: $sans;
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
   color: $ink;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   line-height: 1.15;
 }
 
@@ -138,9 +157,9 @@
   font-family: $sans;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: $orange-deep;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: $ink-mid;
   margin: 0 0 10px;
 }
 

@@ -1,63 +1,8 @@
-// Custom cursor
-#cur {
-  position: fixed;
-  width: 5px;
-  height: 5px;
-  background: $orange;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9990;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s $ease, height 0.3s $ease,
-    border-radius 0.3s $ease;
-}
-
-#cur-r {
-  position: fixed;
-  width: 30px;
-  height: 30px;
-  border: 1px solid rgba(255, 77, 0, 0.28);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9989;
-  transform: translate(-50%, -50%);
-  transition: width 0.35s $ease, height 0.35s $ease,
-    border-color 0.35s $ease;
-}
-
-.cur-big {
-  #cur {
-    width: 8px;
-    height: 8px;
-  }
-
-  #cur-r {
-    width: 52px;
-    height: 52px;
-    border-color: rgba(255, 77, 0, 0.5);
-  }
-}
-
-.cur-text {
-  #cur {
-    width: 1px;
-    height: 20px;
-    border-radius: 0;
-  }
-}
-
-@media (max-width: $bp), (prefers-reduced-motion: reduce) {
-  #cur,
-  #cur-r {
-    display: none !important;
-  }
-}
-
 // Scroll reveals
 .rv {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 0.9s $ease, transform 0.9s $ease;
+  transform: translateY(18px);
+  transition: opacity 0.7s $ease, transform 0.7s $ease;
 
   &.in {
     opacity: 1;
@@ -67,8 +12,8 @@
 
 .rv-left {
   opacity: 0;
-  transform: translateX(-26px);
-  transition: opacity 0.9s $ease, transform 0.9s $ease;
+  transform: translateX(-24px);
+  transition: opacity 0.7s $ease, transform 0.7s $ease;
 
   &.in {
     opacity: 1;
@@ -78,8 +23,8 @@
 
 .rv-right {
   opacity: 0;
-  transform: translateX(26px);
-  transition: opacity 0.9s $ease, transform 0.9s $ease;
+  transform: translateX(24px);
+  transition: opacity 0.7s $ease, transform 0.7s $ease;
 
   &.in {
     opacity: 1;
@@ -88,27 +33,78 @@
 }
 
 .rv1 {
-  transition-delay: 0.09s;
+  transition-delay: 0.06s;
 }
 
 .rv2 {
-  transition-delay: 0.17s;
+  transition-delay: 0.12s;
 }
 
 .rv3 {
-  transition-delay: 0.25s;
+  transition-delay: 0.18s;
 }
 
 .rv4 {
-  transition-delay: 0.33s;
+  transition-delay: 0.24s;
+}
+
+// Image clip reveal
+.img-reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1s $ease;
+
+  &.in {
+    clip-path: inset(0 0 0 0);
+  }
+
+  img {
+    transform: scale(1.08);
+    transition: transform 1.2s $ease;
+  }
+
+  &.in img {
+    transform: scale(1);
+  }
+}
+
+// Photo marquee band (legacy)
+.photo-band {
+  display: none;
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee.is-running {
+  animation: marquee-x 48s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .rv,
   .rv-left,
-  .rv-right {
+  .rv-right,
+  .img-reveal {
     opacity: 1;
     transform: none;
+    clip-path: none;
     transition: none;
+  }
+
+  .img-reveal img {
+    transform: none;
+  }
+
+  .marquee.is-running {
+    animation: none;
   }
 }

@@ -14,6 +14,12 @@ $default_heading = $about_style
 
 $eyebrow = alex_field( 'eyebrow', $default_eyebrow );
 $heading = alex_field( 'heading', $default_heading );
+$body    = $about_style
+	? ''
+	: alex_field(
+		'body',
+		'No juniors, no handoffs, no account layers. You work directly with me — from the first conversation to a site that is genuinely yours.'
+	);
 $groups  = alex_field(
 	'groups',
 	array(
@@ -35,11 +41,40 @@ $groups  = alex_field(
 		),
 	)
 );
+
+$media_imgs = array();
+if ( ! $about_style ) {
+	$media_imgs = array_values(
+		array_filter(
+			array(
+				alex_theme_image( 'desk-detail' ),
+				alex_theme_image( 'craft-02' ),
+				alex_theme_image( 'london' ),
+				alex_theme_image( 'craft-03' ),
+			)
+		)
+	);
+}
 ?>
 <section id="capability" class="capability<?php echo $about_style ? ' capability--about' : ''; ?>" aria-label="<?php esc_attr_e( 'Technical capability', 'alex-theme' ); ?>">
-	<div class="rv">
-		<p class="s-eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
-		<h2 class="s-h"><?php echo wp_kses_post( $heading ); ?></h2>
+	<div class="capability__head<?php echo $media_imgs ? ' capability__head--media' : ''; ?>">
+		<div class="capability__intro rv">
+			<p class="s-eyebrow"><?php echo esc_html( $eyebrow ); ?></p>
+			<h2 class="s-h"><?php echo wp_kses_post( $heading ); ?></h2>
+			<?php if ( $body ) : ?>
+				<p class="s-body"><?php echo esc_html( $body ); ?></p>
+			<?php endif; ?>
+		</div>
+
+		<?php if ( $media_imgs ) : ?>
+			<div class="capability__media" aria-hidden="true">
+				<?php foreach ( $media_imgs as $i => $src ) : ?>
+					<figure class="capability__shot">
+						<img src="<?php echo esc_url( $src ); ?>" alt="" width="600" height="400" loading="<?php echo 0 === $i ? 'eager' : 'lazy'; ?>" decoding="async" />
+					</figure>
+				<?php endforeach; ?>
+			</div>
+		<?php endif; ?>
 	</div>
 
 	<div class="cap-grid">

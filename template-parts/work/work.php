@@ -3,7 +3,7 @@
  * Selected Work block — recent project grid from the Work CPT.
  */
 $eyebrow  = alex_field( 'eyebrow', 'Selected work' );
-$heading  = alex_field( 'heading', 'A few recent <em>projects</em>' );
+$heading  = alex_field( 'heading', 'Recent <em>commissions</em>' );
 $all_link = alex_button( get_field( 'all_link' ), 'Full portfolio', alex_work_archive_url() );
 
 $work_query = alex_query_work(
@@ -27,16 +27,16 @@ $work_query = alex_query_work(
 			$n = 0;
 			while ( $work_query->have_posts() ) :
 				$work_query->the_post();
-				$project = alex_work_item( get_post() );
+				$project = alex_work_item( get_post(), $n );
 				if ( ! $project || ! $project['url'] ) {
 					continue;
 				}
 				++$n;
 				?>
 				<a href="<?php echo esc_url( $project['url'] ); ?>" class="work__card rv rv<?php echo esc_attr( (string) min( $n, 4 ) ); ?>">
-					<div class="work__media" aria-hidden="true">
+					<div class="work__media">
 						<?php if ( $project['image'] ) : ?>
-							<img src="<?php echo esc_url( $project['image'] ); ?>" alt="" loading="lazy" decoding="async" />
+							<img src="<?php echo esc_url( $project['image'] ); ?>" alt="<?php echo esc_attr( sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $project['title'] ) ); ?>" loading="lazy" decoding="async" />
 						<?php endif; ?>
 					</div>
 					<div class="work__meta">

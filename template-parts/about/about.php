@@ -7,18 +7,17 @@ $calendly    = 'https://calendly.com/alexmwebdesign/1-hour-website-chat';
 
 $eyebrow     = alex_field( 'eyebrow', 'About' );
 $heading     = alex_field( 'heading', 'Alex <em>McIver</em>' );
-$subheading  = alex_field( 'subheading', "I'm a London-based WordPress and Shopify developer who believes good websites are ones that actually work for your business — fast, considered, and easy to run." );
-$primary     = alex_button( get_field( 'primary_button' ), "Let's work together", $contact_url );
-$secondary   = alex_button( get_field( 'secondary_button' ), 'Book a call', $calendly );
+$subheading  = alex_field( 'subheading', 'Independent WordPress and Shopify developer in London. Sites built with clear scope, a fixed fee, and the judgement that comes from doing this every day.' );
+$primary     = alex_button( get_field( 'primary_button' ), 'Enquire about a project', $contact_url );
+$secondary   = alex_button( get_field( 'secondary_button' ), 'Book a discovery call', $calendly );
 $photo_label = alex_field( 'photo_label', 'Photo of Alex' );
 $photo_url   = alex_field( 'photo_url', get_template_directory_uri() . '/assets/images/alex-portrait.webp' );
 $intro_quote = alex_field( 'intro_quote', 'I build digital products with the same care as the business behind them.' );
 $intro_text  = alex_field(
 	'intro_text',
-	'<p>I started building websites because I loved solving problems. Five years and thirty-plus projects later, I still do — but I\'ve learned that the technical stuff only matters if it actually helps your business grow.</p>'
-	. '<p>I work at <strong>Hewitt Matthews</strong>, a performance marketing agency in London, where I manage a full support desk and deliver custom builds — everything from bespoke plugin development and WooCommerce setups to server configuration and CDN management.</p>'
-	. '<p>Alongside that, I take on freelance projects through <strong>Alex M Web Design</strong> — ranging from Shopify stores to SEO-led WordPress redesigns for small business owners who want a site that actually brings in customers.</p>'
-	. '<p>The thing clients always mention? I explain things in plain English, I stay calm under pressure, and <strong>no challenge is ever too big</strong>.</p>'
+	'<p>I take on a limited number of WordPress and Shopify projects each year — enough to give each one proper attention, never enough to hand work down a chain.</p>'
+	. '<p>By day I lead builds and support at <strong>Hewitt Matthews</strong>, a London performance marketing agency. Alongside that, I work directly with founders and marketers through <strong>Alex M Web Design</strong>.</p>'
+	. '<p>Clients stay for the same reasons they hire me: plain English, considered decisions, and a site they can run without calling a developer for every change.</p>'
 );
 $stats = alex_field(
 	'stats',
