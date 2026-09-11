@@ -41,6 +41,29 @@ $platforms   = alex_field(
 );
 $hero_image = alex_field( 'hero_image', alex_theme_image( 'alex-portrait' ) );
 $hero_alt   = alex_field( 'hero_image_alt', 'Alex McIver, independent WordPress and Shopify developer' );
+$orbit_base = get_template_directory_uri() . '/assets/images/orbit';
+$orbit_icons = array(
+	array(
+		'slug'  => 'php',
+		'file'  => 'php.svg',
+		'class' => 'hero-orbit__icon--php',
+	),
+	array(
+		'slug'  => 'wordpress',
+		'file'  => 'wordpress.svg',
+		'class' => 'hero-orbit__icon--wp',
+	),
+	array(
+		'slug'  => 'shopify',
+		'file'  => 'shopify.svg',
+		'class' => 'hero-orbit__icon--shopify',
+	),
+	array(
+		'slug'  => 'divi',
+		'file'  => 'divi.svg',
+		'class' => 'hero-orbit__icon--divi',
+	),
+);
 ?>
 
 <section class="hero" aria-label="<?php esc_attr_e( 'Alex McIver — Independent WordPress and Shopify developer, London', 'alex-theme' ); ?>">
@@ -56,11 +79,37 @@ $hero_alt   = alex_field( 'hero_image_alt', 'Alex McIver, independent WordPress 
 		</div>
 
 		<div class="hero-right">
-			<?php if ( $hero_image ) : ?>
-				<figure class="hero-visual hero-visual--portrait">
-					<img src="<?php echo esc_url( $hero_image ); ?>" alt="<?php echo esc_attr( $hero_alt ); ?>" width="800" height="1000" loading="eager" decoding="async" />
-				</figure>
-			<?php endif; ?>
+			<div class="hero-orbit" role="img" aria-label="<?php esc_attr_e( 'Alex McIver surrounded by WordPress, Shopify, Divi and PHP', 'alex-theme' ); ?>">
+				<div class="hero-orbit__stage">
+					<div class="hero-orbit__core">
+						<?php if ( $hero_image ) : ?>
+							<img
+								src="<?php echo esc_url( $hero_image ); ?>"
+								alt="<?php echo esc_attr( $hero_alt ); ?>"
+								width="640"
+								height="640"
+								loading="eager"
+								decoding="async"
+							/>
+						<?php endif; ?>
+					</div>
+					<div class="hero-orbit__ring" aria-hidden="true">
+						<?php foreach ( $orbit_icons as $icon ) : ?>
+							<div class="hero-orbit__icon <?php echo esc_attr( $icon['class'] ); ?>">
+								<div class="hero-orbit__badge">
+									<img
+										src="<?php echo esc_url( $orbit_base . '/' . $icon['file'] ); ?>"
+										alt=""
+										width="48"
+										height="48"
+										decoding="async"
+									/>
+								</div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
