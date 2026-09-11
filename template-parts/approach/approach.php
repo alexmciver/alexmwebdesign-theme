@@ -140,7 +140,7 @@ if ( 'story' === $layout ) :
 			?>
 			<div class="approach__step rv rv<?php echo esc_attr( (string) ( $i + 1 ) ); ?>">
 				<?php if ( $img ) : ?>
-					<figure class="approach__media img-reveal">
+					<figure class="approach__media">
 						<img src="<?php echo esc_url( $img ); ?>" alt="" width="400" height="300" loading="lazy" decoding="async" />
 					</figure>
 				<?php endif; ?>
