@@ -90,6 +90,25 @@
     object-fit: cover;
     transition: transform 0.8s $ease;
   }
+
+  &--logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $paper-2;
+
+    &::after {
+      display: none;
+    }
+
+    img {
+      width: auto;
+      height: auto;
+      max-width: 48%;
+      max-height: 42%;
+      object-fit: contain;
+    }
+  }
 }
 
 .work__card:hover {
@@ -100,6 +119,10 @@
 
     img {
       transform: scale(1.06);
+    }
+
+    &--logo img {
+      transform: scale(1.04);
     }
   }
 

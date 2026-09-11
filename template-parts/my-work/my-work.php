@@ -20,18 +20,8 @@ if ( function_exists( 'get_field' ) ) {
 	}
 }
 
-$featured = $featured_id ? alex_work_item( $featured_id ) : null;
-
-// Fall back to the latest Work post when none is selected.
-if ( ! $featured ) {
-	$latest = alex_query_work( array( 'posts_per_page' => 1 ) );
-	if ( $latest->have_posts() ) {
-		$latest->the_post();
-		$featured_id = get_the_ID();
-		$featured    = alex_work_item( $featured_id );
-		wp_reset_postdata();
-	}
-}
+$featured_id = alex_featured_work_id( $featured_id );
+$featured    = $featured_id ? alex_work_item( $featured_id ) : null;
 
 $archive_args = array( 'posts_per_page' => -1 );
 if ( $featured_id ) {
@@ -58,8 +48,11 @@ $has_featured_link = $featured && $featured_url && $featured_text;
 <section class="my-work" aria-label="<?php esc_attr_e( 'Selected projects', 'alex-theme' ); ?>">
 	<?php if ( $featured ) : ?>
 		<article class="my-work__featured rv">
-			<?php $featured_image = alex_featured_image( $featured ); ?>
-			<div class="my-work__featured-media">
+			<?php
+			$featured_image = alex_featured_image( $featured );
+			$featured_mod   = ( ! empty( $featured['image_mode'] ) && 'logo' === $featured['image_mode'] ) ? ' my-work__featured-media--logo' : '';
+			?>
+			<div class="my-work__featured-media<?php echo esc_attr( $featured_mod ); ?>">
 				<?php if ( $featured_image ) : ?>
 					<img src="<?php echo esc_url( $featured_image ); ?>" alt="<?php echo esc_attr( sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $featured['title'] ) ); ?>" loading="lazy" decoding="async" />
 				<?php endif; ?>
@@ -114,9 +107,10 @@ $has_featured_link = $featured && $featured_url && $featured_text;
 						continue;
 					}
 					++$i;
+					$media_mod = ( ! empty( $project['image_mode'] ) && 'logo' === $project['image_mode'] ) ? ' work__media--logo' : '';
 					?>
 					<a href="<?php echo esc_url( $project['url'] ); ?>" class="work__card rv rv<?php echo esc_attr( (string) min( $i, 4 ) ); ?>">
-						<div class="work__media">
+						<div class="work__media<?php echo esc_attr( $media_mod ); ?>">
 							<?php if ( $project['image'] ) : ?>
 								<img src="<?php echo esc_url( $project['image'] ); ?>" alt="<?php echo esc_attr( sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $project['title'] ) ); ?>" loading="lazy" decoding="async" />
 							<?php endif; ?>

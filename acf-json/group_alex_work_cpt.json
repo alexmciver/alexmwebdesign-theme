@@ -106,6 +106,87 @@
             "rows": 3,
             "placeholder": "",
             "new_lines": ""
+        },
+        {
+            "key": "field_alex_work_cpt_project_url",
+            "label": "Project URL",
+            "name": "project_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Live site URL. Used to generate an automatic screenshot preview.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": "https:\/\/example.com"
+        },
+        {
+            "key": "field_alex_work_cpt_preview_type",
+            "label": "Card preview",
+            "name": "preview_type",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "Screenshot uses the Project URL. Logo uses the upload below. Featured image uses the WordPress featured image.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "screenshot": "Site screenshot",
+                "logo": "Company logo",
+                "featured": "Featured image"
+            },
+            "default_value": "screenshot",
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": "",
+            "create_options": 0,
+            "save_options": 0
+        },
+        {
+            "key": "field_alex_work_cpt_company_logo",
+            "label": "Company logo",
+            "name": "company_logo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Prefer an SVG or transparent PNG.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_alex_work_cpt_preview_type",
+                        "operator": "==",
+                        "value": "logo"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "jpg,jpeg,png,webp,svg",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
         }
     ],
     "location": [
@@ -129,5 +210,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1789059600
+    "modified": 1789149600
 }

@@ -135,11 +135,182 @@ function alex_query_work( $args = array() ) {
 }
 
 /**
+ * Resolve a featured Work post ID.
+ *
+ * Prefer an explicit block override, then the CPT “Featured project” toggle,
+ * then the latest Work post.
+ *
+ * @param int $override_id Optional post ID from the My Work block field.
+ * @return int
+ */
+function alex_featured_work_id( $override_id = 0 ) {
+	$override_id = absint( $override_id );
+	if ( $override_id && 'work' === get_post_type( $override_id ) && 'publish' === get_post_status( $override_id ) ) {
+		return $override_id;
+	}
+
+	$featured = alex_query_work(
+		array(
+			'posts_per_page' => 1,
+			'meta_key'       => 'is_featured',
+			'meta_value'     => '1',
+		)
+	);
+	if ( $featured->have_posts() ) {
+		$featured->the_post();
+		$id = get_the_ID();
+		wp_reset_postdata();
+		return (int) $id;
+	}
+
+	$latest = alex_query_work( array( 'posts_per_page' => 1 ) );
+	if ( $latest->have_posts() ) {
+		$latest->the_post();
+		$id = get_the_ID();
+		wp_reset_postdata();
+		return (int) $id;
+	}
+
+	return 0;
+}
+
+/**
+ * Keep only one Work post marked as featured.
+ *
+ * @param int|string $post_id Post ID being saved.
+ */
+function alex_work_enforce_single_featured( $post_id ) {
+	$post_id = (int) $post_id;
+	if ( $post_id <= 0 || 'work' !== get_post_type( $post_id ) ) {
+		return;
+	}
+	if ( ! function_exists( 'get_field' ) || ! get_field( 'is_featured', $post_id ) ) {
+		return;
+	}
+
+	$others = get_posts(
+		array(
+			'post_type'      => 'work',
+			'post_status'    => 'any',
+			'posts_per_page' => -1,
+			'post__not_in'   => array( $post_id ),
+			'fields'         => 'ids',
+			'meta_key'       => 'is_featured',
+			'meta_value'     => '1',
+		)
+	);
+
+	foreach ( $others as $other_id ) {
+		update_field( 'is_featured', 0, (int) $other_id );
+	}
+}
+add_action( 'acf/save_post', 'alex_work_enforce_single_featured', 20 );
+
+/**
+ * WordPress.com mShots URL for a live site screenshot.
+ *
+ * @param string $url   Absolute project URL.
+ * @param int    $width Screenshot width in pixels.
+ * @return string
+ */
+function alex_work_mshot_url( $url, $width = 1200 ) {
+	$url = esc_url_raw( $url );
+	if ( ! $url ) {
+		return '';
+	}
+	return 'https://s0.wp.com/mshots/v1/' . rawurlencode( $url ) . '?w=' . absint( $width );
+}
+
+/**
+ * Company logo URL from the Work ACF image field.
+ *
+ * @param int $post_id Work post ID.
+ * @return string
+ */
+function alex_work_logo_url( $post_id ) {
+	if ( ! function_exists( 'get_field' ) ) {
+		return '';
+	}
+	$logo = get_field( 'company_logo', $post_id );
+	if ( is_array( $logo ) && ! empty( $logo['url'] ) ) {
+		return (string) $logo['url'];
+	}
+	if ( is_numeric( $logo ) ) {
+		$src = wp_get_attachment_image_url( (int) $logo, 'large' );
+		return $src ? $src : '';
+	}
+	if ( is_string( $logo ) && $logo ) {
+		return $logo;
+	}
+	return '';
+}
+
+/**
+ * Resolve card / featured preview image for a Work post.
+ *
+ * Priority follows the Card preview ACF select, then sensible fallbacks.
+ *
+ * @param WP_Post $post           Work post.
+ * @param int     $fallback_index Placeholder cycle index.
+ * @return array{image:string,mode:string}
+ */
+function alex_work_preview( $post, $fallback_index = 0 ) {
+	$preview     = (string) alex_field( 'preview_type', 'screenshot', $post->ID );
+	$project_url = (string) alex_field( 'project_url', '', $post->ID );
+	$featured    = get_the_post_thumbnail_url( $post, 'large' );
+	$logo        = alex_work_logo_url( $post->ID );
+
+	if ( 'logo' === $preview && $logo ) {
+		return array(
+			'image' => $logo,
+			'mode'  => 'logo',
+		);
+	}
+
+	if ( 'featured' === $preview && $featured ) {
+		return array(
+			'image' => $featured,
+			'mode'  => 'featured',
+		);
+	}
+
+	if ( ( 'screenshot' === $preview || 'featured' !== $preview ) && $project_url ) {
+		$shot = alex_work_mshot_url( $project_url );
+		if ( $shot ) {
+			return array(
+				'image' => $shot,
+				'mode'  => 'screenshot',
+			);
+		}
+	}
+
+	if ( $featured ) {
+		return array(
+			'image' => $featured,
+			'mode'  => 'featured',
+		);
+	}
+
+	if ( $logo ) {
+		return array(
+			'image' => $logo,
+			'mode'  => 'logo',
+		);
+	}
+
+	$placeholder = alex_work_placeholder( $fallback_index );
+	return array(
+		'image' => $placeholder ? $placeholder : '',
+		'mode'  => 'placeholder',
+	);
+}
+
+/**
  * Normalised Work item for cards and featured layouts.
  *
  * @param int|WP_Post|null $post Post object or ID.
  * @param int              $fallback_index Optional placeholder image index (0–3) when no thumbnail.
- * @return array{title:string,platform:string,result:string,scope:string,client:string,year:string,body:string,url:string,image:string}|null
+ * @return array{title:string,platform:string,result:string,scope:string,client:string,year:string,body:string,url:string,project_url:string,image:string,image_mode:string}|null
  */
 function alex_work_item( $post = null, $fallback_index = 0 ) {
 	$post = get_post( $post );
@@ -147,21 +318,20 @@ function alex_work_item( $post = null, $fallback_index = 0 ) {
 		return null;
 	}
 
-	$image = get_the_post_thumbnail_url( $post, 'large' );
-	if ( ! $image ) {
-		$image = alex_work_placeholder( $fallback_index );
-	}
+	$preview = alex_work_preview( $post, $fallback_index );
 
 	return array(
-		'title'    => get_the_title( $post ),
-		'platform' => (string) alex_field( 'platform', '', $post->ID ),
-		'result'   => (string) alex_field( 'result', '', $post->ID ),
-		'scope'    => (string) alex_field( 'scope', '', $post->ID ),
-		'client'   => (string) alex_field( 'client', '', $post->ID ),
-		'year'     => (string) alex_field( 'year', '', $post->ID ),
-		'body'     => has_excerpt( $post ) ? get_the_excerpt( $post ) : '',
-		'url'      => get_permalink( $post ),
-		'image'    => $image ? $image : '',
+		'title'       => get_the_title( $post ),
+		'platform'    => (string) alex_field( 'platform', '', $post->ID ),
+		'result'      => (string) alex_field( 'result', '', $post->ID ),
+		'scope'       => (string) alex_field( 'scope', '', $post->ID ),
+		'client'      => (string) alex_field( 'client', '', $post->ID ),
+		'year'        => (string) alex_field( 'year', '', $post->ID ),
+		'body'        => has_excerpt( $post ) ? get_the_excerpt( $post ) : '',
+		'url'         => get_permalink( $post ),
+		'project_url' => (string) alex_field( 'project_url', '', $post->ID ),
+		'image'       => $preview['image'],
+		'image_mode'  => $preview['mode'],
 	);
 }
 
@@ -214,7 +384,8 @@ function alex_work_placeholder( $index = 0 ) {
  * @return string
  */
 function alex_featured_image( $item ) {
-	if ( ! empty( $item['image'] ) && false === strpos( $item['image'], '/work-0' ) ) {
+	$mode = ! empty( $item['image_mode'] ) ? $item['image_mode'] : '';
+	if ( ! empty( $item['image'] ) && 'placeholder' !== $mode && false === strpos( $item['image'], '/work-0' ) ) {
 		return $item['image'];
 	}
 	$featured = alex_theme_image( 'work-featured' );

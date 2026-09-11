@@ -32,9 +32,10 @@ $work_query = alex_query_work(
 					continue;
 				}
 				++$n;
+				$media_mod = ( ! empty( $project['image_mode'] ) && 'logo' === $project['image_mode'] ) ? ' work__media--logo' : '';
 				?>
 				<a href="<?php echo esc_url( $project['url'] ); ?>" class="work__card rv rv<?php echo esc_attr( (string) min( $n, 4 ) ); ?>">
-					<div class="work__media">
+					<div class="work__media<?php echo esc_attr( $media_mod ); ?>">
 						<?php if ( $project['image'] ) : ?>
 							<img src="<?php echo esc_url( $project['image'] ); ?>" alt="<?php echo esc_attr( sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $project['title'] ) ); ?>" loading="lazy" decoding="async" />
 						<?php endif; ?>

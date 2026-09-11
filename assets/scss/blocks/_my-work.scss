@@ -44,6 +44,21 @@
 		height: 100%;
 		object-fit: cover;
 	}
+
+	&--logo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: $paper-2;
+
+		img {
+			width: auto;
+			height: auto;
+			max-width: 42%;
+			max-height: 36%;
+			object-fit: contain;
+		}
+	}
 }
 
 .my-work__featured-copy {

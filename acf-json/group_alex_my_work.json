@@ -92,7 +92,7 @@
             "name": "featured_work",
             "aria-label": "",
             "type": "post_object",
-            "instructions": "Leave empty to use the latest Work post. Title, excerpt, scope, client, year and image come from that post.",
+            "instructions": "Optional override. Leave empty to use the Work post marked Featured project (or the latest post).",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -240,5 +240,5 @@
     "display_title": "",
     "allow_ai_access": false,
     "ai_description": "",
-    "modified": 1789059800
+    "modified": 1789150500
 }
