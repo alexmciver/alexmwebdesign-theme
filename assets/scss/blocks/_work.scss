@@ -44,7 +44,7 @@
   transition: color 0.25s $ease;
 
   &:hover {
-    color: $orange;
+    color: $orange-deep;
   }
 }
 
@@ -70,7 +70,7 @@
     }
 
     .work__title {
-      color: $orange;
+      color: $orange-deep;
     }
   }
 }
@@ -128,7 +128,7 @@
 
   em {
     font-style: normal;
-    color: $orange;
+    color: $orange-deep;
     font-weight: 500;
   }
 }

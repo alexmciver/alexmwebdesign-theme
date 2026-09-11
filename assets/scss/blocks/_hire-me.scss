@@ -1,5 +1,5 @@
 .hire-me {
-	background: $orange;
+	background: $orange-deep;
 	padding: 100px 64px;
 	text-align: center;
 
@@ -28,7 +28,7 @@
 	font-family: $sans;
 	font-size: 15px;
 	line-height: 1.7;
-	color: rgba(255, 255, 255, 0.78);
+	color: #fff;
 	margin: 0 0 36px;
 	max-width: 42ch;
 	margin-left: auto;
@@ -48,7 +48,7 @@
 }
 
 .hire-me .btn-outline-white {
-	border-color: rgba(255, 255, 255, 0.45);
+	border-color: $muted-on-ink-soft;
 
 	&:hover {
 		border-color: #fff;
@@ -79,7 +79,7 @@
 	}
 
 	.hire-me__sub {
-		color: rgba(255, 255, 255, 0.45);
+		color: $muted-on-ink-soft;
 	}
 }
 

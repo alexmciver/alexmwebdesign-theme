@@ -58,7 +58,7 @@ $platforms   = alex_field(
 		</div>
 
 		<div class="hero-right">
-			<div class="code-win" id="code-win">
+			<div class="code-win" id="code-win" aria-hidden="true">
 				<div class="cw-bar">
 					<div class="cw-dot r"></div>
 					<div class="cw-dot y"></div>
@@ -89,7 +89,7 @@ $platforms   = alex_field(
 			?>
 			<div class="stat">
 				<?php if ( $is_num ) : ?>
-					<div class="stat-n" data-count="<?php echo esc_attr( $value ); ?>"<?php echo '' !== $suffix ? ' data-suffix="' . esc_attr( $suffix ) . '"' : ''; ?>>0</div>
+					<div class="stat-n" data-count="<?php echo esc_attr( $value ); ?>"<?php echo '' !== $suffix ? ' data-suffix="' . esc_attr( $suffix ) . '"' : ''; ?> aria-label="<?php echo esc_attr( $value . $suffix . ( $label ? ' ' . $label : '' ) ); ?>">0</div>
 				<?php else : ?>
 					<div class="stat-n"><?php echo esc_html( $value ); ?></div>
 				<?php endif; ?>

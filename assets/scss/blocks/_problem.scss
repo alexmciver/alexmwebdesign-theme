@@ -38,8 +38,8 @@
   transition: color 0.25s $ease, border-color 0.25s $ease;
 
   &:hover {
-    color: $orange;
-    border-color: $orange;
+    color: $orange-deep;
+    border-color: $orange-deep;
   }
 }
 
@@ -64,7 +64,7 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: $orange;
+  color: $orange-deep;
   flex-shrink: 0;
   padding-top: 3px;
 }

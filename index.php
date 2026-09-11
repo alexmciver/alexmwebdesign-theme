@@ -4,7 +4,7 @@
  */
 get_header();
 ?>
-<main id="content" role="main">
+<main id="content" tabindex="-1">
 	<?php
 	while ( have_posts() ) :
 		the_post();

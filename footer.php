@@ -28,14 +28,14 @@ if ( $footer_copyright ) {
 	$footer_copyright = str_replace( '{year}', (string) gmdate( 'Y' ), $footer_copyright );
 }
 ?>
-<footer class="site-footer">
+<footer class="site-footer" role="contentinfo" aria-label="<?php esc_attr_e( 'Site footer', 'alex-theme' ); ?>">
 	<div class="footer-inner">
 		<div>
-			<div class="footer-logo"><span></span><?php echo esc_html( $footer_logo_text ); ?></div>
+			<div class="footer-logo"><span aria-hidden="true"></span><?php echo esc_html( $footer_logo_text ); ?></div>
 			<p class="footer-tagline"><?php echo esc_html( $footer_tagline ); ?></p>
 		</div>
 		<div>
-			<p class="footer-col-title"><?php esc_html_e( 'Pages', 'alex-theme' ); ?></p>
+			<p class="footer-col-title" id="footer-pages-title"><?php esc_html_e( 'Pages', 'alex-theme' ); ?></p>
 			<?php
 			wp_nav_menu(
 				array(
@@ -43,13 +43,14 @@ if ( $footer_copyright ) {
 					'container'      => false,
 					'menu_class'     => 'footer-links',
 					'fallback_cb'    => 'alex_footer_nav_fallback',
+					'items_wrap'     => '<ul class="%2$s" aria-labelledby="footer-pages-title">%3$s</ul>',
 				)
 			);
 			?>
 		</div>
 		<div>
-			<p class="footer-col-title"><?php echo esc_html( $footer_contact_title ); ?></p>
-			<div class="footer-contact">
+			<p class="footer-col-title" id="footer-contact-title"><?php echo esc_html( $footer_contact_title ); ?></p>
+			<div class="footer-contact" aria-labelledby="footer-contact-title">
 				<?php if ( $footer_email ) : ?>
 					<a href="mailto:<?php echo esc_attr( $footer_email ); ?>"><?php echo esc_html( $footer_email ); ?></a>
 				<?php endif; ?>
@@ -57,7 +58,7 @@ if ( $footer_copyright ) {
 					<a href="tel:<?php echo esc_attr( $footer_phone ); ?>"><?php echo esc_html( $footer_phone_display ); ?></a>
 				<?php endif; ?>
 				<?php if ( $footer_calendly_url && $footer_calendly_label ) : ?>
-					<a href="<?php echo esc_url( $footer_calendly_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $footer_calendly_label ); ?></a>
+					<a href="<?php echo esc_url( $footer_calendly_url ); ?>"<?php echo alex_external_link_attrs( $footer_calendly_url ); ?>><?php echo esc_html( $footer_calendly_label ); ?><span class="u-sr-only"><?php esc_html_e( ' (opens in a new tab)', 'alex-theme' ); ?></span></a>
 				<?php endif; ?>
 			</div>
 		</div>

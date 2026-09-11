@@ -84,10 +84,12 @@ $has_secondary = ! empty( $secondary['button_text'] ) && ! empty( $secondary['bu
 		<?php if ( $has_primary || $has_secondary ) : ?>
 			<div class="hire-me__btns">
 				<?php if ( $has_primary ) : ?>
-					<a href="<?php echo esc_url( $primary['button_url'] ); ?>" class="btn <?php echo esc_attr( $primary_class ); ?>"<?php echo false !== stripos( (string) $primary['button_url'], 'calendly.com' ) ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $primary['button_text'] ); ?></a>
+					<?php $primary_ext = alex_external_link_attrs( $primary['button_url'] ); ?>
+					<a href="<?php echo esc_url( $primary['button_url'] ); ?>" class="btn <?php echo esc_attr( $primary_class ); ?>"<?php echo $primary_ext; ?>><?php echo esc_html( $primary['button_text'] ); ?><?php if ( $primary_ext ) : ?><span class="u-sr-only"><?php esc_html_e( ' (opens in a new tab)', 'alex-theme' ); ?></span><?php endif; ?></a>
 				<?php endif; ?>
 				<?php if ( $has_secondary ) : ?>
-					<a href="<?php echo esc_url( $secondary['button_url'] ); ?>" class="btn btn-outline-white"<?php echo false !== stripos( (string) $secondary['button_url'], 'calendly.com' ) ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $secondary['button_text'] ); ?></a>
+					<?php $secondary_ext = alex_external_link_attrs( $secondary['button_url'] ); ?>
+					<a href="<?php echo esc_url( $secondary['button_url'] ); ?>" class="btn btn-outline-white"<?php echo $secondary_ext; ?>><?php echo esc_html( $secondary['button_text'] ); ?><?php if ( $secondary_ext ) : ?><span class="u-sr-only"><?php esc_html_e( ' (opens in a new tab)', 'alex-theme' ); ?></span><?php endif; ?></a>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>

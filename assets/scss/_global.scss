@@ -66,6 +66,66 @@ img {
   color: #fff;
 }
 
+// Screen-reader only
+.u-sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Skip link
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  z-index: 10000;
+  padding: 12px 18px;
+  background: $ink;
+  color: #fff;
+  font-family: $sans;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 $radius $radius;
+  transform: translateY(-120%);
+  transition: transform 0.2s $ease;
+
+  &:focus,
+  &:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid $orange;
+    outline-offset: 2px;
+  }
+}
+
+// Visible keyboard focus (WCAG 2.4.7 / 2.4.13)
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid $orange;
+  outline-offset: 3px;
+}
+
+.btn:focus-visible,
+.nav-burger:focus-visible,
+.faq-q:focus-visible {
+  outline-offset: 4px;
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid CanvasText;
+  }
+}
+
 // Scroll progress
 #scroll-progress {
   position: fixed;
@@ -165,9 +225,18 @@ section,
   transition: color 0.25s $ease, border-color 0.25s $ease;
 
   &:hover {
-    color: $orange;
-    border-color: $orange;
+    color: $orange-deep;
+    border-color: $orange-deep;
   }
+}
+
+#content:focus {
+  outline: none;
+}
+
+#content:focus-visible {
+  outline: 2px solid $orange;
+  outline-offset: 4px;
 }
 
 // Container — gutters live on sections; keep a narrow utility if needed

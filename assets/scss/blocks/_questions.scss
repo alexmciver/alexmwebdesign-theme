@@ -41,8 +41,8 @@
   transition: color 0.25s $ease, border-color 0.25s $ease;
 
   &:hover {
-    color: $orange;
-    border-color: $orange;
+    color: $orange-deep;
+    border-color: $orange-deep;
   }
 }
 

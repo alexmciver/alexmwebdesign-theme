@@ -36,7 +36,7 @@
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: $orange;
+  color: $orange-deep;
   margin-bottom: 26px;
 
   &::after {
@@ -44,7 +44,7 @@
     display: block;
     width: 44px;
     height: 1px;
-    background: $orange;
+    background: $orange-deep;
     flex-shrink: 0;
   }
 }
@@ -62,7 +62,7 @@
   font-family: $sans;
   font-size: 16px;
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.45);
+  color: $muted-on-ink-soft;
   max-width: 520px;
   margin-top: 24px;
 }

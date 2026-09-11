@@ -124,11 +124,15 @@ $faqs    = alex_field( 'faqs', $default_faqs );
 			}
 			?>
 			<div class="faq-item rv rv<?php echo esc_attr( (string) min( $i + 1, 4 ) ); ?>">
-				<button type="button" class="faq-q" aria-expanded="false">
+				<?php
+				$faq_id    = 'faq-' . (string) ( $i + 1 );
+				$panel_id  = $faq_id . '-panel';
+				?>
+				<button type="button" class="faq-q" id="<?php echo esc_attr( $faq_id ); ?>" aria-expanded="false" aria-controls="<?php echo esc_attr( $panel_id ); ?>">
 					<span><?php echo esc_html( $question ); ?></span>
 					<span class="faq-ico" aria-hidden="true"></span>
 				</button>
-				<div class="faq-a" hidden>
+				<div class="faq-a" id="<?php echo esc_attr( $panel_id ); ?>" role="region" aria-labelledby="<?php echo esc_attr( $faq_id ); ?>" hidden>
 					<?php if ( $answer ) : ?>
 						<p><?php echo esc_html( $answer ); ?></p>
 					<?php endif; ?>

@@ -77,7 +77,7 @@
 	font-family: $sans;
 	font-size: 16px;
 	line-height: 1.75;
-	color: rgba(255, 255, 255, 0.45);
+	color: $muted-on-ink-soft;
 	max-width: 42ch;
 	margin: 28px 0 0;
 }
@@ -126,7 +126,7 @@
 	font-weight: 600;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: rgba(255, 255, 255, 0.28);
+	color: $label-on-ink;
 }
 
 .contact-hero__value {

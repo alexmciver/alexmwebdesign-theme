@@ -13,14 +13,16 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<a class="skip-link" href="#content"><?php esc_html_e( 'Skip to content', 'alex-theme' ); ?></a>
+
 <div id="scroll-progress" aria-hidden="true"></div>
 <div id="grain" aria-hidden="true"></div>
 <div id="cur" aria-hidden="true"></div>
 <div id="cur-r" aria-hidden="true"></div>
 
 <header>
-	<nav id="nav" role="navigation" aria-label="<?php esc_attr_e( 'Main navigation', 'alex-theme' ); ?>">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo"><span></span>Alex M</a>
+	<nav id="nav" aria-label="<?php esc_attr_e( 'Main navigation', 'alex-theme' ); ?>">
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav-logo"><span aria-hidden="true"></span>Alex M</a>
 		<?php
 		wp_nav_menu(
 			array(
@@ -31,11 +33,11 @@
 			)
 		);
 		?>
-		<button type="button" class="nav-burger" id="burger" aria-label="<?php esc_attr_e( 'Open menu', 'alex-theme' ); ?>" aria-expanded="false" aria-controls="mobile-nav">
-			<span></span><span></span><span></span>
+		<button type="button" class="nav-burger" id="burger" aria-label="<?php esc_attr_e( 'Open menu', 'alex-theme' ); ?>" data-label-open="<?php esc_attr_e( 'Open menu', 'alex-theme' ); ?>" data-label-close="<?php esc_attr_e( 'Close menu', 'alex-theme' ); ?>" aria-expanded="false" aria-controls="mobile-nav">
+			<span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
 		</button>
 	</nav>
-	<nav class="nav-mobile" id="mobile-nav" aria-label="<?php esc_attr_e( 'Mobile navigation', 'alex-theme' ); ?>">
+	<nav class="nav-mobile" id="mobile-nav" hidden aria-label="<?php esc_attr_e( 'Mobile navigation', 'alex-theme' ); ?>">
 		<?php
 		wp_nav_menu(
 			array(

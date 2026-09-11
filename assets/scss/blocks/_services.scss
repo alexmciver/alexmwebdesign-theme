@@ -44,7 +44,7 @@
   transition: color 0.25s $ease;
 
   &:hover {
-    color: $orange;
+    color: $orange-deep;
   }
 }
 
@@ -67,12 +67,12 @@
 
   &:hover {
     .services__title {
-      color: $orange;
+      color: $orange-deep;
     }
 
     .services__arr {
       background: $orange;
-      border-color: $orange;
+      border-color: $orange-deep;
       color: #fff;
       transform: translate(2px, -2px);
     }
@@ -90,7 +90,7 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: $orange;
+  color: $orange-deep;
 }
 
 .services__title {

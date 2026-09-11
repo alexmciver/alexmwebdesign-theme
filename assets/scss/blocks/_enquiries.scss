@@ -14,6 +14,10 @@
 
   .s-eyebrow {
     color: $orange;
+
+    &::after {
+      background: $orange;
+    }
   }
 
   .s-h {
@@ -27,7 +31,7 @@
   font-family: $sans;
   font-size: 16px;
   line-height: 1.75;
-  color: rgba(255, 255, 255, 0.5);
+  color: $muted-on-ink-soft;
   max-width: 420px;
   margin-bottom: 40px;
 }
@@ -60,7 +64,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
+  color: $label-on-ink;
   margin-bottom: 6px;
 }
 
@@ -68,7 +72,7 @@
   font-family: $sans;
   font-size: 13px;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.35);
+  color: $label-on-ink;
   max-width: 360px;
   margin: 0;
 }
@@ -99,7 +103,7 @@
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.35);
+    color: $label-on-ink;
   }
 
   .wpcf7-form-control-wrap {
@@ -119,15 +123,17 @@
     font-family: $sans;
     font-size: 15px;
     color: #fff;
-    outline: none;
     transition: border-color 0.25s $ease;
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.25);
+      color: $muted-on-ink;
     }
 
-    &:focus {
-        border-color: $orange;
+    &:focus,
+    &:focus-visible {
+      border-color: $orange;
+      outline: 2px solid $orange;
+      outline-offset: 2px;
     }
   }
 
@@ -199,6 +205,14 @@
   background: $paper;
   align-items: start;
 
+  .s-eyebrow {
+    color: $orange-deep;
+
+    &::after {
+      background: $orange-deep;
+    }
+  }
+
   .s-h {
     color: $ink;
     max-width: 14ch;
@@ -224,8 +238,11 @@
         color: $ink-light;
       }
 
-      &:focus {
+      &:focus,
+      &:focus-visible {
         border-color: $orange;
+        outline: 2px solid $orange;
+        outline-offset: 2px;
       }
     }
 
@@ -336,7 +353,7 @@
   font-family: $sans;
   font-size: 14px;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.45);
+  color: $muted-on-ink-soft;
   margin: 0;
   max-width: 36ch;
 }

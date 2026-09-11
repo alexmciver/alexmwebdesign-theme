@@ -288,6 +288,26 @@ function alex_page_url( $slug ) {
 	return $page ? get_permalink( $page ) : home_url( '/' . trailingslashit( $slug ) );
 }
 
+/**
+ * Attributes for links that open in a new tab.
+ *
+ * @param string $url Link URL.
+ * @return string Safe HTML attribute string (leading space) or empty.
+ */
+function alex_external_link_attrs( $url ) {
+	if ( ! $url ) {
+		return '';
+	}
+	$host = wp_parse_url( home_url(), PHP_URL_HOST );
+	$link_host = wp_parse_url( $url, PHP_URL_HOST );
+	$is_external = $link_host && $host && strcasecmp( (string) $link_host, (string) $host ) !== 0;
+	$is_calendly = false !== stripos( (string) $url, 'calendly.com' );
+	if ( ! $is_external && ! $is_calendly ) {
+		return '';
+	}
+	return ' target="_blank" rel="noopener noreferrer"';
+}
+
 // ACF Local JSON — save field groups into the theme
 add_filter(
 	'acf/settings/save_json',

@@ -66,9 +66,8 @@ $details    = alex_field(
 					}
 				}
 
-				$blank_attrs = ( 'link' === $type || ( $href && false !== stripos( $href, 'calendly.com' ) ) )
-					? ' target="_blank" rel="noopener noreferrer"'
-					: '';
+				$blank_attrs = alex_external_link_attrs( $href );
+				$new_tab     = '' !== $blank_attrs;
 				?>
 				<li>
 					<?php if ( $label ) : ?>
@@ -78,7 +77,7 @@ $details    = alex_field(
 						<?php if ( 'text' === $type || ! $href ) : ?>
 							<?php echo esc_html( $value ); ?>
 						<?php else : ?>
-							<a href="<?php echo esc_url( $href ); ?>"<?php echo $blank_attrs; ?>><?php echo esc_html( $value ); ?></a>
+							<a href="<?php echo esc_url( $href ); ?>"<?php echo $blank_attrs; ?>><?php echo esc_html( $value ); ?><?php if ( $new_tab ) : ?><span class="u-sr-only"><?php esc_html_e( ' (opens in a new tab)', 'alex-theme' ); ?></span><?php endif; ?></a>
 						<?php endif; ?>
 					</span>
 				</li>

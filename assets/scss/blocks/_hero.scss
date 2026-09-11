@@ -79,7 +79,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: $muted-on-ink-soft;
   margin-bottom: 28px;
 
   &::before {
@@ -137,7 +137,7 @@
 .hero-sub {
   font-family: $sans;
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.5);
+  color: $muted-on-ink-soft;
   line-height: 1.75;
   max-width: 480px;
   margin-bottom: 36px;
@@ -200,7 +200,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.35);
+  color: $label-on-ink;
   margin-top: 8px;
 }
 
@@ -227,7 +227,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.3);
+  color: $label-on-ink;
   white-space: nowrap;
 }
 
@@ -245,7 +245,7 @@
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.45);
+    color: $muted-on-ink-soft;
   }
 }
 
@@ -290,7 +290,7 @@
 .cw-title {
   margin-left: 6px;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.25);
+  color: $label-on-ink;
   font-family: $sans;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -307,7 +307,7 @@
 .cw-line {
   white-space: pre;
   display: block;
-  color: #6e7681;
+  color: #8b949e; // ≥4.5:1 on #0d1117
   opacity: 0;
   transform: translateX(-8px);
   transition: opacity 0.4s $ease, transform 0.4s $ease;
@@ -330,7 +330,7 @@
   }
 
   .cm {
-    color: #6e7681;
+    color: #8b949e;
     font-style: italic;
   }
 

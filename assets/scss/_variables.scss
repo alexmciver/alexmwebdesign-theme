@@ -6,12 +6,18 @@ $bp: 1000px;
 $ink: #0e1018;
 $ink-2: #1a1d28;
 $ink-mid: #5a5f70;
-$ink-light: #9096a6;
+$ink-light: #686d7d; // ≥4.5:1 on $paper (WCAG AA)
 $paper: #faf9f7;
 $paper-2: #f3f1ed;
 $paper-3: #e9e6e0;
-$orange: #ff4d00;
+$orange: #ff4d00; // Brand accent on dark / large text
+$orange-deep: #c43c00; // AA text & solid fills on light / with white text
 $orange-soft: rgba(255, 77, 0, 0.09);
+
+// Muted text on ink (≥4.5:1 for normal text)
+$muted-on-ink: rgba(255, 255, 255, 0.55);
+$muted-on-ink-soft: rgba(255, 255, 255, 0.5);
+$label-on-ink: rgba(255, 255, 255, 0.55);
 
 // Hairlines
 $line: rgba(14, 16, 24, 0.1);
@@ -42,7 +48,11 @@ $radius-float: 6px;
   --paper-2: #{$paper-2};
   --paper-3: #{$paper-3};
   --orange: #{$orange};
+  --orange-deep: #{$orange-deep};
   --orange-soft: #{$orange-soft};
+  --muted-on-ink: #{$muted-on-ink};
+  --muted-on-ink-soft: #{$muted-on-ink-soft};
+  --label-on-ink: #{$label-on-ink};
 
   // Hairlines
   --line: #{$line};

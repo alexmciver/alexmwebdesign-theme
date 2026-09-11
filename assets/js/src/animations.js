@@ -34,21 +34,75 @@
   // Burger / mobile overlay
   var burger = document.getElementById("burger");
   var mobileNav = document.getElementById("mobile-nav");
+  var menuOpenLabel = "Open menu";
+  var menuCloseLabel = "Close menu";
+
+  function getFocusable(container) {
+    return Array.prototype.slice.call(
+      container.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    );
+  }
+
+  function setMobileMenu(open) {
+    if (!burger || !mobileNav) return;
+    mobileNav.classList.toggle("open", open);
+    burger.classList.toggle("open", open);
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+    burger.setAttribute("aria-label", open ? menuCloseLabel : menuOpenLabel);
+    document.body.style.overflow = open ? "hidden" : "";
+
+    if (open) {
+      mobileNav.removeAttribute("hidden");
+      var links = getFocusable(mobileNav);
+      if (links.length) {
+        links[0].focus();
+      }
+    } else {
+      mobileNav.setAttribute("hidden", "");
+      burger.focus();
+    }
+  }
+
   if (burger && mobileNav) {
+    menuOpenLabel = burger.getAttribute("data-label-open") || burger.getAttribute("aria-label") || menuOpenLabel;
+    menuCloseLabel = burger.getAttribute("data-label-close") || menuCloseLabel;
+
     burger.addEventListener("click", function () {
-      var open = mobileNav.classList.toggle("open");
-      burger.classList.toggle("open", open);
-      burger.setAttribute("aria-expanded", open ? "true" : "false");
-      document.body.style.overflow = open ? "hidden" : "";
+      setMobileMenu(!mobileNav.classList.contains("open"));
     });
 
     mobileNav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
-        mobileNav.classList.remove("open");
-        burger.classList.remove("open");
-        burger.setAttribute("aria-expanded", "false");
-        document.body.style.overflow = "";
+        setMobileMenu(false);
       });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!mobileNav.classList.contains("open")) return;
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setMobileMenu(false);
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+
+      var focusable = getFocusable(mobileNav);
+      if (!focusable.length) return;
+
+      // Keep the burger in the tab cycle while the overlay is open.
+      var cycle = [burger].concat(focusable);
+      var first = cycle[0];
+      var last = cycle[cycle.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     });
   }
 
@@ -84,7 +138,19 @@
   // Count-ups
   function initCountUps() {
     var counters = document.querySelectorAll("[data-count]");
-    if (!counters.length || reduceMotion) return;
+    if (!counters.length) return;
+
+    function setFinal(el) {
+      var target = parseFloat(el.getAttribute("data-count"));
+      var suffix = el.getAttribute("data-suffix") || "";
+      if (isNaN(target)) return;
+      el.textContent = Math.round(target) + suffix;
+    }
+
+    if (reduceMotion) {
+      counters.forEach(setFinal);
+      return;
+    }
 
     var io = new IntersectionObserver(
       function (entries) {

@@ -79,7 +79,7 @@
 	font-family: $sans;
 	font-size: 17px;
 	line-height: 1.75;
-	color: rgba(255, 255, 255, 0.45);
+	color: $muted-on-ink-soft;
 	max-width: 42ch;
 	margin: 24px 0 40px;
 }
@@ -125,7 +125,7 @@
 	font-family: $sans;
 	font-size: 12px;
 	letter-spacing: 0.06em;
-	color: rgba(255, 255, 255, 0.22);
+	color: $label-on-ink;
 }
 
 // Intro + stats
@@ -216,7 +216,7 @@
 	font-weight: 600;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: $orange;
+	color: $orange-deep;
 	margin: 0 0 16px;
 }
 

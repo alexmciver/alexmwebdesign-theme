@@ -45,7 +45,7 @@
 	font-size: 11px;
 	font-weight: 600;
 	letter-spacing: 0.08em;
-	color: $orange;
+	color: $orange-deep;
 	margin-bottom: 18px;
 }
 
@@ -80,7 +80,7 @@
 	transition: color 0.25s $ease;
 
 	&:hover {
-		color: $orange;
+		color: $orange-deep;
 	}
 }
 
@@ -201,7 +201,7 @@
 	font-family: $sans;
 	font-size: 15px;
 	line-height: 1.75;
-	color: rgba(255, 255, 255, 0.48);
+	color: $muted-on-ink-soft;
 	margin: 0 0 32px;
 	max-width: 42ch;
 }
@@ -216,7 +216,7 @@
 		font-family: $sans;
 		font-size: 14px;
 		line-height: 1.5;
-		color: rgba(255, 255, 255, 0.62);
+		color: $muted-on-ink;
 		padding: 16px 0;
 		border-bottom: 1px solid $line-dark;
 	}
@@ -228,11 +228,12 @@
 	font-family: $sans;
 	font-size: 14px;
 	line-height: 1.7;
-	color: rgba(255, 255, 255, 0.45);
+	color: $muted-on-ink-soft;
 
 	a {
 		color: $orange;
-		text-decoration: none;
+		text-decoration: underline;
+		text-underline-offset: 3px;
 		transition: opacity 0.25s $ease;
 
 		&:hover {
@@ -305,7 +306,7 @@
 	font-size: 12px;
 	font-weight: 600;
 	letter-spacing: 0.04em;
-	color: $orange;
+	color: $orange-deep;
 	margin: 0 0 28px;
 }
 

@@ -134,7 +134,7 @@ if ( 'contact' === $layout ) :
 			<?php if ( $calendar_url && $calendar_label ) : ?>
 				<li>
 					<span class="enquiries__label"><?php esc_html_e( 'Calendar', 'alex-theme' ); ?></span>
-					<a href="<?php echo esc_url( $calendar_url ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $calendar_label ); ?> →</a>
+					<a href="<?php echo esc_url( $calendar_url ); ?>"<?php echo alex_external_link_attrs( $calendar_url ); ?>><?php echo esc_html( $calendar_label ); ?> →<span class="u-sr-only"><?php esc_html_e( ' (opens in a new tab)', 'alex-theme' ); ?></span></a>
 				</li>
 			<?php endif; ?>
 		</ul>
