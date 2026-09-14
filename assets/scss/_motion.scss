@@ -10,6 +10,12 @@
   }
 }
 
+// Above-the-fold heroes must paint without waiting for IntersectionObserver (LCP).
+.page-hero .rv {
+  opacity: 1;
+  transform: none;
+}
+
 .rv-left {
   opacity: 0;
   transform: translateX(-24px);

@@ -27,6 +27,114 @@ function my_theme_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_assets' );
 
 /**
+ * Preload fonts used in the first paint (LCP text).
+ */
+function alex_preload_fonts() {
+	$base  = get_template_directory_uri() . '/assets/fonts/';
+	$fonts = array(
+		'dm-sans-latin.woff2',
+		'cormorant-garamond-italic-latin.woff2',
+	);
+
+	foreach ( $fonts as $font ) {
+		$path = get_template_directory() . '/assets/fonts/' . $font;
+		if ( ! file_exists( $path ) ) {
+			continue;
+		}
+		printf(
+			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( $base . $font )
+		);
+	}
+}
+add_action( 'wp_head', 'alex_preload_fonts', 1 );
+
+/**
+ * Inline critical CSS so the page hero can paint before styles.css.
+ */
+function alex_critical_css() {
+	$file = get_template_directory() . '/assets/css/critical.css';
+	if ( ! file_exists( $file ) ) {
+		return;
+	}
+	$css = file_get_contents( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- local theme file.
+	if ( ! is_string( $css ) || '' === trim( $css ) ) {
+		return;
+	}
+
+	// Relative font URLs must resolve from the document, not the CSS file path.
+	$fonts_uri = trailingslashit( get_template_directory_uri() ) . 'assets/fonts/';
+	$css       = str_replace( 'url("../fonts/', 'url("' . esc_url( $fonts_uri ), $css );
+	$css       = str_replace( "url('../fonts/", "url('" . esc_url( $fonts_uri ), $css );
+
+	echo '<style id="alex-critical-css">' . $css . '</style>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- trusted local CSS.
+}
+add_action( 'wp_head', 'alex_critical_css', 2 );
+
+/**
+ * Load the full theme stylesheet without blocking first paint.
+ *
+ * @param string $html   Link tag HTML.
+ * @param string $handle Style handle.
+ * @param string $href   Stylesheet URL.
+ * @param string $media  Media attribute.
+ * @return string
+ */
+function alex_defer_theme_style( $html, $handle, $href, $media ) {
+	if ( 'theme-style' !== $handle ) {
+		return $html;
+	}
+
+	$href = esc_url( $href );
+	return "<link rel='preload' href='{$href}' as='style' onload=\"this.onload=null;this.rel='stylesheet'\">\n"
+		. "<noscript><link rel='stylesheet' href='{$href}'></noscript>\n";
+}
+add_filter( 'style_loader_tag', 'alex_defer_theme_style', 10, 4 );
+
+/**
+ * Whether the current view needs Contact Form 7 assets.
+ *
+ * @return bool
+ */
+function alex_needs_cf7() {
+	if ( is_admin() ) {
+		return true;
+	}
+	if ( ! is_singular() ) {
+		return false;
+	}
+
+	$post = get_post();
+	if ( ! $post ) {
+		return false;
+	}
+
+	if ( has_shortcode( $post->post_content, 'contact-form-7' ) ) {
+		return true;
+	}
+
+	if ( function_exists( 'has_block' ) && has_block( 'alex-theme/enquiries', $post ) ) {
+		return true;
+	}
+
+	return is_page( 'contact' );
+}
+
+/**
+ * Drop Contact Form 7 CSS/JS on pages without a form.
+ */
+function alex_dequeue_cf7_when_unused() {
+	if ( alex_needs_cf7() ) {
+		return;
+	}
+
+	wp_dequeue_script( 'contact-form-7' );
+	wp_dequeue_script( 'swv' );
+	wp_dequeue_style( 'contact-form-7' );
+}
+add_action( 'wp_enqueue_scripts', 'alex_dequeue_cf7_when_unused', 100 );
+
+/**
  * Theme supports and menus.
  */
 function alex_theme_setup() {
