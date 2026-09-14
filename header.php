@@ -8,9 +8,19 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php // GTM blocked until Complianz Statistics consent (Complianz must not also inject GTM). ?>
+	<script type="text/plain" data-category="statistics">
+	(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-NZVWTWP');
+	</script>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NZVWTWP"
+height="0" width="0" style="display:none;visibility:hidden" data-category="statistics"></iframe></noscript>
 <?php wp_body_open(); ?>
 
 <a class="skip-link" href="#content"><?php esc_html_e( 'Skip to content', 'alex-theme' ); ?></a>
