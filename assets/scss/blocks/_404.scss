@@ -1,0 +1,47 @@
+// 404 — page not found
+
+.error-404-hero {
+	min-height: min(72vh, 720px);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding-bottom: 96px;
+
+	@include bp {
+		min-height: auto;
+		padding-bottom: 72px;
+	}
+
+	.rv {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 640px;
+	}
+
+	.s-eyebrow {
+		color: $muted-on-ink;
+	}
+
+	.page-hero-sub {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	h1 em {
+		font-family: $serif;
+		font-style: italic;
+		font-weight: 400;
+		color: inherit;
+	}
+}
+
+.error-404-hero__btns {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 12px;
+	margin-top: 36px;
+}
