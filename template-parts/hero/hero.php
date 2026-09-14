@@ -99,7 +99,7 @@ $orbit_icons = array(
 								<div class="hero-orbit__badge">
 									<img
 										src="<?php echo esc_url( $orbit_base . '/' . $icon['file'] ); ?>"
-										alt=""
+										alt="<?php esc_attr_e( $icon['slug'], 'alex-theme' ); ?> icon image"
 										width="48"
 										height="48"
 										decoding="async"
