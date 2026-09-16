@@ -103,6 +103,10 @@ $heading = alex_field( 'heading', $default_heading );
 $body    = alex_field( 'body', $default_body );
 $link    = alex_button( get_field( 'link' ), $default_link_text, $default_link_url );
 $faqs    = alex_field( 'faqs', $default_faqs );
+
+if ( function_exists( 'alex_ai_faq_schema' ) ) {
+	alex_ai_faq_schema( $faqs );
+}
 ?>
 <section id="questions" class="questions" aria-label="<?php esc_attr_e( 'Frequently asked questions', 'alex-theme' ); ?>">
 	<div class="questions__left rv">

@@ -1,6 +1,7 @@
 <?php
 
 require_once get_template_directory() . '/inc/cv-sync.php';
+require_once get_template_directory() . '/inc/ai-search.php';
 
 /**
  * Enqueue styles and scripts.
@@ -204,6 +205,7 @@ add_action( 'init', 'alex_register_work_cpt' );
  */
 function alex_theme_flush_rewrites() {
 	alex_register_work_cpt();
+	alex_ai_search_rewrites();
 	flush_rewrite_rules();
 }
 add_action( 'after_switch_theme', 'alex_theme_flush_rewrites' );
