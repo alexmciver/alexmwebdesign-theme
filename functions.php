@@ -332,6 +332,202 @@ function alex_work_mshot_url( $url, $width = 1200 ) {
 }
 
 /**
+ * Local media URL for a saved site screenshot, when it matches the project URL.
+ *
+ * @param int    $post_id     Work post ID.
+ * @param string $project_url Live project URL.
+ * @return string
+ */
+function alex_work_local_screenshot_url( $post_id, $project_url ) {
+	$project_url = esc_url_raw( $project_url );
+	if ( ! $project_url ) {
+		return '';
+	}
+	if ( (string) get_post_meta( $post_id, '_alex_screenshot_source', true ) !== $project_url ) {
+		return '';
+	}
+
+	$attachment_id = (int) get_post_meta( $post_id, '_alex_screenshot_id', true );
+	if ( ! $attachment_id || ! wp_attachment_is_image( $attachment_id ) ) {
+		return '';
+	}
+
+	$src = wp_get_attachment_image_url( $attachment_id, 'large' );
+	return $src ? $src : '';
+}
+
+/**
+ * Queue a one-off capture when a Work post needs a stored screenshot.
+ *
+ * @param int $post_id Work post ID.
+ */
+function alex_work_queue_screenshot( $post_id ) {
+	$post_id = (int) $post_id;
+	if ( $post_id <= 0 || 'work' !== get_post_type( $post_id ) ) {
+		return;
+	}
+	if ( wp_is_post_revision( $post_id ) || wp_is_post_autosave( $post_id ) ) {
+		return;
+	}
+
+	$preview = (string) alex_field( 'preview_type', 'screenshot', $post_id );
+	$url     = esc_url_raw( (string) alex_field( 'project_url', '', $post_id ) );
+	if ( 'screenshot' !== $preview || ! $url ) {
+		return;
+	}
+
+	$stored        = (string) get_post_meta( $post_id, '_alex_screenshot_source', true );
+	$attachment_id = (int) get_post_meta( $post_id, '_alex_screenshot_id', true );
+	$current       = $attachment_id && wp_attachment_is_image( $attachment_id );
+
+	if ( $stored === $url && $current ) {
+		return;
+	}
+
+	if ( $attachment_id && $stored !== $url ) {
+		wp_delete_attachment( $attachment_id, true );
+		delete_post_meta( $post_id, '_alex_screenshot_id' );
+		delete_post_meta( $post_id, '_alex_screenshot_source' );
+	}
+
+	alex_work_schedule_screenshot( $post_id, 0 );
+}
+add_action( 'acf/save_post', 'alex_work_queue_screenshot', 25 );
+
+/**
+ * Schedule a screenshot attempt. Later attempts wait for WordPress.com to finish.
+ *
+ * @param int $post_id Work post ID.
+ * @param int $attempt Zero-based attempt count.
+ */
+function alex_work_schedule_screenshot( $post_id, $attempt = 0 ) {
+	$post_id = (int) $post_id;
+	$attempt = (int) $attempt;
+	$args    = array( $post_id, $attempt );
+	if ( wp_next_scheduled( 'alex_work_capture_screenshot', $args ) ) {
+		return;
+	}
+
+	// The first attempt is due immediately so the cron spawn on this request can run it.
+	$delay = 0 === $attempt ? 0 : 2 * MINUTE_IN_SECONDS;
+	wp_schedule_single_event( time() + $delay, 'alex_work_capture_screenshot', $args );
+}
+
+/**
+ * Download a finished screenshot into the media library.
+ *
+ * WordPress.com answers with a “Generating Preview…” GIF until the JPEG exists.
+ * That GIF is not stored. The card keeps its previous image until a real JPEG lands.
+ *
+ * @param int $post_id Work post ID.
+ * @param int $attempt Zero-based attempt count.
+ */
+function alex_work_capture_screenshot( $post_id, $attempt = 0 ) {
+	$post_id = (int) $post_id;
+	$attempt = (int) $attempt;
+	if ( $post_id <= 0 || 'work' !== get_post_type( $post_id ) ) {
+		return;
+	}
+
+	$url = esc_url_raw( (string) alex_field( 'project_url', '', $post_id ) );
+	if ( ! $url || 'screenshot' !== (string) alex_field( 'preview_type', 'screenshot', $post_id ) ) {
+		return;
+	}
+	if ( alex_work_local_screenshot_url( $post_id, $url ) ) {
+		return;
+	}
+
+	$remote = alex_work_mshot_url( $url );
+	if ( ! $remote ) {
+		return;
+	}
+
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+
+	$tmp = download_url( $remote, 20 );
+	if ( is_wp_error( $tmp ) ) {
+		alex_work_retry_screenshot( $post_id, $attempt );
+		return;
+	}
+
+	$info = wp_getimagesize( $tmp );
+	$mime = ( is_array( $info ) && ! empty( $info['mime'] ) ) ? $info['mime'] : '';
+	$wide = is_array( $info ) && (int) $info[0] >= 600;
+	if ( ( 'image/jpeg' !== $mime && 'image/png' !== $mime ) || ! $wide ) {
+		wp_delete_file( $tmp );
+		alex_work_retry_screenshot( $post_id, $attempt );
+		return;
+	}
+
+	$ext   = 'image/png' === $mime ? 'png' : 'jpg';
+	$title = get_the_title( $post_id );
+	$file  = array(
+		'name'     => sanitize_file_name( sanitize_title( $title ? $title : 'work' ) . '-preview.' . $ext ),
+		'tmp_name' => $tmp,
+	);
+	$saved = media_handle_sideload( $file, $post_id, sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $title ) );
+	if ( is_wp_error( $saved ) ) {
+		if ( file_exists( $tmp ) ) {
+			wp_delete_file( $tmp );
+		}
+		alex_work_retry_screenshot( $post_id, $attempt );
+		return;
+	}
+
+	$previous = (int) get_post_meta( $post_id, '_alex_screenshot_id', true );
+	update_post_meta( $post_id, '_alex_screenshot_id', (int) $saved );
+	update_post_meta( $post_id, '_alex_screenshot_source', $url );
+	update_post_meta( $saved, '_wp_attachment_image_alt', sprintf( /* translators: %s: project title */ __( 'Preview of %s', 'alex-theme' ), $title ) );
+
+	if ( $previous && $previous !== (int) $saved ) {
+		wp_delete_attachment( $previous, true );
+	}
+}
+add_action( 'alex_work_capture_screenshot', 'alex_work_capture_screenshot', 10, 2 );
+
+/**
+ * Try the capture again until WordPress.com returns a real screenshot.
+ *
+ * @param int $post_id Work post ID.
+ * @param int $attempt Attempt that just failed.
+ */
+function alex_work_retry_screenshot( $post_id, $attempt ) {
+	if ( (int) $attempt >= 5 ) {
+		return;
+	}
+	alex_work_schedule_screenshot( (int) $post_id, (int) $attempt + 1 );
+}
+
+/**
+ * Copy screenshots for existing Work posts once, after this behaviour is deployed.
+ */
+function alex_work_backfill_screenshots() {
+	if ( get_option( 'alex_work_screenshot_backfill' ) || ! function_exists( 'get_field' ) || ! post_type_exists( 'work' ) ) {
+		return;
+	}
+
+	$ids = get_posts(
+		array(
+			'post_type'      => 'work',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'fields'         => 'ids',
+			'no_found_rows'  => true,
+		)
+	);
+
+	foreach ( $ids as $id ) {
+		alex_work_queue_screenshot( (int) $id );
+	}
+
+	update_option( 'alex_work_screenshot_backfill', 1, false );
+	spawn_cron();
+}
+add_action( 'init', 'alex_work_backfill_screenshots', 30 );
+
+/**
  * Company logo URL from the Work ACF image field.
  *
  * @param int $post_id Work post ID.
@@ -385,7 +581,7 @@ function alex_work_preview( $post, $fallback_index = 0 ) {
 	}
 
 	if ( ( 'screenshot' === $preview || 'featured' !== $preview ) && $project_url ) {
-		$shot = alex_work_mshot_url( $project_url );
+		$shot = alex_work_local_screenshot_url( $post->ID, $project_url );
 		if ( $shot ) {
 			return array(
 				'image' => $shot,

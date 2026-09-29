@@ -113,7 +113,7 @@
             "name": "project_url",
             "aria-label": "",
             "type": "url",
-            "instructions": "Live site URL. Used to generate an automatic screenshot preview.",
+            "instructions": "Live site URL. A screenshot is saved into the media library for the card.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -131,7 +131,7 @@
             "name": "preview_type",
             "aria-label": "",
             "type": "select",
-            "instructions": "Screenshot uses the Project URL. Logo uses the upload below. Featured image uses the WordPress featured image.",
+            "instructions": "Screenshot uses a saved copy of the Project URL. Logo uses the upload below. Featured image uses the WordPress featured image.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
