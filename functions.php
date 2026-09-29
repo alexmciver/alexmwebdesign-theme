@@ -384,6 +384,12 @@ function alex_work_queue_screenshot( $post_id ) {
 		return;
 	}
 
+	for ( $attempt = 0; $attempt <= 5; $attempt++ ) {
+		if ( wp_next_scheduled( 'alex_work_capture_screenshot', array( $post_id, $attempt ) ) ) {
+			return;
+		}
+	}
+
 	if ( $attachment_id && $stored !== $url ) {
 		wp_delete_attachment( $attachment_id, true );
 		delete_post_meta( $post_id, '_alex_screenshot_id' );
@@ -501,12 +507,19 @@ function alex_work_retry_screenshot( $post_id, $attempt ) {
 }
 
 /**
- * Copy screenshots for existing Work posts once, after this behaviour is deployed.
+ * Queue another capture for Work posts that still have no saved screenshot.
+ *
+ * The first pass can miss a few sites when WordPress.com is still generating.
+ * Scanning is throttled so a normal page view does not queue the same post again.
  */
 function alex_work_backfill_screenshots() {
-	if ( get_option( 'alex_work_screenshot_backfill' ) || ! function_exists( 'get_field' ) || ! post_type_exists( 'work' ) ) {
+	if ( ! function_exists( 'get_field' ) || ! post_type_exists( 'work' ) ) {
 		return;
 	}
+	if ( get_transient( 'alex_work_screenshot_scan' ) ) {
+		return;
+	}
+	set_transient( 'alex_work_screenshot_scan', 1, 10 * MINUTE_IN_SECONDS );
 
 	$ids = get_posts(
 		array(
@@ -522,7 +535,6 @@ function alex_work_backfill_screenshots() {
 		alex_work_queue_screenshot( (int) $id );
 	}
 
-	update_option( 'alex_work_screenshot_backfill', 1, false );
 	spawn_cron();
 }
 add_action( 'init', 'alex_work_backfill_screenshots', 30 );
@@ -582,6 +594,9 @@ function alex_work_preview( $post, $fallback_index = 0 ) {
 
 	if ( ( 'screenshot' === $preview || 'featured' !== $preview ) && $project_url ) {
 		$shot = alex_work_local_screenshot_url( $post->ID, $project_url );
+		if ( ! $shot ) {
+			$shot = alex_work_mshot_url( $project_url );
+		}
 		if ( $shot ) {
 			return array(
 				'image' => $shot,
