@@ -119,10 +119,14 @@
     font-family: $sans;
     font-size: 15px;
     color: #fff;
+    // iOS Safari often ignores `color` on inputs; force fill + caret.
+    -webkit-text-fill-color: #fff;
+    caret-color: #fff;
     transition: border-color 0.25s $ease;
 
     &::placeholder {
       color: $muted-on-ink;
+      -webkit-text-fill-color: $muted-on-ink;
     }
 
     &:focus,
@@ -130,6 +134,14 @@
       border-color: $orange;
       outline: 2px solid $orange;
       outline-offset: 2px;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: #fff;
+      caret-color: #fff;
+      transition: background-color 99999s ease-out;
     }
   }
 
@@ -226,10 +238,13 @@
     select,
     textarea {
       color: $ink;
+      -webkit-text-fill-color: $ink;
+      caret-color: $ink;
       border-bottom-color: $line;
 
       &::placeholder {
         color: $ink-light;
+        -webkit-text-fill-color: $ink-light;
       }
 
       &:focus,
@@ -237,6 +252,13 @@
         border-color: $orange;
         outline: 2px solid $orange;
         outline-offset: 2px;
+      }
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus {
+        -webkit-text-fill-color: $ink;
+        caret-color: $ink;
       }
     }
 
