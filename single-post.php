@@ -43,12 +43,12 @@ while ( have_posts() ) :
 		</header>
 
 		<?php if ( has_post_thumbnail() ) : ?>
-			<figure class="blog-single__figure rv">
+			<figure class="blog-single__figure">
 				<?php the_post_thumbnail( 'large' ); ?>
 			</figure>
 		<?php endif; ?>
 
-		<div class="blog-single__content rv">
+		<div class="blog-single__content">
 			<?php the_content(); ?>
 		</div>
 

@@ -179,8 +179,7 @@
 
 	img {
 		width: 100%;
-		max-width: 1080px;
-		margin: -48px auto 0;
+		margin: -48px 0 0;
 		aspect-ratio: 16 / 9;
 		object-fit: cover;
 		background: $paper-3;
@@ -188,8 +187,6 @@
 }
 
 .blog-single__content {
-	max-width: 680px;
-	margin: 0 auto;
 	padding: 72px 64px 48px;
 
 	@include bp {
@@ -343,8 +340,6 @@
 }
 
 .blog-single__footer {
-	max-width: 680px;
-	margin: 0 auto;
 	padding: 0 64px 96px;
 
 	@include bp {
