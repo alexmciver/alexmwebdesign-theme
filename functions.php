@@ -225,6 +225,38 @@ function alex_work_archive_url() {
 }
 
 /**
+ * Blog listing URL (posts page, or /blog/ fallback).
+ *
+ * @return string
+ */
+function alex_blog_url() {
+	$posts_page_id = (int) get_option( 'page_for_posts' );
+	if ( $posts_page_id > 0 ) {
+		return get_permalink( $posts_page_id );
+	}
+	$page = get_page_by_path( 'blog' );
+	if ( $page ) {
+		return get_permalink( $page );
+	}
+	return home_url( '/blog/' );
+}
+
+/**
+ * Approximate reading time for a post.
+ *
+ * @param int|WP_Post|null $post Post object or ID.
+ * @return int Minutes (minimum 1).
+ */
+function alex_reading_time( $post = null ) {
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return 1;
+	}
+	$words = str_word_count( wp_strip_all_tags( (string) $post->post_content ) );
+	return max( 1, (int) ceil( $words / 200 ) );
+}
+
+/**
  * Query Work posts.
  *
  * @param array $args Optional WP_Query args.
@@ -857,6 +889,7 @@ function alex_default_nav_links() {
 		'Work'     => alex_work_archive_url(),
 		'Services' => home_url( '/services/' ),
 		'About'    => home_url( '/about/' ),
+		'Blog'     => alex_blog_url(),
 		'Contact'  => home_url( '/contact/' ),
 	);
 }
