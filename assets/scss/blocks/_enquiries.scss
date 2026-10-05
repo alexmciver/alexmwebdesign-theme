@@ -209,7 +209,8 @@
 }
 
 // Contact page — process + form on paper
-.enquiries--contact {
+// Double class so this wins over `.enquiries { background: $ink }` after CSS merge.
+.enquiries.enquiries--contact {
   background: $paper;
   align-items: start;
 
