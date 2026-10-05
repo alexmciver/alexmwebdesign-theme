@@ -1077,9 +1077,27 @@ function alex_block_category( $categories ) {
 }
 
 /**
- * GZIP compression.
+ * Front-end GZIP only — never buffer admin, AJAX or REST (breaks the block editor).
  */
 function enable_gzip_compression() {
+	if ( is_admin() || wp_doing_ajax() || wp_is_json_request() ) {
+		return;
+	}
+
+	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '';
+	if ( false !== strpos( $request_uri, '/wp-json/' ) || false !== strpos( $request_uri, 'rest_route=' ) ) {
+		return;
+	}
+
+	if ( headers_sent() ) {
+		return;
+	}
+
+	$accept = isset( $_SERVER['HTTP_ACCEPT_ENCODING'] ) ? (string) $_SERVER['HTTP_ACCEPT_ENCODING'] : '';
+	if ( '' === $accept || false === stripos( $accept, 'gzip' ) ) {
+		return;
+	}
+
 	if ( ! ob_start( 'ob_gzhandler' ) ) {
 		ob_start();
 	}
