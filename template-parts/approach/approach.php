@@ -126,6 +126,12 @@ if ( 'story' === $layout ) :
 			),
 		)
 	);
+	$approach_alts = array(
+		__( 'WordPress PHP open in a code editor', 'alex-theme' ),
+		__( 'Two people reviewing a laptop screen together', 'alex-theme' ),
+		__( 'Wireframes and sketches marked up on a desk', 'alex-theme' ),
+		__( 'Component code open in an editor', 'alex-theme' ),
+	);
 	?>
 <section id="approach" class="approach" aria-label="<?php esc_attr_e( 'Approach', 'alex-theme' ); ?>">
 	<div class="rv">
@@ -136,12 +142,13 @@ if ( 'story' === $layout ) :
 	<div class="approach__grid">
 		<?php foreach ( $steps as $i => $step ) : ?>
 			<?php
-			$img = alex_theme_image( 'approach-0' . (string) ( $i + 1 ) );
+			$img          = alex_theme_image( 'approach-0' . (string) ( $i + 1 ) );
+			$approach_alt = isset( $approach_alts[ $i ] ) ? $approach_alts[ $i ] : '';
 			?>
 			<div class="approach__step rv rv<?php echo esc_attr( (string) ( $i + 1 ) ); ?>">
 				<?php if ( $img ) : ?>
 					<figure class="approach__media">
-						<img src="<?php echo esc_url( $img ); ?>" alt="" width="400" height="300" loading="lazy" decoding="async" />
+						<img src="<?php echo esc_url( $img ); ?>" alt="<?php echo esc_attr( $approach_alt ); ?>" width="400" height="300" loading="lazy" decoding="async" />
 					</figure>
 				<?php endif; ?>
 				<?php if ( ! empty( $step['label'] ) ) : ?>

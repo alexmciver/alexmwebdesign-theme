@@ -36,6 +36,13 @@ $services = alex_field(
 );
 
 $arrow = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11L11 3M11 3H5M11 3v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+$service_alts = array(
+	__( 'WordPress development: hands typing on a laptop and desktop monitor', 'alex-theme' ),
+	__( 'Shopify development: a customer paying by phone at a shop counter', 'alex-theme' ),
+	__( 'Performance and search: an analytics dashboard of page load time and bounce rate', 'alex-theme' ),
+	__( 'Ongoing care: a finished webpage open on a tidy desk', 'alex-theme' ),
+);
 ?>
 <section id="services" class="services" aria-label="<?php esc_attr_e( 'Services', 'alex-theme' ); ?>" data-service-preview>
 	<div class="services__head">
@@ -46,12 +53,12 @@ $arrow = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidde
 		<a href="<?php echo esc_url( $all_link['button_url'] ); ?>" class="services__all rv rv2"><?php echo esc_html( $all_link['button_text'] ); ?> →</a>
 	</div>
 
-	<div class="services__stage" aria-hidden="true">
+	<div class="services__stage">
 		<div class="services__preview" id="services-preview">
 			<?php for ( $i = 1; $i <= 4; $i++ ) : ?>
 				<?php $src = alex_theme_image( 'service-0' . $i ); ?>
 				<?php if ( $src ) : ?>
-					<img src="<?php echo esc_url( $src ); ?>" alt="" data-preview="<?php echo esc_attr( (string) $i ); ?>" width="480" height="360" loading="lazy" decoding="async" />
+					<img src="<?php echo esc_url( $src ); ?>" alt="<?php echo esc_attr( $service_alts[ $i - 1 ] ); ?>" data-preview="<?php echo esc_attr( (string) $i ); ?>" width="480" height="360" loading="lazy" decoding="async" />
 				<?php endif; ?>
 			<?php endfor; ?>
 		</div>

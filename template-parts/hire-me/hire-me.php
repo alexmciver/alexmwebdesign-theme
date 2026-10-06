@@ -82,8 +82,8 @@ $has_secondary = ! empty( $secondary['button_text'] ) && ! empty( $secondary['bu
 	$hire_bg = alex_theme_image( 'hire-bg' );
 	if ( $hire_bg && 'contact' !== $variant ) :
 		?>
-		<div class="hire-me__bg" aria-hidden="true">
-			<img src="<?php echo esc_url( $hire_bg ); ?>" alt="" width="2000" height="1200" loading="lazy" decoding="async" />
+		<div class="hire-me__bg">
+			<img src="<?php echo esc_url( $hire_bg ); ?>" alt="<?php esc_attr_e( 'Laptop on a cafe table, open on a design portfolio', 'alex-theme' ); ?>" width="2000" height="1200" loading="lazy" decoding="async" />
 		</div>
 	<?php endif; ?>
 	<div class="hire-me__inner rv">

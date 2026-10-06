@@ -44,16 +44,21 @@ $groups  = alex_field(
 
 $media_imgs = array();
 if ( ! $about_style ) {
-	$media_imgs = array_values(
-		array_filter(
-			array(
-				alex_theme_image( 'desk-detail' ),
-				alex_theme_image( 'craft-02' ),
-				alex_theme_image( 'london' ),
-				alex_theme_image( 'craft-03' ),
-			)
-		)
+	$shots = array(
+		'desk-detail' => __( 'Close-up of hands typing on a laptop at a wooden desk', 'alex-theme' ),
+		'craft-02'    => __( 'HTML open in PhpStorm on a MacBook', 'alex-theme' ),
+		'london'      => __( 'Tower Bridge and the London skyline across the Thames', 'alex-theme' ),
+		'craft-03'    => __( 'Close-up of SVG markup on a screen', 'alex-theme' ),
 	);
+	foreach ( $shots as $slug => $alt ) {
+		$src = alex_theme_image( $slug );
+		if ( $src ) {
+			$media_imgs[] = array(
+				'src' => $src,
+				'alt' => $alt,
+			);
+		}
+	}
 }
 ?>
 <section id="capability" class="capability<?php echo $about_style ? ' capability--about' : ''; ?>" aria-label="<?php esc_attr_e( 'Technical capability', 'alex-theme' ); ?>">
@@ -67,10 +72,10 @@ if ( ! $about_style ) {
 		</div>
 
 		<?php if ( $media_imgs ) : ?>
-			<div class="capability__media" aria-hidden="true">
-				<?php foreach ( $media_imgs as $i => $src ) : ?>
+			<div class="capability__media">
+				<?php foreach ( $media_imgs as $i => $shot ) : ?>
 					<figure class="capability__shot">
-						<img src="<?php echo esc_url( $src ); ?>" alt="" width="600" height="400" loading="<?php echo 0 === $i ? 'eager' : 'lazy'; ?>" decoding="async" />
+						<img src="<?php echo esc_url( $shot['src'] ); ?>" alt="<?php echo esc_attr( $shot['alt'] ); ?>" width="600" height="400" loading="<?php echo 0 === $i ? 'eager' : 'lazy'; ?>" decoding="async" />
 					</figure>
 				<?php endforeach; ?>
 			</div>
