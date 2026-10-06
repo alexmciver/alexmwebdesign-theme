@@ -1041,6 +1041,36 @@ function alex_register_acf_blocks() {
 add_action( 'acf/init', 'alex_register_acf_blocks' );
 
 /**
+ * Feed rendered ACF block previews to Rank Math's content analysis.
+ *
+ * The analyser drops self-closing block comments, so these pages look empty.
+ * Preview HTML is the same markup the editor renders from the front-end templates.
+ *
+ * @param string $hook Current admin page hook.
+ */
+function alex_enqueue_rank_math_acf_blocks( $hook ) {
+	if ( ! in_array( $hook, array( 'post.php', 'post-new.php' ), true ) ) {
+		return;
+	}
+
+	// Registered on admin_enqueue_scripts priority 10. Skip when Rank Math is absent.
+	if ( ! wp_script_is( 'rank-math-analyzer', 'registered' ) && ! wp_script_is( 'rank-math-analyzer', 'enqueued' ) ) {
+		return;
+	}
+
+	$js = get_template_directory() . '/assets/js/rank-math-acf-blocks.js';
+
+	wp_enqueue_script(
+		'alex-rank-math-acf-blocks',
+		get_template_directory_uri() . '/assets/js/rank-math-acf-blocks.js',
+		array( 'wp-hooks', 'rank-math-analyzer' ),
+		file_exists( $js ) ? filemtime( $js ) : wp_get_theme()->get( 'Version' ),
+		true
+	);
+}
+add_action( 'admin_enqueue_scripts', 'alex_enqueue_rank_math_acf_blocks', 20 );
+
+/**
  * Theme Settings options page.
  */
 add_action(
