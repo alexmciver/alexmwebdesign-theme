@@ -1134,3 +1134,105 @@ function enable_gzip_compression() {
 	}
 }
 add_action( 'init', 'enable_gzip_compression' );
+
+/**
+ * Swap Rank Math's Article/BlogPosting schema for a Service graph
+ * on the SEO Health Check page only (page 1744).
+ *
+ * Rank Math has no per-post schema write via the site connector, so this
+ * filter hooks rank_math/json_ld. It is a no-op on every other view, and
+ * it never runs if Rank Math is not loaded.
+ *
+ * @param array  $data   Rank Math JSON-LD graph nodes.
+ * @param object $jsonld Rank Math JsonLD instance.
+ * @return array
+ */
+function alex_seo_health_check_service_schema( $data, $jsonld ) {
+	if ( ! is_page( 1744 ) || ! is_array( $data ) ) {
+		return $data;
+	}
+
+	foreach ( $data as $key => $node ) {
+		if ( ! is_array( $node ) || empty( $node['@type'] ) ) {
+			continue;
+		}
+
+		$types = (array) $node['@type'];
+		if ( array_intersect( $types, array( 'Article', 'BlogPosting' ) ) ) {
+			unset( $data[ $key ] );
+		}
+	}
+
+	$webpage_id = home_url( '/seo-health-check/#webpage' );
+	$service_id = home_url( '/seo-health-check/#service' );
+	$provider   = array(
+		'@type' => 'ProfessionalService',
+		'name'  => 'Alex M Web Design',
+		'url'   => home_url( '/' ),
+	);
+
+	foreach ( $data as $key => $node ) {
+		if ( ! is_array( $node ) || empty( $node['@type'] ) ) {
+			continue;
+		}
+
+		$types = (array) $node['@type'];
+
+		if ( ! empty( $node['@id'] ) && array_intersect( $types, array( 'Organization', 'ProfessionalService' ) ) ) {
+			$provider = array( '@id' => $node['@id'] );
+		}
+
+		if ( in_array( 'WebPage', $types, true ) ) {
+			if ( ! empty( $node['@id'] ) ) {
+				$webpage_id = $node['@id'];
+			}
+			$data[ $key ]['mainEntity'] = array( '@id' => $service_id );
+		}
+	}
+
+	$data['service'] = array(
+		'@type'            => 'Service',
+		'@id'              => $service_id,
+		'name'             => 'SEO Health Check',
+		'serviceType'      => 'SEO audit',
+		'description'      => 'Fixed-price SEO audit for small business websites on Shopify or WordPress. A clear written report with fixes in priority order, and no ranking promises.',
+		'url'              => home_url( '/seo-health-check/' ),
+		'provider'         => $provider,
+		'areaServed'       => array(
+			'@type' => 'Country',
+			'name'  => 'GB',
+		),
+		'isPartOf'         => array( '@id' => $webpage_id ),
+		'mainEntityOfPage' => array( '@id' => $webpage_id ),
+		'offers'           => array(
+			array(
+				'@type'         => 'Offer',
+				'name'          => 'Half day SEO Health Check',
+				'price'         => '250.00',
+				'priceCurrency' => 'GBP',
+				'description'   => 'Up to 8 URLs, including suggested titles and metas. Report within 2 working days.',
+			),
+			array(
+				'@type'         => 'Offer',
+				'name'          => 'Full day SEO Health Check',
+				'price'         => '400.00',
+				'priceCurrency' => 'GBP',
+				'description'   => 'Around 20 URLs, including suggested titles and metas, plus page speed, Core Web Vitals and structured data checks. Report within 3 working days.',
+			),
+		),
+	);
+
+	return $data;
+}
+
+/**
+ * Register the SEO Health Check Service schema filter only when Rank Math is present.
+ */
+function alex_register_seo_health_check_schema() {
+	if ( ! defined( 'RANK_MATH_VERSION' ) && ! class_exists( 'RankMath' ) && ! has_filter( 'rank_math/json_ld' ) ) {
+		return;
+	}
+
+	add_filter( 'rank_math/json_ld', 'alex_seo_health_check_service_schema', 99, 2 );
+}
+add_action( 'init', 'alex_register_seo_health_check_schema', 20 );
