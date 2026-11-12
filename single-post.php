@@ -44,7 +44,7 @@ while ( have_posts() ) :
 
 		<?php if ( has_post_thumbnail() ) : ?>
 			<figure class="blog-single__figure">
-				<?php the_post_thumbnail( 'large' ); ?>
+				<?php the_post_thumbnail( 'full' ); ?>
 			</figure>
 		<?php endif; ?>
 
