@@ -1,0 +1,22 @@
+{
+    "name": "alex-theme/service-page",
+    "title": "Service Page",
+    "description": "Long-form service page — hero, flexible content sections and fixed-price options.",
+    "category": "alex-blocks",
+    "keywords": [
+        "service",
+        "page",
+        "pricing",
+        "audit"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "/template-parts/service-page/service-page.php",
+        "blockVersion": 3
+    },
+    "supports": {
+        "anchor": true,
+        "align": true,
+        "className": true
+    }
+}

@@ -1032,6 +1032,7 @@ function alex_register_acf_blocks() {
 		'my-services',
 		'hire-me',
 		'contact',
+		'service-page',
 	);
 
 	foreach ( $block_templates as $template ) {
