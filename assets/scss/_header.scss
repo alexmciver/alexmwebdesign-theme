@@ -1,3 +1,7 @@
+header {
+  overflow: visible;
+}
+
 #nav {
   position: fixed;
   top: 0;
@@ -10,6 +14,7 @@
   padding: 24px 64px;
   border-bottom: 1px solid transparent;
   background: transparent;
+  overflow: visible;
   transition: padding 0.3s $ease, background 0.3s $ease, border-color 0.3s $ease;
 
   @include bp {
@@ -29,7 +34,7 @@
       color: $ink;
     }
 
-    .nav-links a {
+    .nav-links>li>a {
       color: $ink-mid;
 
       &:hover,
@@ -38,8 +43,8 @@
       }
     }
 
-    .current-menu-item > a,
-    .current_page_item > a {
+    .nav-links>.current-menu-item>a,
+    .nav-links>.current_page_item>a {
       color: $ink;
     }
 
@@ -68,7 +73,14 @@
     display: none;
   }
 
-  a {
+  >li {
+    position: relative;
+  }
+
+  >li>a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-family: $sans;
     font-weight: 500;
     font-size: 15px;
@@ -83,9 +95,83 @@
     }
   }
 
-  .current-menu-item > a,
-  .current_page_item > a {
+  >.current-menu-item>a,
+  >.current_page_item>a {
     color: #fff;
+  }
+
+  .menu-item-has-children>a::after {
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    margin-top: -2px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    opacity: 0.7;
+  }
+
+  .sub-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 120;
+    min-width: 240px;
+    max-width: 280px;
+    margin: 0;
+    padding: 8px 0;
+    list-style: none;
+    background: $ink-2;
+    border: 1px solid $line-dark;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(4px);
+    transition: opacity 0.2s $ease, visibility 0.2s $ease, transform 0.2s $ease;
+
+    // Hover bridge so the panel stays open while moving the pointer down
+    &::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      height: 10px;
+    }
+
+    a {
+      display: block;
+      padding: 11px 18px;
+      font-family: $sans;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 1.4;
+      letter-spacing: -0.015em;
+      color: $muted-on-ink;
+      white-space: normal;
+      transition: color 0.2s $ease;
+
+      &:hover,
+      &:focus-visible,
+      &.active {
+        color: #fff;
+      }
+    }
+
+    .current-menu-item>a,
+    .current_page_item>a {
+      color: #fff;
+    }
+  }
+
+  .menu-item-has-children:hover>.sub-menu,
+  .menu-item-has-children:focus-within>.sub-menu,
+  .menu-item-has-children.is-open>.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 }
 
@@ -159,6 +245,22 @@
       color: $orange;
     }
   }
+
+  .nav-mobile__child {
+    margin-top: -12px;
+    padding-left: 2px;
+    font-size: clamp(16px, 4vw, 20px);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: $muted-on-ink;
+    max-width: 16em;
+    line-height: 1.3;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+    }
+  }
 }
 
 body.has-light-nav {
@@ -167,7 +269,7 @@ body.has-light-nav {
       color: $ink;
     }
 
-    .nav-links a {
+    .nav-links>li>a {
       color: $ink-mid;
     }
 

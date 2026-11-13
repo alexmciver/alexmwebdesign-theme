@@ -82,6 +82,31 @@
     });
   }
 
+  // Desktop submenus — class toggle keeps the panel open while pointer moves
+  var desktopParents = document.querySelectorAll(".nav-links .menu-item-has-children");
+  desktopParents.forEach(function (item) {
+    var closeTimer;
+    function open() {
+      clearTimeout(closeTimer);
+      desktopParents.forEach(function (other) {
+        if (other !== item) other.classList.remove("is-open");
+      });
+      item.classList.add("is-open");
+    }
+    function scheduleClose() {
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(function () {
+        item.classList.remove("is-open");
+      }, 120);
+    }
+    item.addEventListener("mouseenter", open);
+    item.addEventListener("mouseleave", scheduleClose);
+    item.addEventListener("focusin", open);
+    item.addEventListener("focusout", function (e) {
+      if (!item.contains(e.relatedTarget)) scheduleClose();
+    });
+  });
+
   function initReveals() {
     var els = document.querySelectorAll(".rv, .rv-left, .rv-right, .img-reveal");
     if (!els.length) return;

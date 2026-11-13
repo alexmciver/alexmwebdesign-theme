@@ -914,10 +914,18 @@ class Alex_Flat_Nav_Walker extends Walker_Nav_Menu {
 	public function start_lvl( &$output, $depth = 0, $args = null ) {}
 	public function end_lvl( &$output, $depth = 0, $args = null ) {}
 	public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
-		$output .= sprintf(
+		$classes = array();
+		if ( in_array( 'current-menu-item', (array) $item->classes, true ) ) {
+			$classes[] = 'active';
+		}
+		if ( $depth > 0 ) {
+			$classes[] = 'nav-mobile__child';
+		}
+		$class_attr = $classes ? ' class="' . esc_attr( implode( ' ', $classes ) ) . '"' : '';
+		$output     .= sprintf(
 			'<a href="%s"%s>%s</a>',
 			esc_url( $item->url ),
-			in_array( 'current-menu-item', (array) $item->classes, true ) ? ' class="active"' : '',
+			$class_attr,
 			esc_html( $item->title )
 		);
 	}
